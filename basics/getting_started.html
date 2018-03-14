@@ -71,16 +71,14 @@ installation's <code>env.sh</code> file has been sourced.</p>
 
 <div class="highlight"><pre class="highlight plaintext"><code>acd
 cd bundles
-roby init syskit_basics
+syskit gen app syskit_basics
 cd syskit_basics
 </code></pre></div>
 <p>This creates a Roby application, Roby being the underlying application framework
-and execution engine that Syskit is based on. To be able to use Syskit in this new
-application, we must explicitly load it in <code>config/init.rb</code> by adding</p>
+and execution engine that Syskit is based on. In addition, it loads and sets up
+Syskit in the applications <code>config/init.rb</code>.</p>
 
-<div class="highlight"><pre class="highlight ruby"><code><span class="no">Roby</span><span class="p">.</span><span class="nf">app</span><span class="p">.</span><span class="nf">using</span> <span class="s1">'syskit'</span>
-</code></pre></div>
-<p>We can now verify that the generated application at loads with</p>
+<p>We can now verify that the generated application loads with</p>
 
 <div class="highlight"><pre class="highlight plaintext"><code>$ syskit run
 Bundles[INFO]: Active bundles: syskit_basics
@@ -191,14 +189,6 @@ integration code and then load the environment. This is done by modifying the
 newly-created <code>config/robots/gazebo.rb</code> configuration file to add:</p>
 
 <div class="highlight"><pre class="highlight ruby"><code><span class="no">Robot</span><span class="p">.</span><span class="nf">init</span> <span class="k">do</span>
-  <span class="c1">## You can load plugins here</span>
-  <span class="c1"># Roby.app.using 'fault_injection'</span>
-  <span class="c1"># Roby.app.using 'syskit'</span>
-
-  <span class="c1">## Change the scheduler</span>
-  <span class="nb">require</span> <span class="s1">'roby/schedulers/temporal'</span>
-  <span class="no">Roby</span><span class="p">.</span><span class="nf">scheduler</span> <span class="o">=</span> <span class="no">Roby</span><span class="o">::</span><span class="no">Schedulers</span><span class="o">::</span><span class="no">Temporal</span><span class="p">.</span><span class="nf">new</span>
-
   <span class="c1"># The rock-gazebo bridge requires models from the 'common_models' bundle.</span>
   <span class="c1"># It already depends on it, but we need to manually add the bundle to the</span>
   <span class="c1"># Roby search path</span>
