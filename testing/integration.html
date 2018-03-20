@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="../images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="testing testing_integration">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent'><span class='parent-label'><a href="../basics/">Basics</a></span><ul><li class='child'><a href="../basics/">Introduction</a></li><li class='child'><a href="../basics/installation.html">Installation</a></li><li class='child'><a href="../basics/day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="../basics/getting_started.html">Getting Started</a></li><li class='child'><a href="../basics/composition.html">Compositions</a></li><li class='child'><a href="../basics/constant_generator.html">Constant Generator</a></li><li class='child'><a href="../basics/devices.html">Profiles and Devices</a></li><li class='child'><a href="../basics/deployment.html">Deployment</a></li><li class='child'><a href="../basics/validation.html">Configuration Consistency</a></li><li class='child'><a href="../basics/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../workspace/">Workspace and Packages</a></span><ul><li class='child'><a href="../workspace/">Introduction</a></li><li class='child'><a href="../workspace/conventions.html">Conventions</a></li><li class='child'><a href="../workspace/setup.html">Starting a New Project</a></li><li class='child'><a href="../workspace/add_packages.html">Adding new packages</a></li><li class='child'><a href="../workspace/os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="../workspace/managing.html">Build configuration design</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../type_system/">The Type System</a></span><ul><li class='child'><a href="../type_system/">Introduction</a></li><li class='child'><a href="../type_system/defining_types.html">Defining Types</a></li><li class='child'><a href="../type_system/types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../integrating_functionality/">Integrating Functionality</a></span><ul><li class='child'><a href="../integrating_functionality/">Introduction</a></li><li class='child'><a href="../integrating_functionality/cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="../integrating_functionality/ruby_libraries.html">Ruby Library Packages</a></li><li class='child'><a href="../integrating_functionality/components.html">Components</a></li><li class='child'><a href="../integrating_functionality/interface.html">Interface</a></li><li class='child'><a href="../integrating_functionality/state_machine.html">State Machine</a></li><li class='child'><a href="../integrating_functionality/writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="../integrating_functionality/timestamping.html">Timestamping</a></li><li class='child'><a href="../integrating_functionality/deployment.html">Deployments</a></li><li class='child'><a href="../integrating_functionality/runtime.html">Runtime</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../component_networks/">Designing Component Networks</a></span><ul><li class='child'><a href="../component_networks/">Introduction</a></li><li class='child'><a href="../component_networks/composition.html">Compositions</a></li><li class='child'><a href="../component_networks/profiles.html">Profiles</a></li><li class='child'><a href="../component_networks/reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="../component_networks/transformations.html">Transformations</a></li></ul></li><li class='parent active'><span class='parent-label'><a href="./">Testing</a></span><ul><li class='child'><a href="./">Introduction</a></li><li class='child active'><a href="integration.html">Integration Tests</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <p>The last level of tests that a Rock/Syskit system supports is the one of
+integration or acceptance tests. In a nutshell, these tests see your system
+as a blackbox, run actions and verify the result of these actions. They actually
+act as outsiders: they run everything through Syskit's remote interface, the way
+you would control it through the IDE or a GUI.</p>
+
+<p>These tests are based on <a href="https://cucumber.io/">Cucumber</a>. This documentation
+assumes that you've at least read the introductory Cucumber material. It will
+focus on the Syskit-specific parts of using cucumber.</p>
+
+<p>Generally speaking, each cucumber feature when interacting with a Syskit system
+follows this pattern:</p>
+
+<ul>
+  <li>start a Gazebo scene</li>
+  <li>start the Syskit app</li>
+  <li>start action(s)</li>
+  <li>run a predicate that verifies the action's result</li>
+  <li>start more action(s)</li>
+  <li>run more predicates that verifies the action's result</li>
+  <li>end</li>
+</ul>
+
+<p>The <em>predicates</em> described above are themselves actions, which are supposed to
+finish successfully if the predicate passes, and fail otherwise.</p>
+
+<p>Let's go through the items step-by-step. We will take use the Syskit basics
+tutorial as a basis for our examples.</p>
+
+<h2 id="setting-up-a-syskit-app-to-use-integration-tests">Setting up a Syskit app to use integration tests</h2>
+
+<p>In order to use Cucumber to run test features, one needs to depend on <a href="https://github.com/rock-core/bundles-cucumber">the
+cucumber bundle</a>. Just add the
+following in your bundle's <code>manifest.xml</code>, and then run <code>aup</code>.</p>
+
+<div class="highlight"><pre class="highlight xml"><code><span class="nt">&lt;depend_optional</span> <span class="na">name=</span><span class="s">"bundles/cucumber"</span> <span class="nt">/&gt;</span>
+</code></pre></div>
+<p class="note">Add this dependency as optional, as it will allow you to exclude it from the
+build in production systems</p>
+
+<p>You must have also followed the modifications to <code>config/init.rb</code> listed in
+<a href="../basics/getting_started.html">the basics section</a>,</p>
+
+<p>Finally, create the initial scaffold.</p>
+
+<ol>
+  <li>
+    <p>run <code>cucumber --init</code> in your bundle</p>
+  </li>
+  <li>
+    <p>edit features/support/env.rb and add the Roby, RockGazebo and this bundle's
+own World modules to the Cucumber world.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'cucumber/rock_world'</span>
+<span class="no">Cucumber</span><span class="o">::</span><span class="no">RockWorld</span><span class="p">.</span><span class="nf">setup</span>
+<span class="no">World</span><span class="p">(</span>
+    <span class="no">Roby</span><span class="o">::</span><span class="no">App</span><span class="o">::</span><span class="no">Cucumber</span><span class="o">::</span><span class="no">World</span><span class="p">,</span>
+    <span class="no">RockGazebo</span><span class="o">::</span><span class="no">Syskit</span><span class="o">::</span><span class="no">Cucumber</span><span class="o">::</span><span class="no">World</span><span class="p">,</span>
+    <span class="no">Cucumber</span><span class="o">::</span><span class="no">RockWorld</span><span class="p">)</span>
+</code></pre></div>  </li>
+  <li>
+    <p>create an action that refines the <code>Cucumber</code> action interface provided by
+<code>bundles/cucumber</code>. The refinement is meant to provide the robot-under test
+to the underlying compositions
+See <code>bundles/cucumber/models/actions/cucumber.rb</code> for the interface
+definition. The action interface is usually called <code>Actions::Cucumber</code> as
+well. In the <code>syskit_basics</code> bundle we created during the
+<a href="../basics/">Basics</a> tutorials, one would do</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>syskit gen action cucumber
+</code></pre></div>
+    <p>and edit <code>models/actions/cucumber.rb</code>:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'cucumber/models/actions/cucumber'</span>
+<span class="nb">require</span> <span class="s1">'syskit_basics/models/profiles/gazebo/base'</span>
+
+<span class="k">module</span> <span class="nn">SyskitBasics</span>
+    <span class="k">module</span> <span class="nn">Actions</span>
+        <span class="k">class</span> <span class="nc">Cucumber</span> <span class="o">&lt;</span> <span class="no">Cucumber</span><span class="o">::</span><span class="no">Actions</span><span class="o">::</span><span class="no">Cucumber</span>
+            <span class="k">def</span> <span class="nf">cucumber_warp_robot</span><span class="p">(</span><span class="o">**</span><span class="p">)</span>
+                <span class="k">super</span><span class="p">.</span><span class="nf">use</span><span class="p">(</span><span class="no">Profiles</span><span class="o">::</span><span class="no">Base</span><span class="p">.</span><span class="nf">ur10_dev</span><span class="p">)</span>
+            <span class="k">end</span>
+            
+            <span class="k">def</span> <span class="nf">cucumber_maintain_pose</span><span class="p">(</span><span class="o">**</span><span class="p">)</span>
+                <span class="k">super</span><span class="p">.</span><span class="nf">use</span><span class="p">(</span><span class="no">Profiles</span><span class="o">::</span><span class="no">Base</span><span class="p">.</span><span class="nf">ur10_dev</span><span class="p">)</span>
+            <span class="k">end</span>
+            
+            <span class="k">def</span> <span class="nf">cucumber_reach_pose</span><span class="p">(</span><span class="o">**</span><span class="p">)</span>
+                <span class="k">super</span><span class="p">.</span><span class="nf">use</span><span class="p">(</span><span class="no">Profiles</span><span class="o">::</span><span class="no">Base</span><span class="p">.</span><span class="nf">ur10_dev</span><span class="p">)</span>
+            <span class="k">end</span>
+            
+            <span class="k">def</span> <span class="nf">cucumber_acquire_current_pose</span><span class="p">(</span><span class="o">**</span><span class="p">)</span>
+                <span class="k">super</span><span class="p">.</span><span class="nf">use</span><span class="p">(</span><span class="no">Profiles</span><span class="o">::</span><span class="no">Base</span><span class="p">.</span><span class="nf">ur10_dev</span><span class="p">)</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>  </li>
+  <li>
+    <p>create a robot configuration where this new profile is loaded. This robot
+configuration will usually "derive" from the gazebo configuration by adding</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="nb">require_relative</span> <span class="s1">'gazebo'</span>
+</code></pre></div>
+    <p>at the top of the robot's configuration file.</p>
+
+    <p>The robot should obviously add the <code>Cucumber</code> action interface to its main actions,
+with</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">Robot</span><span class="p">.</span><span class="nf">actions</span> <span class="k">do</span>
+    <span class="n">use_library</span> <span class="no">SyskitBasics</span><span class="o">::</span><span class="no">Actions</span><span class="o">::</span><span class="no">Cucumber</span>
+<span class="k">end</span>
+</code></pre></div>  </li>
+</ol>
+
+<h2 id="starting-the-scene-and-the-app">Starting the scene and the app</h2>
+
+<p>The app and the scene (Gazebo) are both started with a <code>Given</code> step of the
+form: <strong>Given the <em>robot name</em> robot starting at <em>pose</em> in <em>scene name</em></strong>.</p>
+
+<p>The <em>robot name</em> is the name of the robot configuration in the Syskit app.
+The <em>pose</em> stanza defines where the robot-under-test should be placed in the
+scene at the beginning of the test (see below for how poses are specified).
+The <em>scene name</em> is the name of the scene in <code>scenes/</code>. Underscores in the
+robot or scene names can be replaced by spaces, and <code>the</code> can be added in
+front of the scene name</p>
+
+<p>For instance, in our <code>syskit_basics</code> bundle, with the <code>cucumber</code> robot we just started,
+this could be:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>Given the cucumber robot starting at origin in the empty world
+</code></pre></div>
+<p>If your Syskit app needs more arguments (as passed with the <code>--set</code> option on
+the command line), these can be given with a <strong>with key=value, key=value and key=value</strong>
+syntax. For instance</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>Given the cucumber robot starting at origin in the empty world with never_fail=true
+</code></pre></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>
