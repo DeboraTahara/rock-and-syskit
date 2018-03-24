@@ -84,14 +84,14 @@ only have left to give a name to the components Syskit is using. This is done
 in the robot's config file with:</p>
 
 <div class="highlight"><pre class="highlight ruby"><code><span class="no">Robot</span><span class="p">.</span><span class="nf">requires</span> <span class="k">do</span>
-  <span class="no">Syskit</span><span class="p">.</span><span class="nf">conf</span><span class="p">.</span><span class="nf">use_gazebo_world</span><span class="p">(</span><span class="s1">'empty_world'</span><span class="p">)</span>
+    <span class="no">Syskit</span><span class="p">.</span><span class="nf">conf</span><span class="p">.</span><span class="nf">use_gazebo_world</span><span class="p">(</span><span class="s1">'empty_world'</span><span class="p">)</span>
 
-  <span class="nb">require</span> <span class="s1">'syskit_basics/models/profiles/gazebo/arm_control'</span>
-  <span class="no">Syskit</span><span class="p">.</span><span class="nf">conf</span><span class="p">.</span><span class="nf">use_deployment</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">cart_ctrl_wdls</span><span class="o">.</span><span class="no">CartCtrl</span> <span class="o">=&gt;</span> <span class="s1">'arm_pos2twist'</span>
-  <span class="no">Syskit</span><span class="p">.</span><span class="nf">conf</span><span class="p">.</span><span class="nf">use_deployment</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">cart_ctrl_wdls</span><span class="o">.</span><span class="no">WDLSSolver</span> <span class="o">=&gt;</span> <span class="s1">'arm_twist2joint'</span>
-  <span class="no">Syskit</span><span class="p">.</span><span class="nf">conf</span><span class="p">.</span><span class="nf">use_deployment</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">robot_frames</span><span class="o">.</span><span class="no">SingleChainPublisher</span> <span class="o">=&gt;</span> <span class="s1">'arm_chain_publisher'</span>
-  <span class="no">Syskit</span><span class="p">.</span><span class="nf">conf</span><span class="p">.</span><span class="nf">use_ruby_tasks</span> <span class="no">SyskitBasics</span><span class="o">::</span><span class="no">Compositions</span><span class="o">::</span><span class="no">ArmCartesianConstantCommandGenerator</span> <span class="o">=&gt;</span> <span class="s1">'arm_constant_setpoint'</span>
-  <span class="no">Syskit</span><span class="p">.</span><span class="nf">conf</span><span class="p">.</span><span class="nf">use_ruby_tasks</span> <span class="no">SyskitBasics</span><span class="o">::</span><span class="no">Compositions</span><span class="o">::</span><span class="no">JointPositionConstantGenerator</span> <span class="o">=&gt;</span> <span class="s1">'joint_position_setpoint'</span>
+    <span class="nb">require</span> <span class="s1">'syskit_basics/models/profiles/gazebo/arm_control'</span>
+    <span class="no">Syskit</span><span class="p">.</span><span class="nf">conf</span><span class="p">.</span><span class="nf">use_deployment</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">cart_ctrl_wdls</span><span class="o">.</span><span class="no">CartCtrl</span> <span class="o">=&gt;</span> <span class="s1">'arm_pos2twist'</span>
+    <span class="no">Syskit</span><span class="p">.</span><span class="nf">conf</span><span class="p">.</span><span class="nf">use_deployment</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">cart_ctrl_wdls</span><span class="o">.</span><span class="no">WDLSSolver</span> <span class="o">=&gt;</span> <span class="s1">'arm_twist2joint'</span>
+    <span class="no">Syskit</span><span class="p">.</span><span class="nf">conf</span><span class="p">.</span><span class="nf">use_deployment</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">robot_frames</span><span class="o">.</span><span class="no">SingleChainPublisher</span> <span class="o">=&gt;</span> <span class="s1">'arm_chain_publisher'</span>
+    <span class="no">Syskit</span><span class="p">.</span><span class="nf">conf</span><span class="p">.</span><span class="nf">use_ruby_tasks</span> <span class="no">SyskitBasics</span><span class="o">::</span><span class="no">Compositions</span><span class="o">::</span><span class="no">ArmCartesianConstantCommandGenerator</span> <span class="o">=&gt;</span> <span class="s1">'arm_constant_setpoint'</span>
+    <span class="no">Syskit</span><span class="p">.</span><span class="nf">conf</span><span class="p">.</span><span class="nf">use_ruby_tasks</span> <span class="no">SyskitBasics</span><span class="o">::</span><span class="no">Compositions</span><span class="o">::</span><span class="no">JointPositionConstantGenerator</span> <span class="o">=&gt;</span> <span class="s1">'joint_position_setpoint'</span>
 <span class="k">end</span>
 </code></pre></div>
 <p class="callout callout-info">Now that we've required our toplevel profile in the robot configuration file,
@@ -224,40 +224,40 @@ themselves.</p>
 <p>In <code>models/compositions/arm_cartesian_constant_control_wdls.rb</code></p>
 
 <div class="highlight"><pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">ArmCartesianConstantControlWdls</span> <span class="o">&lt;</span> <span class="no">Syskit</span><span class="o">::</span><span class="no">Composition</span>
-  <span class="c1"># The robot model that is to be used</span>
-  <span class="c1">#</span>
-  <span class="c1"># This must be the enclosing profile object that has the use_sdf_model call</span>
-  <span class="c1">#</span>
-  <span class="c1"># @return [Profile]</span>
-  <span class="n">argument</span> <span class="ss">:robot</span>
-  <span class="o">...</span>
-  <span class="n">add</span><span class="p">(</span><span class="no">ArmCartesianControlWdls</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'control'</span><span class="p">).</span>
-    <span class="nf">with_arguments</span><span class="p">(</span><span class="ss">robot: </span><span class="n">from</span><span class="p">(</span><span class="ss">:parent_task</span><span class="p">).</span><span class="nf">robot</span><span class="p">)</span>
+    <span class="c1"># The robot model that is to be used</span>
+    <span class="c1">#</span>
+    <span class="c1"># This must be the enclosing profile object that has the use_sdf_model call</span>
+    <span class="c1">#</span>
+    <span class="c1"># @return [Profile]</span>
+    <span class="n">argument</span> <span class="ss">:robot</span>
+    <span class="o">...</span>
+    <span class="n">add</span><span class="p">(</span><span class="no">ArmCartesianControlWdls</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'control'</span><span class="p">).</span>
+        <span class="nf">with_arguments</span><span class="p">(</span><span class="ss">robot: </span><span class="n">from</span><span class="p">(</span><span class="ss">:parent_task</span><span class="p">).</span><span class="nf">robot</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre></div>
 <p>and in <code>models/compositions/arm_cartesian_control_wdls.rb</code></p>
 
 <div class="highlight"><pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">ArmCartesianControlWdls</span> <span class="o">&lt;</span> <span class="no">Syskit</span><span class="o">::</span><span class="no">Composition</span>
-  <span class="c1"># The robot model that is to be used</span>
-  <span class="c1">#</span>
-  <span class="c1"># This must be the enclosing profile object that has the use_sdf_model call</span>
-  <span class="c1">#</span>
-  <span class="c1"># @return [Profile]</span>
-  <span class="n">argument</span> <span class="ss">:robot</span>
-  <span class="o">...</span>
-  <span class="n">add</span><span class="p">(</span><span class="no">OroGen</span><span class="p">.</span><span class="nf">cart_ctrl_wdls</span><span class="o">.</span><span class="no">WDLSSolver</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'twist2joint_velocity'</span><span class="p">).</span>
-    <span class="nf">with_arguments</span><span class="p">(</span><span class="ss">robot: </span><span class="n">from</span><span class="p">(</span><span class="ss">:parent_task</span><span class="p">).</span><span class="nf">robot</span><span class="p">)</span>
-  <span class="n">add</span><span class="p">(</span><span class="no">OroGen</span><span class="p">.</span><span class="nf">robot_frames</span><span class="o">.</span><span class="no">SingleChainPublisher</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'joint2pose'</span><span class="p">).</span>
-    <span class="nf">with_arguments</span><span class="p">(</span><span class="ss">robot: </span><span class="n">from</span><span class="p">(</span><span class="ss">:parent_task</span><span class="p">).</span><span class="nf">robot</span><span class="p">)</span>
+    <span class="c1"># The robot model that is to be used</span>
+    <span class="c1">#</span>
+    <span class="c1"># This must be the enclosing profile object that has the use_sdf_model call</span>
+    <span class="c1">#</span>
+    <span class="c1"># @return [Profile]</span>
+    <span class="n">argument</span> <span class="ss">:robot</span>
+    <span class="o">...</span>
+    <span class="n">add</span><span class="p">(</span><span class="no">OroGen</span><span class="p">.</span><span class="nf">cart_ctrl_wdls</span><span class="o">.</span><span class="no">WDLSSolver</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'twist2joint_velocity'</span><span class="p">).</span>
+        <span class="nf">with_arguments</span><span class="p">(</span><span class="ss">robot: </span><span class="n">from</span><span class="p">(</span><span class="ss">:parent_task</span><span class="p">).</span><span class="nf">robot</span><span class="p">)</span>
+    <span class="n">add</span><span class="p">(</span><span class="no">OroGen</span><span class="p">.</span><span class="nf">robot_frames</span><span class="o">.</span><span class="no">SingleChainPublisher</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'joint2pose'</span><span class="p">).</span>
+        <span class="nf">with_arguments</span><span class="p">(</span><span class="ss">robot: </span><span class="n">from</span><span class="p">(</span><span class="ss">:parent_task</span><span class="p">).</span><span class="nf">robot</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre></div>
 <p>Since the <code>ArmControl</code> profile is specific to the <code>gazebo</code> robot, we can inject
 the relevant robot in the profile directly:</p>
 
 <div class="highlight"><pre class="highlight ruby"><code><span class="n">define</span> <span class="s1">'arm_cartesian_constant_control'</span><span class="p">,</span>
-  <span class="no">Compositions</span><span class="o">::</span><span class="no">ArmCartesianConstantControlWdls</span><span class="p">.</span>
-    <span class="nf">use</span><span class="p">(</span><span class="no">Base</span><span class="p">.</span><span class="nf">ur10_dev</span><span class="p">).</span>
-    <span class="nf">with_arguments</span><span class="p">(</span><span class="ss">robot: </span><span class="no">Base</span><span class="p">)</span>
+    <span class="no">Compositions</span><span class="o">::</span><span class="no">ArmCartesianConstantControlWdls</span><span class="p">.</span>
+        <span class="nf">use</span><span class="p">(</span><span class="no">Base</span><span class="p">.</span><span class="nf">ur10_dev</span><span class="p">).</span>
+        <span class="nf">with_arguments</span><span class="p">(</span><span class="ss">robot: </span><span class="no">Base</span><span class="p">)</span>
 </code></pre></div>
 <p id="orogen_extension_files">We need to modify the oroGen component models to use the robot argument.
 Since oroGen components are auto-generated by Syskit, there's a special
@@ -294,26 +294,26 @@ the <code>WDLSSolver</code> task. Let's add the <code>robot</code> argument, and
 <code>configure</code> method that is described in the template to forward the model on to
 the task's properties.</p>
 
-<div class="highlight"><pre class="highlight ruby"><code><span class="no">Syskit</span><span class="p">.</span><span class="nf">extend_model</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">cart_ctrl_wdls</span><span class="o">.</span><span class="no">WDLSSolver</span>
-  <span class="n">argument</span> <span class="ss">:robot</span>
-  <span class="k">def</span> <span class="nf">configure</span>
-    <span class="k">super</span> <span class="c1"># call super as described in the template</span>
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">Syskit</span><span class="p">.</span><span class="nf">extend_model</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">cart_ctrl_wdls</span><span class="o">.</span><span class="no">WDLSSolver</span> <span class="k">do</span>
+    <span class="n">argument</span> <span class="ss">:robot</span>
+    <span class="k">def</span> <span class="nf">configure</span>
+        <span class="k">super</span> <span class="c1"># call super as described in the template</span>
 
-    <span class="n">properties</span><span class="p">.</span><span class="nf">robot_model</span> <span class="o">=</span> <span class="n">robot</span><span class="p">.</span><span class="nf">sdf_model</span><span class="p">.</span><span class="nf">make_root</span><span class="p">.</span><span class="nf">to_xml_string</span>
-    <span class="n">properties</span><span class="p">.</span><span class="nf">robot_model_format</span> <span class="o">=</span> <span class="ss">:ROBOT_MODEL_SDF</span>
-  <span class="k">end</span>
+        <span class="n">properties</span><span class="p">.</span><span class="nf">robot_model</span> <span class="o">=</span> <span class="n">robot</span><span class="p">.</span><span class="nf">sdf_model</span><span class="p">.</span><span class="nf">make_root</span><span class="p">.</span><span class="nf">to_xml_string</span>
+        <span class="n">properties</span><span class="p">.</span><span class="nf">robot_model_format</span> <span class="o">=</span> <span class="ss">:ROBOT_MODEL_SDF</span>
+    <span class="k">end</span>
 <span class="k">end</span>
 </code></pre></div>
 <p>and in <code>models/orogen/robot_frames.rb</code>:</p>
 
-<div class="highlight"><pre class="highlight ruby"><code><span class="no">Syskit</span><span class="p">.</span><span class="nf">extend_model</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">robot_frames</span><span class="o">.</span><span class="no">SingleChainPublisher</span>
-  <span class="n">argument</span> <span class="ss">:robot</span>
-  <span class="k">def</span> <span class="nf">configure</span>
-    <span class="k">super</span> <span class="c1"># call super as described in the template</span>
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">Syskit</span><span class="p">.</span><span class="nf">extend_model</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">robot_frames</span><span class="o">.</span><span class="no">SingleChainPublisher</span> <span class="k">do</span>
+    <span class="n">argument</span> <span class="ss">:robot</span>
+    <span class="k">def</span> <span class="nf">configure</span>
+        <span class="k">super</span> <span class="c1"># call super as described in the template</span>
 
-    <span class="n">properties</span><span class="p">.</span><span class="nf">robot_model</span> <span class="o">=</span> <span class="n">robot</span><span class="p">.</span><span class="nf">sdf_model</span><span class="p">.</span><span class="nf">make_root</span><span class="p">.</span><span class="nf">to_xml_string</span>
-    <span class="n">properties</span><span class="p">.</span><span class="nf">robot_model_format</span> <span class="o">=</span> <span class="ss">:ROBOT_MODEL_SDF</span>
-  <span class="k">end</span>
+        <span class="n">properties</span><span class="p">.</span><span class="nf">robot_model</span> <span class="o">=</span> <span class="n">robot</span><span class="p">.</span><span class="nf">sdf_model</span><span class="p">.</span><span class="nf">make_root</span><span class="p">.</span><span class="nf">to_xml_string</span>
+        <span class="n">properties</span><span class="p">.</span><span class="nf">robot_model_format</span> <span class="o">=</span> <span class="ss">:ROBOT_MODEL_SDF</span>
+    <span class="k">end</span>
 <span class="k">end</span>
 </code></pre></div>
 <h2 id="actions">Building the system's action interface</h2>
@@ -334,8 +334,8 @@ definitions are exported as an action with a <code>_def</code> suffix.</p>
 <p id="main">Let's modify the <code>actions</code> block in <code>config/robots/gazebo.rb</code> to have:</p>
 
 <div class="highlight"><pre class="highlight ruby"><code><span class="no">Robot</span><span class="p">.</span><span class="nf">actions</span> <span class="k">do</span>
-  <span class="n">use_profile</span> <span class="no">SyskitBasics</span><span class="o">::</span><span class="no">Profiles</span><span class="o">::</span><span class="no">Gazebo</span><span class="o">::</span><span class="no">Base</span>
-  <span class="n">use_profile</span> <span class="no">SyskitBasics</span><span class="o">::</span><span class="no">Profiles</span><span class="o">::</span><span class="no">Gazebo</span><span class="o">::</span><span class="no">ArmControl</span>
+    <span class="n">use_profile</span> <span class="no">SyskitBasics</span><span class="o">::</span><span class="no">Profiles</span><span class="o">::</span><span class="no">Gazebo</span><span class="o">::</span><span class="no">Base</span>
+    <span class="n">use_profile</span> <span class="no">SyskitBasics</span><span class="o">::</span><span class="no">Profiles</span><span class="o">::</span><span class="no">Gazebo</span><span class="o">::</span><span class="no">ArmControl</span>
 <span class="k">end</span>
 </code></pre></div>
 <p class="callout callout-info"><strong>Note</strong>: the profile is available in the actions block because <a href="#requires">we've loaded it in the <code>requires</code> block</a></p>

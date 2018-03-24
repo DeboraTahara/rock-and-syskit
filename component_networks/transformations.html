@@ -42,7 +42,26 @@
                 </nav>
             </div>
             <div class="col-md-9" role="main">
-                <h1 id="geometric-relations">Geometric Relations</h1>
+                <h1 class="no_toc" id="geometric-relations">Geometric Relations</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#geometry-in-components" id="markdown-toc-geometry-in-components">Geometry in components</a>    <ul>
+      <li><a href="#data_sources" id="markdown-toc-data_sources">In data sources</a></li>
+      <li><a href="#in-data-processing-components" id="markdown-toc-in-data-processing-components">In data processing components</a></li>
+    </ul>
+  </li>
+  <li><a href="#system-wide-frame-consistency" id="markdown-toc-system-wide-frame-consistency">System-wide frame consistency</a>    <ul>
+      <li><a href="#component_annotations" id="markdown-toc-component_annotations">Enabling propagation: additional component annotations in transformer-enabled components</a></li>
+      <li><a href="#enabling-propagation-adding-geometry-modelling-in-components-that-do-not-use-the-transformer" id="markdown-toc-enabling-propagation-adding-geometry-modelling-in-components-that-do-not-use-the-transformer">Enabling propagation: adding geometry modelling in components that do not use the transformer</a></li>
+      <li><a href="#annotating-devices" id="markdown-toc-annotating-devices">Annotating Devices</a></li>
+      <li><a href="#use_frames_in_profiles" id="markdown-toc-use_frames_in_profiles">Setting frames that can't be deduced by propagation</a></li>
+      <li><a href="#frame-related-errors" id="markdown-toc-frame-related-errors">Frame-related errors</a></li>
+    </ul>
+  </li>
+  <li><a href="#describing-frames-and-their-relations-using-sdf" id="markdown-toc-describing-frames-and-their-relations-using-sdf">Describing frames and their relations using SDF</a></li>
+  <li><a href="#caveats" id="markdown-toc-caveats">Caveats</a></li>
+  <li><a href="#system-design-guidelines" id="markdown-toc-system-design-guidelines">System Design Guidelines</a></li>
+</ul>
 
 <p>One of the most common tasks in a robotic systems is to represent the
 relationship between a robot body (or one of its parts) and the world. E.g. a

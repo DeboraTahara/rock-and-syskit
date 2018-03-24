@@ -77,23 +77,23 @@ properties are set to actual links in the provided model. Let's do this in
 <span class="c1">#   verified</span>
 <span class="c1"># @raise [ArgumentError] if the link is not in the model</span>
 <span class="k">def</span> <span class="nf">verify_link_in_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">link_name</span><span class="p">)</span>
-  <span class="k">if</span> <span class="o">!</span><span class="n">model</span><span class="p">.</span><span class="nf">each_link</span><span class="p">.</span><span class="nf">any?</span> <span class="p">{</span> <span class="o">|</span><span class="n">link</span><span class="o">|</span> <span class="n">link</span><span class="p">.</span><span class="nf">full_name</span> <span class="o">==</span> <span class="n">link_name</span> <span class="p">}</span>
-    <span class="k">raise</span> <span class="no">ArgumentError</span><span class="p">,</span> <span class="s2">"link name '</span><span class="si">#{</span><span class="n">link_name</span><span class="si">}</span><span class="s2">' is not a link of the robot model. Existing links: </span><span class="si">#{</span><span class="n">model</span><span class="p">.</span><span class="nf">each_link</span><span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:full_name</span><span class="p">).</span><span class="nf">sort</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="s2">", "</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
-  <span class="k">end</span>
+    <span class="k">if</span> <span class="o">!</span><span class="n">model</span><span class="p">.</span><span class="nf">each_link</span><span class="p">.</span><span class="nf">any?</span> <span class="p">{</span> <span class="o">|</span><span class="n">link</span><span class="o">|</span> <span class="n">link</span><span class="p">.</span><span class="nf">full_name</span> <span class="o">==</span> <span class="n">link_name</span> <span class="p">}</span>
+        <span class="k">raise</span> <span class="no">ArgumentError</span><span class="p">,</span> <span class="s2">"link name '</span><span class="si">#{</span><span class="n">link_name</span><span class="si">}</span><span class="s2">' is not a link of the robot model. Existing links: </span><span class="si">#{</span><span class="n">model</span><span class="p">.</span><span class="nf">each_link</span><span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:full_name</span><span class="p">).</span><span class="nf">sort</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="s2">", "</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
+    <span class="k">end</span>
 <span class="k">end</span>
 
 <span class="k">def</span> <span class="nf">configure</span>
-  <span class="k">super</span>
+    <span class="k">super</span>
 
-  <span class="c1"># Extract the model into its own SDF document</span>
-  <span class="n">as_root</span> <span class="o">=</span> <span class="n">robot</span><span class="p">.</span><span class="nf">sdf_model</span><span class="p">.</span><span class="nf">make_root</span>
-  <span class="c1"># And get the new model</span>
-  <span class="n">model</span> <span class="o">=</span> <span class="n">as_root</span><span class="p">.</span><span class="nf">each_model</span><span class="p">.</span><span class="nf">first</span>
-  <span class="n">verify_link_in_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">properties</span><span class="p">.</span><span class="nf">root</span><span class="p">)</span>
-  <span class="n">verify_link_in_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">properties</span><span class="p">.</span><span class="nf">tip</span><span class="p">)</span>
+    <span class="c1"># Extract the model into its own SDF document</span>
+    <span class="n">as_root</span> <span class="o">=</span> <span class="n">robot</span><span class="p">.</span><span class="nf">sdf_model</span><span class="p">.</span><span class="nf">make_root</span>
+    <span class="c1"># And get the new model</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">as_root</span><span class="p">.</span><span class="nf">each_model</span><span class="p">.</span><span class="nf">first</span>
+    <span class="n">verify_link_in_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">properties</span><span class="p">.</span><span class="nf">root</span><span class="p">)</span>
+    <span class="n">verify_link_in_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">properties</span><span class="p">.</span><span class="nf">tip</span><span class="p">)</span>
 
-  <span class="n">properties</span><span class="p">.</span><span class="nf">robot_model</span> <span class="o">=</span> <span class="n">as_root</span><span class="p">.</span><span class="nf">to_xml_string</span>
-  <span class="n">properties</span><span class="p">.</span><span class="nf">robot_model_format</span> <span class="o">=</span> <span class="ss">:ROBOT_MODEL_SDF</span>
+    <span class="n">properties</span><span class="p">.</span><span class="nf">robot_model</span> <span class="o">=</span> <span class="n">as_root</span><span class="p">.</span><span class="nf">to_xml_string</span>
+    <span class="n">properties</span><span class="p">.</span><span class="nf">robot_model_format</span> <span class="o">=</span> <span class="ss">:ROBOT_MODEL_SDF</span>
 <span class="k">end</span>
 </code></pre></div>
 <div class="panel panel-warning">
@@ -117,9 +117,9 @@ Corresponding tests are stored in <code>test/lib/</code>.</p>
 <span class="c1"># @param [String] link_name the name of the link</span>
 <span class="c1"># @raise [ArgumentError] if the link is not in the model</span>
 <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">verify_link_in_model</span><span class="p">(</span><span class="n">sdf_model</span><span class="p">,</span> <span class="n">link_name</span><span class="p">)</span>
-  <span class="k">if</span> <span class="o">!</span><span class="n">sdf_model</span><span class="p">.</span><span class="nf">each_link</span><span class="p">.</span><span class="nf">any?</span> <span class="p">{</span> <span class="o">|</span><span class="n">link</span><span class="o">|</span> <span class="n">link</span><span class="p">.</span><span class="nf">name</span> <span class="o">==</span> <span class="n">link_name</span> <span class="p">}</span>
-    <span class="k">raise</span> <span class="no">ArgumentError</span><span class="p">,</span> <span class="s2">"link name '</span><span class="si">#{</span><span class="n">link_name</span><span class="si">}</span><span class="s2">' is not a link of the robot model. Existing links: </span><span class="si">#{</span><span class="n">sdf_model</span><span class="p">.</span><span class="nf">each_link</span><span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:name</span><span class="p">).</span><span class="nf">sort</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="s2">", "</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
-  <span class="k">end</span>
+    <span class="k">if</span> <span class="o">!</span><span class="n">sdf_model</span><span class="p">.</span><span class="nf">each_link</span><span class="p">.</span><span class="nf">any?</span> <span class="p">{</span> <span class="o">|</span><span class="n">link</span><span class="o">|</span> <span class="n">link</span><span class="p">.</span><span class="nf">name</span> <span class="o">==</span> <span class="n">link_name</span> <span class="p">}</span>
+        <span class="k">raise</span> <span class="no">ArgumentError</span><span class="p">,</span> <span class="s2">"link name '</span><span class="si">#{</span><span class="n">link_name</span><span class="si">}</span><span class="s2">' is not a link of the robot model. Existing links: </span><span class="si">#{</span><span class="n">sdf_model</span><span class="p">.</span><span class="nf">each_link</span><span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:name</span><span class="p">).</span><span class="nf">sort</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="s2">", "</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
+    <span class="k">end</span>
 <span class="k">end</span>
 </code></pre></div>
   </div>
@@ -130,63 +130,70 @@ functionality</a>.  The <code>syskit gen orogen</code> call
 created a test template. Let's modify it to test the setup for <code>WDLSSolver</code>.
 The modifications for <code>SingleChainPublisher</code> will be left to the reader :P</p>
 
-<div class="highlight"><pre class="highlight ruby"><code><span class="n">describe</span> <span class="no">WDLSSolver</span> <span class="k">do</span>
-  <span class="nb">attr_reader</span> <span class="ss">:profile</span>
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">describe</span> <span class="n">cart_ctrl_wdls</span><span class="o">.</span><span class="no">WDLSSolver</span> <span class="k">do</span>
+    <span class="nb">attr_reader</span> <span class="ss">:profile</span>
 
-  <span class="n">before</span> <span class="k">do</span>
-    <span class="c1"># Create a mock that has a robot model</span>
-    <span class="n">xml</span> <span class="o">=</span> <span class="o">&lt;&lt;-</span><span class="no">EOSDF</span><span class="sh">
-      &lt;model name='test'&gt;
-        &lt;link name="root_test" /&gt;
-        &lt;link name="tip_test" /&gt;
-      &lt;/model&gt;
-</span><span class="no">      EOSDF</span>
-    <span class="c1"># We don't really need a full profile object, only an object</span>
-    <span class="c1"># that provides a Model object from a '#sdf_model' attribute</span>
-    <span class="c1">#</span>
-    <span class="c1"># Let's fake one using flexmock. Flexmock is loaded as part</span>
-    <span class="c1"># Of Syskit's test harness</span>
-    <span class="c1">#</span>
-    <span class="c1"># https://github.com/doudou/flexmock</span>
-    <span class="vi">@profile</span> <span class="o">=</span> <span class="n">flexmock</span><span class="p">(</span><span class="ss">sdf_model: </span><span class="no">SDF</span><span class="o">::</span><span class="no">Model</span><span class="p">.</span><span class="nf">from_xml_string</span><span class="p">(</span><span class="n">xml</span><span class="p">))</span>
-  <span class="k">end</span>
-
-  <span class="n">it</span> <span class="s2">"sets the robot model from its 'robot' argument"</span> <span class="k">do</span>
-    <span class="c1"># Create a fake test configuration with valid root and tip</span>
-    <span class="n">syskit_stub_conf</span> <span class="no">WDLSSolver</span><span class="p">,</span> <span class="s1">'default'</span><span class="p">,</span>
-      <span class="ss">data: </span><span class="p">{</span> <span class="s1">'root'</span> <span class="o">=&gt;</span> <span class="s1">'test::root_test'</span><span class="p">,</span> <span class="s1">'tip'</span> <span class="o">=&gt;</span> <span class="s1">'test::tip_test'</span> <span class="p">}</span>
-    <span class="n">task</span> <span class="o">=</span> <span class="n">syskit_stub_deploy_and_configure</span><span class="p">(</span>
-      <span class="no">WDLSSolver</span><span class="p">.</span><span class="nf">with_arguments</span><span class="p">(</span><span class="ss">robot: </span><span class="n">profile</span><span class="p">))</span>
-    <span class="n">assert_equal</span> <span class="s2">"&lt;sdf&gt;</span><span class="si">#{</span><span class="n">profile</span><span class="p">.</span><span class="nf">sdf_model</span><span class="p">.</span><span class="nf">to_xml_string</span><span class="si">}</span><span class="s2">&lt;/sdf&gt;"</span><span class="p">,</span>
-      <span class="n">task</span><span class="p">.</span><span class="nf">properties</span><span class="p">.</span><span class="nf">robot_model</span>
-  <span class="k">end</span>
-
-  <span class="n">it</span> <span class="s2">"raises if the root link does not exist"</span> <span class="k">do</span>
-    <span class="n">syskit_stub_conf</span> <span class="no">WDLSSolver</span><span class="p">,</span> <span class="s1">'default'</span><span class="p">,</span>
-      <span class="ss">data: </span><span class="p">{</span> <span class="s1">'root'</span> <span class="o">=&gt;</span> <span class="s1">'invalid'</span><span class="p">,</span> <span class="s1">'tip'</span> <span class="o">=&gt;</span> <span class="s1">'test::tip_test'</span> <span class="p">}</span>
-    <span class="n">e</span> <span class="o">=</span> <span class="n">assert_raises</span><span class="p">(</span><span class="no">ArgumentError</span><span class="p">)</span> <span class="k">do</span>
-      <span class="n">syskit_stub_deploy_and_configure</span><span class="p">(</span>
-        <span class="no">WDLSSolver</span><span class="p">.</span><span class="nf">with_arguments</span><span class="p">(</span><span class="ss">robot: </span><span class="n">profile</span><span class="p">))</span>
+    <span class="n">before</span> <span class="k">do</span>
+        <span class="c1"># Create a mock that has a robot model</span>
+        <span class="n">xml</span> <span class="o">=</span> <span class="o">&lt;&lt;-</span><span class="no">EOSDF</span><span class="sh">
+        &lt;model name='test'&gt;
+            &lt;link name="root_test" /&gt;
+            &lt;link name="tip_test" /&gt;
+        &lt;/model&gt;
+</span><span class="no">        EOSDF</span>
+        <span class="c1"># We don't really need a full profile object, only an object</span>
+        <span class="c1"># that provides a Model object from a '#sdf_model' attribute</span>
+        <span class="c1">#</span>
+        <span class="c1"># Let's fake one using flexmock. Flexmock is loaded as part</span>
+        <span class="c1"># Of Syskit's test harness</span>
+        <span class="c1">#</span>
+        <span class="c1"># https://github.com/doudou/flexmock</span>
+        <span class="vi">@profile</span> <span class="o">=</span> <span class="n">flexmock</span><span class="p">(</span><span class="ss">sdf_model: </span><span class="no">SDF</span><span class="o">::</span><span class="no">Model</span><span class="p">.</span><span class="nf">from_xml_string</span><span class="p">(</span><span class="n">xml</span><span class="p">))</span>
     <span class="k">end</span>
-    <span class="n">assert_equal</span> <span class="s2">"link name 'invalid' is not a link of the robot model. Existing links: test::root_test, test::tip_test"</span><span class="p">,</span>
-      <span class="n">e</span><span class="p">.</span><span class="nf">message</span>
-  <span class="k">end</span>
 
-  <span class="n">it</span> <span class="s2">"raises if the tip link does not exist"</span> <span class="k">do</span>
-    <span class="n">syskit_stub_conf</span> <span class="no">WDLSSolver</span><span class="p">,</span> <span class="s1">'default'</span><span class="p">,</span>
-      <span class="ss">data: </span><span class="p">{</span> <span class="s1">'root'</span> <span class="o">=&gt;</span> <span class="s1">'test::root_test'</span><span class="p">,</span> <span class="s1">'tip'</span> <span class="o">=&gt;</span> <span class="s1">'invalid'</span> <span class="p">}</span>
-    <span class="n">e</span> <span class="o">=</span> <span class="n">assert_raises</span><span class="p">(</span><span class="no">ArgumentError</span><span class="p">)</span> <span class="k">do</span>
-      <span class="n">syskit_stub_deploy_and_configure</span><span class="p">(</span>
-        <span class="no">WDLSSolver</span><span class="p">.</span><span class="nf">with_arguments</span><span class="p">(</span><span class="ss">robot: </span><span class="n">profile</span><span class="p">))</span>
+    <span class="n">it</span> <span class="s2">"sets the robot model from its 'robot' argument"</span> <span class="k">do</span>
+        <span class="c1"># Create a fake test configuration with valid root and tip</span>
+        <span class="n">syskit_stub_conf</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">cart_ctrl_wdls</span><span class="o">.</span><span class="no">WDLSSolver</span><span class="p">,</span> <span class="s1">'default'</span><span class="p">,</span>
+            <span class="ss">data: </span><span class="p">{</span> <span class="s1">'root'</span> <span class="o">=&gt;</span> <span class="s1">'test::root_test'</span><span class="p">,</span> <span class="s1">'tip'</span> <span class="o">=&gt;</span> <span class="s1">'test::tip_test'</span> <span class="p">}</span>
+        <span class="n">task</span> <span class="o">=</span> <span class="n">syskit_stub_deploy_and_configure</span><span class="p">(</span>
+            <span class="no">OroGen</span><span class="p">.</span><span class="nf">cart_ctrl_wdls</span><span class="o">.</span><span class="no">WDLSSolver</span><span class="p">.</span>
+                <span class="nf">with_arguments</span><span class="p">(</span><span class="ss">robot: </span><span class="n">profile</span><span class="p">))</span>
+        <span class="n">assert_equal</span> <span class="s2">"&lt;sdf&gt;</span><span class="si">#{</span><span class="n">profile</span><span class="p">.</span><span class="nf">sdf_model</span><span class="p">.</span><span class="nf">to_xml_string</span><span class="si">}</span><span class="s2">&lt;/sdf&gt;"</span><span class="p">,</span>
+            <span class="n">task</span><span class="p">.</span><span class="nf">properties</span><span class="p">.</span><span class="nf">robot_model</span>
     <span class="k">end</span>
-    <span class="n">assert_equal</span> <span class="s2">"link name 'invalid' is not a link of the robot model. Existing links: test::root_test, test::tip_test"</span><span class="p">,</span>
-      <span class="n">e</span><span class="p">.</span><span class="nf">message</span>
-  <span class="k">end</span>
+
+    <span class="n">it</span> <span class="s2">"raises if the root link does not exist"</span> <span class="k">do</span>
+        <span class="n">syskit_stub_conf</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">cart_ctrl_wdls</span><span class="o">.</span><span class="no">WDLSSolver</span><span class="p">,</span> <span class="s1">'default'</span><span class="p">,</span>
+            <span class="ss">data: </span><span class="p">{</span> <span class="s1">'root'</span> <span class="o">=&gt;</span> <span class="s1">'invalid'</span><span class="p">,</span> <span class="s1">'tip'</span> <span class="o">=&gt;</span> <span class="s1">'test::tip_test'</span> <span class="p">}</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">assert_raises</span><span class="p">(</span><span class="no">ArgumentError</span><span class="p">)</span> <span class="k">do</span>
+            <span class="n">syskit_stub_deploy_and_configure</span><span class="p">(</span>
+                <span class="no">OroGen</span><span class="p">.</span><span class="nf">cart_ctrl_wdls</span><span class="o">.</span><span class="no">WDLSSolver</span><span class="p">.</span>
+                    <span class="nf">with_arguments</span><span class="p">(</span><span class="ss">robot: </span><span class="n">profile</span><span class="p">))</span>
+        <span class="k">end</span>
+        <span class="n">assert_equal</span> <span class="s2">"link name 'invalid' is not a link of the robot model. "</span><span class="p">\</span>
+            <span class="s2">"Existing links: test::root_test, test::tip_test"</span><span class="p">,</span>
+            <span class="n">e</span><span class="p">.</span><span class="nf">message</span>
+    <span class="k">end</span>
+
+    <span class="n">it</span> <span class="s2">"raises if the tip link does not exist"</span> <span class="k">do</span>
+        <span class="n">syskit_stub_conf</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">cart_ctrl_wdls</span><span class="o">.</span><span class="no">WDLSSolver</span><span class="p">,</span> <span class="s1">'default'</span><span class="p">,</span>
+            <span class="ss">data: </span><span class="p">{</span> <span class="s1">'root'</span> <span class="o">=&gt;</span> <span class="s1">'test::root_test'</span><span class="p">,</span> <span class="s1">'tip'</span> <span class="o">=&gt;</span> <span class="s1">'invalid'</span> <span class="p">}</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">assert_raises</span><span class="p">(</span><span class="no">ArgumentError</span><span class="p">)</span> <span class="k">do</span>
+            <span class="n">syskit_stub_deploy_and_configure</span><span class="p">(</span>
+                <span class="no">OroGen</span><span class="p">.</span><span class="nf">cart_ctrl_wdls</span><span class="o">.</span><span class="no">WDLSSolver</span><span class="p">.</span>
+                    <span class="nf">with_arguments</span><span class="p">(</span><span class="ss">robot: </span><span class="n">profile</span><span class="p">))</span>
+        <span class="k">end</span>
+        <span class="n">assert_equal</span> <span class="s2">"link name 'invalid' is not a link of the robot model. "</span><span class="p">\</span>
+            <span class="s2">"Existing links: test::root_test, test::tip_test"</span><span class="p">,</span>
+            <span class="n">e</span><span class="p">.</span><span class="nf">message</span>
+    <span class="k">end</span>
 <span class="k">end</span>
 </code></pre></div>
-<p>And run the tests either <a href="constant_generator.html#run_test_command_line">on the command line</a> or <a href="constant_generator.html#run_test_ide">with the IDE</a>.</p>
+<p>And run the tests either <a href="constant_generator.html#run_test_command_line">on the command line</a>
+or <a href="constant_generator.html#run_test_ide">with the IDE</a>.</p>
 
-<p>The tests for <code>WDLSSolver</code> we just wrote should pass. However, we get an error for <code>AdaptiveWDLSSolver</code>:</p>
+<p>The tests for <code>WDLSSolver</code> we just wrote should pass. However, we get an
+error for <code>AdaptiveWDLSSolver</code>:</p>
 
 <div class="highlight"><pre class="highlight plaintext"><code>  1) Error:
 OroGen::CartCtrlWdls::AdaptiveWDLSSolver#test_0001_anonymous:
@@ -207,9 +214,9 @@ OroGen::CartCtrlWdls::AdaptiveWDLSSolver:0x5e5bbb8
     /home/doudou/dev/vanilla/rock-website/tools/syskit/lib/syskit/test/task_context_test.rb:75:in `is_configurable'
     /home/doudou/dev/vanilla/rock-website/bundles/syskit_basics/test/orogen/test_cart_ctrl_wdls.rb:55:in `block (2 levels) in &lt;module:CartCtrlWdls&gt;'
 </code></pre></div>
-<p>With the <code>missing_arguments:</code> line <a href="constant_generator.html#missing_arguments">we've already seen</a>.</p>
-
-<p>Looking at <code>AdaptiveWDLSSolver</code>, we can see that it is subclassing <code>WDLSSolver</code>:</p>
+<p>With the <code>missing_arguments:</code> line
+<a href="constant_generator.html#missing_arguments">we have already seen</a>.
+Looking at <code>AdaptiveWDLSSolver</code>, we can see that it is subclassing <code>WDLSSolver</code>:</p>
 
 <p><img src="media/adaptive_wdlssolver_subclassed_from.png" alt="AdaptiveWDLSSolver subclassed from WDLSSolver" class="fullwidth" /></p>
 
@@ -240,24 +247,24 @@ setup the 'default' configuration for the two components, and a proper robot
 model. Let's do it in the test's <code>before</code> block:</p>
 
 <div class="highlight"><pre class="highlight ruby"><code><span class="n">before</span> <span class="k">do</span>
-  <span class="c1"># Create a mock that has a robot model</span>
-  <span class="n">xml</span> <span class="o">=</span> <span class="o">&lt;&lt;-</span><span class="no">EOSDF</span><span class="sh">
-    &lt;model name='test'&gt;
-      &lt;link name="root_test" /&gt;
-      &lt;link name="tip_test" /&gt;
-    &lt;/model&gt;
-</span><span class="no">  EOSDF</span>
-  <span class="vi">@profile</span> <span class="o">=</span> <span class="n">flexmock</span><span class="p">(</span><span class="ss">sdf_model: </span><span class="no">SDF</span><span class="o">::</span><span class="no">Model</span><span class="p">.</span><span class="nf">from_xml_string</span><span class="p">(</span><span class="n">xml</span><span class="p">))</span>
-  <span class="n">syskit_stub_conf</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">cart_ctrl_wdls</span><span class="o">.</span><span class="no">WDLSSolver</span><span class="p">,</span> <span class="s1">'default'</span><span class="p">,</span>
-    <span class="ss">data: </span><span class="p">{</span> <span class="s1">'root'</span> <span class="o">=&gt;</span> <span class="s1">'test::root_test'</span><span class="p">,</span> <span class="s1">'tip'</span> <span class="o">=&gt;</span> <span class="s1">'test::tip_test'</span> <span class="p">}</span>
-  <span class="n">syskit_stub_conf</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">robot_frames</span><span class="o">.</span><span class="no">SingleChainPublisher</span><span class="p">,</span> <span class="s1">'default'</span><span class="p">,</span>
-    <span class="ss">data: </span><span class="p">{</span> <span class="s1">'chain'</span> <span class="o">=&gt;</span> <span class="no">Hash</span><span class="p">[</span><span class="s1">'root_link'</span> <span class="o">=&gt;</span> <span class="s1">'test::root_test'</span><span class="p">,</span> <span class="s1">'tip_link'</span> <span class="o">=&gt;</span> <span class="s1">'test::tip_test'</span><span class="p">]</span> <span class="p">}</span>
+    <span class="c1"># Create a mock that has a robot model</span>
+    <span class="n">xml</span> <span class="o">=</span> <span class="o">&lt;&lt;-</span><span class="no">EOSDF</span><span class="sh">
+        &lt;model name='test'&gt;
+        &lt;link name="root_test" /&gt;
+        &lt;link name="tip_test" /&gt;
+        &lt;/model&gt;
+</span><span class="no">    EOSDF</span>
+    <span class="vi">@profile</span> <span class="o">=</span> <span class="n">flexmock</span><span class="p">(</span><span class="ss">sdf_model: </span><span class="no">SDF</span><span class="o">::</span><span class="no">Model</span><span class="p">.</span><span class="nf">from_xml_string</span><span class="p">(</span><span class="n">xml</span><span class="p">))</span>
+    <span class="n">syskit_stub_conf</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">cart_ctrl_wdls</span><span class="o">.</span><span class="no">WDLSSolver</span><span class="p">,</span> <span class="s1">'default'</span><span class="p">,</span>
+        <span class="ss">data: </span><span class="p">{</span> <span class="s1">'root'</span> <span class="o">=&gt;</span> <span class="s1">'test::root_test'</span><span class="p">,</span> <span class="s1">'tip'</span> <span class="o">=&gt;</span> <span class="s1">'test::tip_test'</span> <span class="p">}</span>
+    <span class="n">syskit_stub_conf</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">robot_frames</span><span class="o">.</span><span class="no">SingleChainPublisher</span><span class="p">,</span> <span class="s1">'default'</span><span class="p">,</span>
+        <span class="ss">data: </span><span class="p">{</span> <span class="s1">'chain'</span> <span class="o">=&gt;</span> <span class="no">Hash</span><span class="p">[</span><span class="s1">'root_link'</span> <span class="o">=&gt;</span> <span class="s1">'test::root_test'</span><span class="p">,</span> <span class="s1">'tip_link'</span> <span class="o">=&gt;</span> <span class="s1">'test::tip_test'</span><span class="p">]</span> <span class="p">}</span>
 <span class="k">end</span>
 </code></pre></div>
     <p>and modify the test to pass the robot model</p>
 
 <div class="highlight"><pre class="highlight ruby"><code><span class="n">cmp_task</span> <span class="o">=</span> <span class="n">syskit_stub_deploy_configure_and_start</span><span class="p">(</span>
-  <span class="no">ArmCartesianControlWdls</span><span class="p">.</span><span class="nf">with_arguments</span><span class="p">(</span><span class="ss">robot: </span><span class="vi">@profile</span><span class="p">))</span>
+    <span class="no">ArmCartesianControlWdls</span><span class="p">.</span><span class="nf">with_arguments</span><span class="p">(</span><span class="ss">robot: </span><span class="vi">@profile</span><span class="p">))</span>
 </code></pre></div>
     <p>Do the same modification for the <code>ArmCartesianConstantControlWdls</code> composition and now
 verify that the tests pass with <code>syskit test -rgazebo</code>.</p>

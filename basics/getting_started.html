@@ -134,21 +134,21 @@ about collisions.</p>
 
 <div class="highlight"><pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
 <span class="nt">&lt;sdf</span> <span class="na">version=</span><span class="s">"1.6"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;world</span> <span class="na">name=</span><span class="s">"empty_world"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;model</span> <span class="na">name=</span><span class="s">"ur10_fixed"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;world</span> <span class="na">name=</span><span class="s">"empty_world"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;model</span> <span class="na">name=</span><span class="s">"ur10_fixed"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;include&gt;</span>
+                <span class="nt">&lt;name&gt;</span>ur10<span class="nt">&lt;/name&gt;</span>
+                <span class="nt">&lt;uri&gt;</span>model://ur10<span class="nt">&lt;/uri&gt;</span>
+            <span class="nt">&lt;/include&gt;</span>
+            <span class="nt">&lt;joint</span> <span class="na">name=</span><span class="s">"attached_to_ground"</span> <span class="na">type=</span><span class="s">"fixed"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;parent&gt;</span>world<span class="nt">&lt;/parent&gt;</span>
+                <span class="nt">&lt;child&gt;</span>ur10::base<span class="nt">&lt;/child&gt;</span>
+            <span class="nt">&lt;/joint&gt;</span>
+        <span class="nt">&lt;/model&gt;</span>
         <span class="nt">&lt;include&gt;</span>
-          <span class="nt">&lt;name&gt;</span>ur10<span class="nt">&lt;/name&gt;</span>
-          <span class="nt">&lt;uri&gt;</span>model://ur10<span class="nt">&lt;/uri&gt;</span>
+            <span class="nt">&lt;uri&gt;</span>model://ground_plane<span class="nt">&lt;/uri&gt;</span>
         <span class="nt">&lt;/include&gt;</span>
-        <span class="nt">&lt;joint</span> <span class="na">name=</span><span class="s">"attached_to_ground"</span> <span class="na">type=</span><span class="s">"fixed"</span><span class="nt">&gt;</span>
-          <span class="nt">&lt;parent&gt;</span>world<span class="nt">&lt;/parent&gt;</span>
-          <span class="nt">&lt;child&gt;</span>ur10::base<span class="nt">&lt;/child&gt;</span>
-        <span class="nt">&lt;/joint&gt;</span>
-    <span class="nt">&lt;/model&gt;</span>
-    <span class="nt">&lt;include&gt;</span>
-      <span class="nt">&lt;uri&gt;</span>model://ground_plane<span class="nt">&lt;/uri&gt;</span>
-    <span class="nt">&lt;/include&gt;</span>
-  <span class="nt">&lt;/world&gt;</span>
+    <span class="nt">&lt;/world&gt;</span>
 <span class="nt">&lt;/sdf&gt;</span>
 </code></pre></div>
 <h2 id="running-and-visualizing-a-gazebo-environment">Running and visualizing a Gazebo environment</h2>
@@ -195,12 +195,12 @@ integration code and then load the environment. This is done by modifying the
 newly-created <code>config/robots/gazebo.rb</code> configuration file to add:</p>
 
 <div class="highlight"><pre class="highlight ruby"><code><span class="no">Robot</span><span class="p">.</span><span class="nf">init</span> <span class="k">do</span>
-  <span class="nb">require</span> <span class="s1">'rock_gazebo/syskit'</span>
-  <span class="no">Conf</span><span class="p">.</span><span class="nf">syskit</span><span class="p">.</span><span class="nf">transformer_enabled</span> <span class="o">=</span> <span class="kp">true</span>
+    <span class="nb">require</span> <span class="s1">'rock_gazebo/syskit'</span>
+    <span class="no">Conf</span><span class="p">.</span><span class="nf">syskit</span><span class="p">.</span><span class="nf">transformer_enabled</span> <span class="o">=</span> <span class="kp">true</span>
 <span class="k">end</span>
 
 <span class="no">Robot</span><span class="p">.</span><span class="nf">requires</span> <span class="k">do</span>
-  <span class="no">Syskit</span><span class="p">.</span><span class="nf">conf</span><span class="p">.</span><span class="nf">use_gazebo_world</span><span class="p">(</span><span class="s1">'empty_world'</span><span class="p">)</span>
+    <span class="no">Syskit</span><span class="p">.</span><span class="nf">conf</span><span class="p">.</span><span class="nf">use_gazebo_world</span><span class="p">(</span><span class="s1">'empty_world'</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre></div>
 <p class="next-page"><strong>Next</strong>: now that we have a minimal scene and a working Gazebo installation, <a href="composition.html">let's do

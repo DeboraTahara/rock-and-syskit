@@ -126,9 +126,9 @@ uses the KDL library to do cartesian control of a robotic arm.  To install the
 package, add it in the <code>layout</code> section of <code>autoproj/manifest</code>:</p>
 
 <div class="highlight"><pre class="highlight yaml"><code><span class="na">layout</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="s">rock.core</span>
-  <span class="pi">-</span> <span class="s">rock.gazebo</span>
-  <span class="pi">-</span> <span class="s">control/orogen/cart_ctrl_wdls</span>
+<span class="pi">-</span> <span class="s">rock.core</span>
+<span class="pi">-</span> <span class="s">rock.gazebo</span>
+<span class="pi">-</span> <span class="s">control/orogen/cart_ctrl_wdls</span>
 </code></pre></div>
 <p>Then, run the following to checkout missing packages but avoid updating the existing ones:</p>
 
@@ -200,13 +200,13 @@ later point). So edit the newly-created
 <span class="n">using_task_library</span> <span class="s1">'cart_ctrl_wdls'</span>
 
 <span class="k">module</span> <span class="nn">SyskitBasics</span>
-  <span class="k">module</span> <span class="nn">Compositions</span>
-    <span class="k">class</span> <span class="nc">ArmCartesianControlWdls</span> <span class="o">&lt;</span> <span class="no">Syskit</span><span class="o">::</span><span class="no">Composition</span>
-      <span class="n">add</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">cart_ctrl_wdls</span><span class="o">.</span><span class="no">WDLSSolver</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'twist2joint_velocity'</span>
-      <span class="n">add</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">cart_ctrl_wdls</span><span class="o">.</span><span class="no">CartCtrl</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'position2twist'</span>
-      <span class="n">add</span> <span class="no">CommonModels</span><span class="o">::</span><span class="no">Devices</span><span class="o">::</span><span class="no">Gazebo</span><span class="o">::</span><span class="no">Model</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'arm'</span>
+    <span class="k">module</span> <span class="nn">Compositions</span>
+        <span class="k">class</span> <span class="nc">ArmCartesianControlWdls</span> <span class="o">&lt;</span> <span class="no">Syskit</span><span class="o">::</span><span class="no">Composition</span>
+            <span class="n">add</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">cart_ctrl_wdls</span><span class="o">.</span><span class="no">WDLSSolver</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'twist2joint_velocity'</span>
+            <span class="n">add</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">cart_ctrl_wdls</span><span class="o">.</span><span class="no">CartCtrl</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'position2twist'</span>
+            <span class="n">add</span> <span class="no">CommonModels</span><span class="o">::</span><span class="no">Devices</span><span class="o">::</span><span class="no">Gazebo</span><span class="o">::</span><span class="no">Model</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'arm'</span>
+        <span class="k">end</span>
     <span class="k">end</span>
-  <span class="k">end</span>
 <span class="k">end</span>
 </code></pre></div>
 <p>At this stage, we will have to connect the ports together. To see what inputs
@@ -228,14 +228,14 @@ the <code>ctrl_out</code> port of the <code>CartCtrl</code> component is accesse
 command to the actual arm command input:</p>
 
 <div class="highlight"><pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">ArmCartesianControlWdls</span> <span class="o">&lt;</span> <span class="no">Syskit</span><span class="o">::</span><span class="no">Composition</span>
-  <span class="n">add</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">cart_ctrl_wdls</span><span class="o">.</span><span class="no">WDLSSolver</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'twist2joint_velocity'</span>
-  <span class="n">add</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">cart_ctrl_wdls</span><span class="o">.</span><span class="no">CartCtrl</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'position2twist'</span>
-  <span class="n">add</span> <span class="no">CommonModels</span><span class="o">::</span><span class="no">Devices</span><span class="o">::</span><span class="no">Gazebo</span><span class="o">::</span><span class="no">Model</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'arm'</span>
+    <span class="n">add</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">cart_ctrl_wdls</span><span class="o">.</span><span class="no">WDLSSolver</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'twist2joint_velocity'</span>
+    <span class="n">add</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">cart_ctrl_wdls</span><span class="o">.</span><span class="no">CartCtrl</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'position2twist'</span>
+    <span class="n">add</span> <span class="no">CommonModels</span><span class="o">::</span><span class="no">Devices</span><span class="o">::</span><span class="no">Gazebo</span><span class="o">::</span><span class="no">Model</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'arm'</span>
 
-  <span class="n">position2twist_child</span><span class="p">.</span><span class="nf">ctrl_out_port</span><span class="p">.</span>
-    <span class="nf">connect_to</span> <span class="n">twist2joint_velocity_child</span><span class="p">.</span><span class="nf">desired_twist_port</span>
-  <span class="n">twist2joint_velocity_child</span><span class="p">.</span><span class="nf">solver_output_port</span><span class="p">.</span>
-    <span class="nf">connect_to</span> <span class="n">arm_child</span><span class="p">.</span><span class="nf">joints_cmd_port</span>
+    <span class="n">position2twist_child</span><span class="p">.</span><span class="nf">ctrl_out_port</span><span class="p">.</span>
+        <span class="nf">connect_to</span> <span class="n">twist2joint_velocity_child</span><span class="p">.</span><span class="nf">desired_twist_port</span>
+    <span class="n">twist2joint_velocity_child</span><span class="p">.</span><span class="nf">solver_output_port</span><span class="p">.</span>
+        <span class="nf">connect_to</span> <span class="n">arm_child</span><span class="p">.</span><span class="nf">joints_cmd_port</span>
 <span class="k">end</span>
 </code></pre></div>
 <p>And hit the "Reload Models" button at the top of the IDE window. Syntax errors
@@ -247,7 +247,7 @@ click reload after you fixed them.</p>
 to something. <code>joint_status</code> is the direct joint feedback from the arm:</p>
 
 <div class="highlight"><pre class="highlight ruby"><code><span class="n">arm_child</span><span class="p">.</span><span class="nf">joints_status_port</span><span class="p">.</span>
-  <span class="nf">connect_to</span> <span class="n">twist2joint_velocity_child</span><span class="p">.</span><span class="nf">joint_status_port</span>
+    <span class="nf">connect_to</span> <span class="n">twist2joint_velocity_child</span><span class="p">.</span><span class="nf">joint_status_port</span>
 </code></pre></div>
 <p>However, the cartesian position feedback is not directly provided by the Gazebo
 model. Fortunately, the <code>control/orogen/robot_frames</code> project provides components
@@ -263,25 +263,25 @@ Then, finally add it to the composition.</p>
 <span class="n">using_task_library</span> <span class="s1">'robot_frames'</span>
 
 <span class="k">module</span> <span class="nn">SyskitBasics</span>
-  <span class="k">module</span> <span class="nn">Compositions</span>
-    <span class="k">class</span> <span class="nc">ArmCartesianControlWdls</span> <span class="o">&lt;</span> <span class="no">Syskit</span><span class="o">::</span><span class="no">Composition</span>
-      <span class="n">add</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">cart_ctrl_wdls</span><span class="o">.</span><span class="no">WDLSSolver</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'twist2joint_velocity'</span>
-      <span class="n">add</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">cart_ctrl_wdls</span><span class="o">.</span><span class="no">CartCtrl</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'position2twist'</span>
-      <span class="n">add</span> <span class="no">CommonModels</span><span class="o">::</span><span class="no">Devices</span><span class="o">::</span><span class="no">Gazebo</span><span class="o">::</span><span class="no">Model</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'arm'</span>
-      <span class="n">add</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">robot_frames</span><span class="o">.</span><span class="no">SingleChainPublisher</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'joint2pose'</span>
+    <span class="k">module</span> <span class="nn">Compositions</span>
+        <span class="k">class</span> <span class="nc">ArmCartesianControlWdls</span> <span class="o">&lt;</span> <span class="no">Syskit</span><span class="o">::</span><span class="no">Composition</span>
+            <span class="n">add</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">cart_ctrl_wdls</span><span class="o">.</span><span class="no">WDLSSolver</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'twist2joint_velocity'</span>
+            <span class="n">add</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">cart_ctrl_wdls</span><span class="o">.</span><span class="no">CartCtrl</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'position2twist'</span>
+            <span class="n">add</span> <span class="no">CommonModels</span><span class="o">::</span><span class="no">Devices</span><span class="o">::</span><span class="no">Gazebo</span><span class="o">::</span><span class="no">Model</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'arm'</span>
+            <span class="n">add</span> <span class="no">OroGen</span><span class="p">.</span><span class="nf">robot_frames</span><span class="o">.</span><span class="no">SingleChainPublisher</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'joint2pose'</span>
 
-      <span class="n">position2twist_child</span><span class="p">.</span><span class="nf">ctrl_out_port</span><span class="p">.</span>
-        <span class="nf">connect_to</span> <span class="n">twist2joint_velocity_child</span><span class="p">.</span><span class="nf">desired_twist_port</span>
-      <span class="n">twist2joint_velocity_child</span><span class="p">.</span><span class="nf">solver_output_port</span><span class="p">.</span>
-        <span class="nf">connect_to</span> <span class="n">arm_child</span><span class="p">.</span><span class="nf">joints_cmd_port</span>
-      <span class="n">arm_child</span><span class="p">.</span><span class="nf">joints_status_port</span><span class="p">.</span>
-        <span class="nf">connect_to</span> <span class="n">twist2joint_velocity_child</span><span class="p">.</span><span class="nf">joint_status_port</span>
-      <span class="n">arm_child</span><span class="p">.</span><span class="nf">joints_status_port</span><span class="p">.</span>
-        <span class="nf">connect_to</span> <span class="n">joint2pose_child</span><span class="p">.</span><span class="nf">joints_samples_port</span>
-      <span class="n">joint2pose_child</span><span class="p">.</span><span class="nf">tip_pose_port</span><span class="p">.</span>
-        <span class="nf">connect_to</span> <span class="n">position2twist_child</span><span class="p">.</span><span class="nf">cartesian_status_port</span>
+            <span class="n">position2twist_child</span><span class="p">.</span><span class="nf">ctrl_out_port</span><span class="p">.</span>
+                <span class="nf">connect_to</span> <span class="n">twist2joint_velocity_child</span><span class="p">.</span><span class="nf">desired_twist_port</span>
+            <span class="n">twist2joint_velocity_child</span><span class="p">.</span><span class="nf">solver_output_port</span><span class="p">.</span>
+                <span class="nf">connect_to</span> <span class="n">arm_child</span><span class="p">.</span><span class="nf">joints_cmd_port</span>
+            <span class="n">arm_child</span><span class="p">.</span><span class="nf">joints_status_port</span><span class="p">.</span>
+                <span class="nf">connect_to</span> <span class="n">twist2joint_velocity_child</span><span class="p">.</span><span class="nf">joint_status_port</span>
+            <span class="n">arm_child</span><span class="p">.</span><span class="nf">joints_status_port</span><span class="p">.</span>
+                <span class="nf">connect_to</span> <span class="n">joint2pose_child</span><span class="p">.</span><span class="nf">joints_samples_port</span>
+            <span class="n">joint2pose_child</span><span class="p">.</span><span class="nf">tip_pose_port</span><span class="p">.</span>
+                <span class="nf">connect_to</span> <span class="n">position2twist_child</span><span class="p">.</span><span class="nf">cartesian_status_port</span>
+        <span class="k">end</span>
     <span class="k">end</span>
-  <span class="k">end</span>
 <span class="k">end</span>
 </code></pre></div>
 <p>This leaves us with the command port.</p>

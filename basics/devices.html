@@ -93,7 +93,7 @@ compositions. It's also where the robot definition happens.<br />
 By convention, one usually creates a per-robot <code>Base</code> profile that
 contains the robot definition.  Let's do that now.</p>
 
-<div class="highlight"><pre class="highlight plaintext"><code>$ syskit gen profile -rgazebo base
+<div class="highlight"><pre class="highlight plaintext"><code>$ syskit gen profile gazebo/base
       create  models/profiles/gazebo
       create  models/profiles/gazebo/base.rb
       create  test/profiles/gazebo
@@ -107,18 +107,19 @@ within the <code>Compositions::Gazebo</code> namespace.</p>
 
 <p>Now, here's the catch: we will actually not really learn to define devices, since
 the mapping from the simulation model to devices is done automatically from the
-robot model. One only has to declare the robot model in the <code>Base</code> profile:</p>
+robot model. One only has to declare the robot model in the <code>Base</code> profile we
+just created:</p>
 
 <div class="highlight"><pre class="highlight ruby"><code><span class="k">module</span> <span class="nn">SyskitBasics</span>
-  <span class="k">module</span> <span class="nn">Profiles</span>
-    <span class="k">module</span> <span class="nn">Gazebo</span>
-      <span class="n">profile</span> <span class="s1">'Base'</span> <span class="k">do</span>
-        <span class="n">use_gazebo_model</span> <span class="s1">'model://ur10'</span><span class="p">,</span>
-          <span class="ss">prefix_device_with_name: </span><span class="kp">true</span>
-        <span class="n">use_sdf_world</span>
-      <span class="k">end</span>
+    <span class="k">module</span> <span class="nn">Profiles</span>
+        <span class="k">module</span> <span class="nn">Gazebo</span>
+            <span class="n">profile</span> <span class="s1">'Base'</span> <span class="k">do</span>
+                <span class="n">use_gazebo_model</span> <span class="s1">'model://ur10'</span><span class="p">,</span>
+                    <span class="ss">prefix_device_with_name: </span><span class="kp">true</span>
+                <span class="n">use_sdf_world</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
     <span class="k">end</span>
-  <span class="k">end</span>
 <span class="k">end</span>
 </code></pre></div>
 <p class="note"><strong>Note</strong> the <code>prefix_device_with_name</code> argument is here for backward
@@ -141,7 +142,7 @@ Enable both "Show all ports" and "Show task info" to get port information .</p>
 for really low-level stuff like devices. Let's create an <code>ArmControl</code> profile to
 integrate the arm control stuff.</p>
 
-<div class="highlight"><pre class="highlight plaintext"><code>syskit gen profile -rgazebo ArmControl
+<div class="highlight"><pre class="highlight plaintext"><code>syskit gen profile gazebo/arm_control
 </code></pre></div>
 <p>We need to require the <code>Base</code> profile and <code>ArmCartesianControlWdls</code> composition
 definition.  Then, <code>define</code> the cartesian and joint position controls <em>for our
@@ -158,18 +159,18 @@ previous line. Don't forget these dots !</p>
 <span class="nb">require</span> <span class="s1">'syskit_basics/models/compositions/joint_position_constant_control'</span>
 
 <span class="k">module</span> <span class="nn">SyskitBasics</span>
-  <span class="k">module</span> <span class="nn">Profiles</span>
-    <span class="k">module</span> <span class="nn">Gazebo</span>
-      <span class="n">profile</span> <span class="s1">'ArmControl'</span> <span class="k">do</span>
-        <span class="n">define</span> <span class="s1">'arm_cartesian_constant_control'</span><span class="p">,</span>
-          <span class="no">Compositions</span><span class="o">::</span><span class="no">ArmCartesianConstantControlWdls</span><span class="p">.</span>
-            <span class="nf">use</span><span class="p">(</span><span class="no">Base</span><span class="p">.</span><span class="nf">ur10_dev</span><span class="p">)</span>
-        <span class="n">define</span> <span class="s1">'arm_joint_position_constant_control'</span><span class="p">,</span>
-          <span class="no">Compositions</span><span class="o">::</span><span class="no">JointPositionConstantControl</span><span class="p">.</span>
-            <span class="nf">use</span><span class="p">(</span><span class="no">Base</span><span class="p">.</span><span class="nf">ur10_dev</span><span class="p">)</span>
-      <span class="k">end</span>
+    <span class="k">module</span> <span class="nn">Profiles</span>
+        <span class="k">module</span> <span class="nn">Gazebo</span>
+            <span class="n">profile</span> <span class="s1">'ArmControl'</span> <span class="k">do</span>
+                <span class="n">define</span> <span class="s1">'arm_cartesian_constant_control'</span><span class="p">,</span>
+                    <span class="no">Compositions</span><span class="o">::</span><span class="no">ArmCartesianConstantControlWdls</span><span class="p">.</span>
+                        <span class="nf">use</span><span class="p">(</span><span class="no">Base</span><span class="p">.</span><span class="nf">ur10_dev</span><span class="p">)</span>
+                <span class="n">define</span> <span class="s1">'arm_joint_position_constant_control'</span><span class="p">,</span>
+                    <span class="no">Compositions</span><span class="o">::</span><span class="no">JointPositionConstantControl</span><span class="p">.</span>
+                        <span class="nf">use</span><span class="p">(</span><span class="no">Base</span><span class="p">.</span><span class="nf">ur10_dev</span><span class="p">)</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
     <span class="k">end</span>
-  <span class="k">end</span>
 <span class="k">end</span>
 </code></pre></div>
 <p>As we mentioned <a href="constant_generator.html#joint_position_constant_generator">when we defined it</a>,
@@ -185,29 +186,29 @@ with the <code>_def</code> suffix. Usable joint positions can be found using the
 <span class="nb">require</span> <span class="s1">'syskit_basics/models/compositions/joint_position_constant_control'</span>
 
 <span class="k">module</span> <span class="nn">SyskitBasics</span>
-  <span class="k">module</span> <span class="nn">Profiles</span>
-    <span class="k">module</span> <span class="nn">Gazebo</span>
-      <span class="no">UR10_SAFE_POSITION</span> <span class="o">=</span> <span class="no">Hash</span><span class="p">[</span>
-        <span class="s1">'ur10::shoulder_pan'</span>  <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s1">'ur10::shoulder_lift'</span> <span class="o">=&gt;</span> <span class="o">-</span><span class="no">Math</span><span class="o">::</span><span class="no">PI</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>
-        <span class="s1">'ur10::elbow'</span>         <span class="o">=&gt;</span> <span class="no">Math</span><span class="o">::</span><span class="no">PI</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>
-        <span class="s1">'ur10::wrist_1'</span>       <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s1">'ur10::wrist_2'</span>       <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s1">'ur10::wrist_3'</span>       <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="k">module</span> <span class="nn">Profiles</span>
+        <span class="k">module</span> <span class="nn">Gazebo</span>
+            <span class="no">UR10_SAFE_POSITION</span> <span class="o">=</span> <span class="no">Hash</span><span class="p">[</span>
+                <span class="s1">'ur10::shoulder_pan'</span>  <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s1">'ur10::shoulder_lift'</span> <span class="o">=&gt;</span> <span class="o">-</span><span class="no">Math</span><span class="o">::</span><span class="no">PI</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>
+                <span class="s1">'ur10::elbow'</span>         <span class="o">=&gt;</span> <span class="no">Math</span><span class="o">::</span><span class="no">PI</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>
+                <span class="s1">'ur10::wrist_1'</span>       <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s1">'ur10::wrist_2'</span>       <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s1">'ur10::wrist_3'</span>       <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">]</span>
 
-      <span class="n">profile</span> <span class="s1">'ArmControl'</span> <span class="k">do</span>
-        <span class="n">define</span> <span class="s1">'arm_cartesian_constant_control'</span><span class="p">,</span>
-          <span class="no">Compositions</span><span class="o">::</span><span class="no">ArmCartesianConstantControlWdls</span><span class="p">.</span>
-            <span class="nf">use</span><span class="p">(</span><span class="no">Base</span><span class="p">.</span><span class="nf">ur10_dev</span><span class="p">)</span>
-        <span class="n">define</span> <span class="s1">'arm_joint_position_constant_control'</span><span class="p">,</span>
-          <span class="no">Compositions</span><span class="o">::</span><span class="no">JointPositionConstantControl</span><span class="p">.</span>
-            <span class="nf">use</span><span class="p">(</span><span class="no">Base</span><span class="p">.</span><span class="nf">ur10_dev</span><span class="p">)</span>
-        <span class="n">define</span> <span class="s1">'arm_safe_position'</span><span class="p">,</span>
-          <span class="n">arm_joint_position_constant_control_def</span><span class="p">.</span>
-            <span class="nf">with_arguments</span><span class="p">(</span><span class="ss">setpoint: </span><span class="no">UR10_SAFE_POSITION</span><span class="p">)</span>
-      <span class="k">end</span>
+            <span class="n">profile</span> <span class="s1">'ArmControl'</span> <span class="k">do</span>
+                <span class="n">define</span> <span class="s1">'arm_cartesian_constant_control'</span><span class="p">,</span>
+                    <span class="no">Compositions</span><span class="o">::</span><span class="no">ArmCartesianConstantControlWdls</span><span class="p">.</span>
+                        <span class="nf">use</span><span class="p">(</span><span class="no">Base</span><span class="p">.</span><span class="nf">ur10_dev</span><span class="p">)</span>
+                <span class="n">define</span> <span class="s1">'arm_joint_position_constant_control'</span><span class="p">,</span>
+                    <span class="no">Compositions</span><span class="o">::</span><span class="no">JointPositionConstantControl</span><span class="p">.</span>
+                        <span class="nf">use</span><span class="p">(</span><span class="no">Base</span><span class="p">.</span><span class="nf">ur10_dev</span><span class="p">)</span>
+                <span class="n">define</span> <span class="s1">'arm_safe_position'</span><span class="p">,</span>
+                    <span class="n">arm_joint_position_constant_control_def</span><span class="p">.</span>
+                        <span class="nf">with_arguments</span><span class="p">(</span><span class="ss">setpoint: </span><span class="no">UR10_SAFE_POSITION</span><span class="p">)</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
     <span class="k">end</span>
-  <span class="k">end</span>
 <span class="k">end</span>
 </code></pre></div>
 <p class="callout callout-info">A device model is accessed using the device's name with a <code>_dev</code> suffix on the
