@@ -6822,3 +6822,5 @@ nav.docs-sidebar.affix {
 @media screen and (max-width: 992px) {
   nav.docs-sidebar.affix {
     position: relative; } }
+a > code {
+  color: #337ab7; }

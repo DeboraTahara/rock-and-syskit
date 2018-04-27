@@ -38,15 +38,17 @@
         <div class="row">
             <div class="col-md-3" role="complementary">
                 <nav class="docs-sidebar" data-spy="affix">
-                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent'><span class='parent-label'><a href="../basics/">Basics</a></span><ul><li class='child'><a href="../basics/">Introduction</a></li><li class='child'><a href="../basics/installation.html">Installation</a></li><li class='child'><a href="../basics/day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="../basics/getting_started.html">Getting Started</a></li><li class='child'><a href="../basics/composition.html">Compositions</a></li><li class='child'><a href="../basics/constant_generator.html">Constant Generator</a></li><li class='child'><a href="../basics/devices.html">Profiles and Devices</a></li><li class='child'><a href="../basics/deployment.html">Deployment</a></li><li class='child'><a href="../basics/validation.html">Configuration Consistency</a></li><li class='child'><a href="../basics/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../workspace/">Workspace and Packages</a></span><ul><li class='child'><a href="../workspace/">Introduction</a></li><li class='child'><a href="../workspace/conventions.html">Conventions</a></li><li class='child'><a href="../workspace/setup.html">Starting a New Project</a></li><li class='child'><a href="../workspace/add_packages.html">Adding new packages</a></li><li class='child'><a href="../workspace/os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="../workspace/managing.html">Build configuration design</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../type_system/">The Type System</a></span><ul><li class='child'><a href="../type_system/">Introduction</a></li><li class='child'><a href="../type_system/defining_types.html">Defining Types</a></li><li class='child'><a href="../type_system/types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent active'><span class='parent-label'><a href="./">Integrating Functionality</a></span><ul><li class='child'><a href="./">Introduction</a></li><li class='child active'><a href="cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="ruby_libraries.html">Ruby Library Packages</a></li><li class='child'><a href="components.html">Components</a></li><li class='child'><a href="interface.html">Interface</a></li><li class='child'><a href="state_machine.html">State Machine</a></li><li class='child'><a href="writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="timestamping.html">Timestamping</a></li><li class='child'><a href="deployment.html">Deployments</a></li><li class='child'><a href="runtime.html">Runtime</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../component_networks/">Designing Component Networks</a></span><ul><li class='child'><a href="../component_networks/">Introduction</a></li><li class='child'><a href="../component_networks/composition.html">Compositions</a></li><li class='child'><a href="../component_networks/profiles.html">Profiles</a></li><li class='child'><a href="../component_networks/reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="../component_networks/transformations.html">Transformations</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li></ul>
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent'><span class='parent-label'><a href="../basics/">Basics</a></span><ul><li class='child'><a href="../basics/">Introduction</a></li><li class='child'><a href="../basics/installation.html">Installation</a></li><li class='child'><a href="../basics/day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="../basics/getting_started.html">Getting Started</a></li><li class='child'><a href="../basics/composition.html">Compositions</a></li><li class='child'><a href="../basics/constant_generator.html">Constant Generator</a></li><li class='child'><a href="../basics/devices.html">Profiles and Devices</a></li><li class='child'><a href="../basics/deployment.html">Deployment</a></li><li class='child'><a href="../basics/publishing.html">Publishing</a></li><li class='child'><a href="../basics/validation.html">Configuration Consistency</a></li><li class='child'><a href="../basics/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../workspace/">Workspace and Packages</a></span><ul><li class='child'><a href="../workspace/">Introduction</a></li><li class='child'><a href="../workspace/conventions.html">Conventions</a></li><li class='child'><a href="../workspace/setup.html">Starting a New Project</a></li><li class='child'><a href="../workspace/add_packages.html">Adding new packages</a></li><li class='child'><a href="../workspace/os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="../workspace/managing.html">Build configuration design</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../type_system/">The Type System</a></span><ul><li class='child'><a href="../type_system/">Introduction</a></li><li class='child'><a href="../type_system/defining_types.html">Defining Types</a></li><li class='child'><a href="../type_system/types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent active'><span class='parent-label'><a href="./">Integrating Functionality</a></span><ul><li class='child'><a href="./">Introduction</a></li><li class='child'><a href="add_packages.html">Add packages</a></li><li class='child active'><a href="cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="ruby_libraries.html">Ruby Library Packages</a></li><li class='child'><a href="components.html">Components</a></li><li class='child'><a href="interface.html">Interface</a></li><li class='child'><a href="state_machine.html">State Machine</a></li><li class='child'><a href="writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="timestamping.html">Timestamping</a></li><li class='child'><a href="deployment.html">Deployments</a></li><li class='child'><a href="runtime.html">Runtime</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../component_networks/">Designing Component Networks</a></span><ul><li class='child'><a href="../component_networks/">Introduction</a></li><li class='child'><a href="../component_networks/composition.html">Compositions</a></li><li class='child'><a href="../component_networks/profiles.html">Profiles</a></li><li class='child'><a href="../component_networks/reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="../component_networks/transformations.html">Transformations</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li></ul>
                 </nav>
             </div>
             <div class="col-md-9" role="main">
                 <h1 class="no_toc" id="c-library-packages">C++ Library Packages</h1>
 
 <ul id="markdown-toc">
+  <li><a href="#creating-and-adding-packages-to-the-workspace" id="markdown-toc-creating-and-adding-packages-to-the-workspace">Creating and Adding Packages to the Workspace</a></li>
   <li><a href="#integrating-3rd-party-library" id="markdown-toc-integrating-3rd-party-library">Integrating 3rd-party library</a></li>
   <li><a href="#creating-a-package" id="markdown-toc-creating-a-package">Creating a Package</a></li>
+  <li><a href="#cxx_standard" id="markdown-toc-cxx_standard">Picking the C++ Standard</a></li>
   <li><a href="#conventions-for-library-design" id="markdown-toc-conventions-for-library-design">Conventions for library design</a></li>
   <li><a href="#tests" id="markdown-toc-tests">Tests</a></li>
   <li><a href="#the-rock-cmake-macros" id="markdown-toc-the-rock-cmake-macros">The Rock CMake macros</a></li>
@@ -75,6 +77,10 @@ use "plain make")</p>
 in a Rock component is to provide a pkg-config file for it. This is how orogen
 resolves its dependencies.</p>
 
+<h2 id="creating-and-adding-packages-to-the-workspace">Creating and Adding Packages to the Workspace</h2>
+
+<p>This is covered in the <a href="../workspace/add_packages.html">Workspace and Packages section</a></p>
+
 <h2 id="integrating-3rd-party-library">Integrating 3rd-party library</h2>
 
 <p>Rock packages - even those using the Rock CMake macros - are <strong>not</strong> dependent
@@ -91,7 +97,8 @@ orogen integration. If that is needed, you will probably want to integrate
 this change <a href="../workspace/add_packages.html#patch">as a patch</a> into your build
 configuration. Also, try to get this patch in the package's mainline, it will
 make things easier down the line.</li>
-  <li>provide <a href="../workspace/add_packages.html#manifest_xml">a package manifest</a> in the package set.</li>
+  <li>provide <a href="../workspace/add_packages.html#manifest_xml">a package manifest</a> in the
+package set.</li>
 </ul>
 
 <h2 id="creating-a-package">Creating a Package</h2>
@@ -112,6 +119,23 @@ rock-create-lib imu_advanced_navigation_anpp
 <p>This library creates a dummy class and a dummy executable that uses this class.
 It is great at providing you with the example CMake code for both library and
 tests.</p>
+
+<h2 id="cxx_standard">Picking the C++ Standard</h2>
+
+<p>The Rock CMake macros use CMake's own mechanism to pick the C++ standard that should
+be used to build the code. The template still picks the system's local default. If you
+want to choose one explicitely, use (here for C++11)</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>set(CMAKE_CXX_STANDARD 11)
+</code></pre></div>
+<p>This lets CMake use <em>at least</em> C++11 - some other dependencies might want a later
+standard. If you want to have <em>exactly</em> C++11, add the following line</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>set(CMAKE_CXX_STANDARD_REQUIRED 11)
+</code></pre></div>
+<p>The choice of the C++ standard is automatically
+<a href="components.html#cxx_standard">propagated to oroGen projects</a> when developing components
+based on the C++11 library.</p>
 
 <h2 id="conventions-for-library-design">Conventions for library design</h2>
 
@@ -176,7 +200,7 @@ use it.</p>
 easy.  All you need to do is adding <em>base-logging to your list of package config
 dependencies and include the header _base/logging/Logging.hpp</em> where logging is needed.</p>
 
-<div class="highlight"><pre class="highlight plaintext"><code>rock_library(test_library 
+<div class="highlight"><pre class="highlight plaintext"><code>rock_library(test_library
          DEPS_PKGCONFIG base-logging
          ...)
 </code></pre></div>
@@ -192,7 +216,7 @@ stream-style.</p>
 <span class="p">...</span>
 <span class="c1">// printf-style logging
 </span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">information</span><span class="p">(</span><span class="s">"test-logging happening here"</span><span class="p">);</span>
-<span class="n">LOG_DEBUG</span><span class="p">(</span><span class="s">"I provide you the following debug information: %s"</span><span class="p">,</span> 
+<span class="n">LOG_DEBUG</span><span class="p">(</span><span class="s">"I provide you the following debug information: %s"</span><span class="p">,</span>
     <span class="n">information</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
 <span class="n">LOG_INFO</span><span class="p">(...);</span>
 <span class="n">LOG_WARN</span><span class="p">(...);</span>
@@ -243,7 +267,7 @@ MULTILINE, SHORT, example outputs are given below:</li>
 
 <p>The DEFAULT format contains no linebreaks (here only due to fit the narrow presentation):</p>
 
-<div class="highlight"><pre class="highlight shell"><code><span class="o">[</span>20120120-11:58:00:577] <span class="o">[</span>FATAL] - test_logger::A fatal error 
+<div class="highlight"><pre class="highlight shell"><code><span class="o">[</span>20120120-11:58:00:577] <span class="o">[</span>FATAL] - test_logger::A fatal error
 occurred <span class="o">(</span>/tmp/test_logger/src/Main.cpp:10 - int main<span class="o">(</span>int, char<span class="k">**</span><span class="o">))</span>
 </code></pre></div>
 <p>The SHORT format reduces information to the log priority and the message:</p>
@@ -254,7 +278,7 @@ occurred <span class="o">(</span>/tmp/test_logger/src/Main.cpp:10 - int main<spa
 
 <div class="highlight"><pre class="highlight shell"><code><span class="o">[</span>20120120-11:58:59:976] <span class="k">in </span>int main<span class="o">(</span>int, char<span class="k">**</span><span class="o">)</span>
         /tmp/test_logger/src/Main.cpp:10
-        <span class="o">[</span>FATAL] - test_logger::A fatal error occurred 
+        <span class="o">[</span>FATAL] - test_logger::A fatal error occurred
 </code></pre></div>
 <p class="next-page">The end of this section will detail the CMake macros. Unless you need them, you may
 want to go to the next topic: <a href="ruby_libraries.html">the integration of Ruby packages</a></p>
