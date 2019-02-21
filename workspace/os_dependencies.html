@@ -445,9 +445,9 @@ may use the <code>default</code> keyword or a comma-separated list of release na
   <span class="pi">-</span> <span class="s">xenial,'14.04',saucy</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">repo</span>
       <span class="na">repo</span><span class="pi">:</span> <span class="s1">'</span><span class="s">deb</span><span class="nv"> </span><span class="s">http://packages.microsoft.com/repos/vscode</span><span class="nv"> </span><span class="s">stable</span><span class="nv"> </span><span class="s">main'</span>
-  <span class="pi">-</span> <span class="s">default</span>
-    <span class="s">- type</span><span class="pi">:</span> <span class="s">repo</span>
-      <span class="s">repo</span><span class="pi">:</span> <span class="s1">'</span><span class="s">deb</span><span class="nv"> </span><span class="s">http://dl.google.com/linux/chrome/deb/</span><span class="nv"> </span><span class="s">stable</span><span class="nv"> </span><span class="s">main'</span>
+  <span class="pi">-</span> <span class="na">default</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">repo</span>
+      <span class="na">repo</span><span class="pi">:</span> <span class="s1">'</span><span class="s">deb</span><span class="nv"> </span><span class="s">http://dl.google.com/linux/chrome/deb/</span><span class="nv"> </span><span class="s">stable</span><span class="nv"> </span><span class="s">main'</span>
 </code></pre></div>
 <p>By default, Autoproj will add new entries to <code>/etc/apt/sources.list.d/autoproj.list</code>. This
 may be changed with the addition of a <code>file</code> option in the entry. So, to have Autoproj add
