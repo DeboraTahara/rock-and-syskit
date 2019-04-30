@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta charset="utf-8">
+        <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Building Robots with Rock and Syskit</title>
+
+        <link href="../images/favicon.ico" rel="icon" type="image/ico" relative="true" />
+        <link href="../stylesheets/site.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body class="component_networks component_networks_connections">
+            <!-- top navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" role="complementary">
+                <nav class="docs-sidebar" data-spy="affix">
+                    <ul class="nav"><li class='child'><a href="../">Building robots with Rock and Syskit</a></li><li class='parent'><span class='parent-label'><a href="../basics/">Basics</a></span><ul><li class='child'><a href="../basics/">Introduction</a></li><li class='child'><a href="../basics/installation.html">Installation</a></li><li class='child'><a href="../basics/day_to_day.html">Day-to-day Workspace Commands</a></li><li class='child'><a href="../basics/getting_started.html">Getting Started</a></li><li class='child'><a href="../basics/composition.html">Compositions</a></li><li class='child'><a href="../basics/constant_generator.html">Constant Generator</a></li><li class='child'><a href="../basics/devices.html">Profiles and Devices</a></li><li class='child'><a href="../basics/deployment.html">Deployment</a></li><li class='child'><a href="../basics/publishing.html">Publishing</a></li><li class='child'><a href="../basics/validation.html">Configuration Consistency</a></li><li class='child'><a href="../basics/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../runtime_overview/">Runtime Overview</a></span><ul><li class='child'><a href="../runtime_overview/">Introduction</a></li><li class='child'><a href="../runtime_overview/task_structure.html">Task Structures</a></li><li class='child'><a href="../runtime_overview/event_loop.html">Event Loop</a></li><li class='child'><a href="../runtime_overview/exceptions.html">Errors</a></li><li class='child'><a href="../runtime_overview/live_data.html">Live Data Visualization</a></li><li class='child'><a href="../runtime_overview/recap.html">Recap</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../workspace/">Workspace and Packages</a></span><ul><li class='child'><a href="../workspace/">Introduction</a></li><li class='child'><a href="../workspace/conventions.html">Conventions</a></li><li class='child'><a href="../workspace/setup.html">Starting a New Project</a></li><li class='child'><a href="../workspace/add_packages.html">Adding new packages</a></li><li class='child'><a href="../workspace/os_dependencies.html">OS Dependencies</a></li><li class='child'><a href="../workspace/managing.html">Build configuration design</a></li><li class='child'><a href="../workspace/troubleshooting.html">Troubleshooting</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../libraries/">Libraries</a></span><ul><li class='child'><a href="../libraries/">Introduction</a></li><li class='child'><a href="../libraries/add_packages.html">Add packages</a></li><li class='child'><a href="../libraries/cpp_libraries.html">C++ Library Packages</a></li><li class='child'><a href="../libraries/ruby_libraries.html">Ruby Library Packages</a></li><li class='child'><a href="../libraries/vscode.html">The VSCode workflow</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../components/">Components</a></span><ul><li class='child'><a href="../components/">Introduction</a></li><li class='child'><a href="../components/defining_types.html">Defining Types</a></li><li class='child'><a href="../components/importing_types.html">Importing Types</a></li><li class='child'><a href="../components/interface.html">Interface</a></li><li class='child'><a href="../components/state_machine.html">State Machine</a></li><li class='child'><a href="../components/writing_the_hooks.html">Writing the Hooks</a></li><li class='child'><a href="../components/timestamping.html">Timestamping</a></li><li class='child'><a href="../components/deployment.html">Deployments</a></li><li class='child'><a href="../components/runtime.html">Runtime</a></li><li class='child'><a href="../components/types_in_ruby.html">Types in Ruby</a></li></ul></li><li class='parent active'><span class='parent-label'><a href="./">Designing Component Networks</a></span><ul><li class='child'><a href="./">Introduction</a></li><li class='child'><a href="composition.html">Compositions</a></li><li class='child'><a href="profiles.html">Profiles</a></li><li class='child'><a href="reusable_networks.html">Reusable Networks</a></li><li class='child'><a href="transformations.html">Transformations</a></li><li class='child active'><a href="connections.html">Connections</a></li></ul></li><li class='parent'><span class='parent-label'><a href="../testing/">Testing and Debugging</a></span><ul><li class='child'><a href="../testing/">Introduction</a></li><li class='child'><a href="../testing/integration.html">Integration Tests</a></li></ul></li></ul>
+                </nav>
+            </div>
+            <div class="col-md-9" role="main">
+                <h1 class="no_toc" id="connections">Connections</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#connection-definitions" id="markdown-toc-connection-definitions">Connection Definitions</a>    <ul>
+      <li><a href="#storage-object" id="markdown-toc-storage-object">Storage Objects</a></li>
+      <li><a href="#policy" id="markdown-toc-policy">Transports</a></li>
+    </ul>
+  </li>
+  <li><a href="#the-default-policy" id="markdown-toc-the-default-policy">The Default Policy</a></li>
+  <li><a href="#reliable-connection" id="markdown-toc-reliable-connection">Reliable Connection Policy</a></li>
+  <li><a href="#manual-policy" id="markdown-toc-manual-policy">Manual Policy</a></li>
+  <li><a href="#handling-single-shot-ports" id="markdown-toc-handling-single-shot-ports">Handling Single-shot Ports</a></li>
+  <li><a href="#dataflow-dynamics" id="markdown-toc-dataflow-dynamics">Dataflow Dynamics</a></li>
+  <li><a href="#transport-details" id="markdown-toc-transport-details">Transport Details</a>    <ul>
+      <li><a href="#corba" id="markdown-toc-corba">CORBA</a></li>
+      <li><a href="#mq" id="markdown-toc-mq">POSIX Message Queues</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>Both within this section and within <a href="../syskit_basics">the basics tutorials</a>,
+we simply connected components together, and seen that it was possible to get
+data from one component to be processed by another. We have not really looked
+into how this happened, and how - as a system designer - one would want to
+tune how things happen.</p>
+
+<h2 id="connection-definitions">Connection Definitions</h2>
+
+<p>In practice, Rock has a rather rich design space when it comes to connecting
+components together. Within Orocos/RTT, the underlying component framework
+that underlies a Rock system, a <em>connection</em> is defined by two ports (source
+and sink) and a connection policy.</p>
+
+<p>When the source sends a sample on a connection:</p>
+
+<ul>
+  <li>the sample will be transferred into a storage object</li>
+  <li>the sink will (asynchronously) be able to read the sample back from the
+storage object</li>
+</ul>
+
+<p>The type of <em>storage object</em> is all that is needed if the connection is
+between two components in the same process. However, if the two components
+are in two processes (on the same machine and/or on two different machines),
+one also has to pick a <em>transport</em>. There is in this case two choices, the
+<em>push</em> model:</p>
+
+<ul>
+  <li>the sample is passed to the transport, which sends it to the sink process</li>
+  <li>the sink side of the transport receives the sample and puts it into the
+storage object</li>
+  <li>the sink will (asynchronously) be able to read the sample back from the
+storage object</li>
+</ul>
+
+<p>and the <em>pull</em> model:</p>
+
+<ul>
+  <li>the sample is put into a storage object on the source side</li>
+  <li>when the sink (asynchronously) reads its port,
+    <ul>
+      <li>the transport remotely reads the storage object</li>
+      <li>the transport transfers the sample</li>
+      <li>the transport provides the sample to the sink</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Note that <strong>all transports</strong> are realtime compatible in push mode. Push mode
+is the default, and is rarely used outside of Rock's UI system.</p>
+
+<p>We will further detail what one can pick as storage object and transport, and
+follow on how to control what policy and transport Syskit selects.</p>
+
+<h3 id="storage-object">Storage Objects</h3>
+
+<p>The storage object define how samples are being queued. It is usually
+located, in the connection channel, after the transport (<em>push</em>) or more
+rarely before (<em>pull</em>).</p>
+
+<p>There are three choices of storage objects:</p>
+
+<ul>
+  <li>the <em>data</em> object stores a single sample. Each newly arrived sample overrides
+the last one. The reader will therefore always read the last sample written
+by the sink.</li>
+  <li>the <em>ring buffer</em> object is a fixed-size FIFO which drops old samples when
+full. As long as the ring buffer is not full, it behaves just like the <em>buffer</em>.
+If full, however, it will drop the oldest samples, instead of the newest.</li>
+  <li>the <em>buffer</em> object is a fixed-size FIFO which drops new samples when full.
+As long as the buffer is not full, the reader will be able to read all
+samples received on the connection. If full, however, it will drop new samples.
+A slow reader combined with a too small buffer will therefore mainly read
+old samples.</li>
+</ul>
+
+<p>The <em>buffer</em> storage object is still available mostly for backward-compatibility
+reasons. Syskit will by default only use the <em>data</em> and <em>ring buffer</em> objects.</p>
+
+<p>The reason why the two buffer objects are fixed size is to avoid having a
+runaway buffer because the sink component is reading data slower than the
+source component is producing it. Choosing buffer sizes is a trade-off
+between memory utilization and latency possibly introduced by huge buffers
+(remember that a 100 samples buffer means that the component would process a
+100 periods-old sample first)</p>
+
+<h3 id="policy">Transports</h3>
+
+<p>Transports are pluggable means to create connections across processes, and
+sometime hosts. Note that sample-process connections do not use any
+transports <strong>at all</strong>. When connections are created between two components
+within the same process, samples are simply copied (in the C++ sense)
+between the source, the storage object and the sink.</p>
+
+<p>The two off-the-shelf transports that Syskit supports are:</p>
+
+<ol>
+  <li>
+    <p>the CORBA transport. It uses a CORBA-based interface, which can transport
+data between processes and even hosts. Since it is based on CORBA, it
+requires the CORBA subsystem (omniorb or TAO) to be properly configured. This
+works out of the box on machines that only have one IP, but turns out to be
+more complex in multi-homed machine. <a href="#corba">More</a></p>
+  </li>
+  <li>
+    <p>the POSIX MQueue transport. It uses the kernel's message queues and
+is therefore only available for inter-process communication on the same
+host. It is usually more efficient that the CORBA transport, and is
+better when hard realtime properties want to be kept, but at the price
+of a more complex setup. <a href="#mq">More …</a></p>
+  </li>
+</ol>
+
+<h2 id="the-default-policy">The Default Policy</h2>
+
+<p>Without any action on your side, that is no special definition(s) in the
+components oroGen files, nor in the composition definitions, connections
+are using a <em>data</em> storage and either no transport in the same-process case,
+or the CORBA transport in all other cases.</p>
+
+<h2 id="reliable-connection">Reliable Connection Policy</h2>
+
+<p>Data connections will only hold the last sample received. Common type of
+components, for instance state filters, work best when procesing as many
+samples as they can. When in a Syskit environment, this is done by appending
+the <code>needs_reliable_connection</code> statement to input port definitions within
+the oroGen component. For instance:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">input_port</span><span class="p">(</span><span class="s1">'pose_samples'</span><span class="p">,</span> <span class="s1">'/base/samples/RigidBodyState'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">needs_reliable_connection</span>
+</code></pre></div>
+<p><strong>Notice the leading dot before `needs_reliable_connection.</strong></p>
+
+<p>This statement tells Syskit that the component will best work if it receives
+all the samples on the target port. The component itself should be
+implemented to read all pending samples every time the <code>updateHook</code> is called:</p>
+
+<div class="highlight"><pre class="highlight cpp"><code><span class="k">while</span> <span class="p">(</span><span class="n">_pose_samples</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="n">pose</span><span class="p">,</span> <span class="nb">false</span><span class="p">)</span> <span class="o">==</span> <span class="n">RTT</span><span class="o">::</span><span class="n">NewData</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>When Syskit encounters such a port, it will use a ring buffer policy, and
+attempt to automatically determine the best buffer size. The latter is done
+by estimating the output period of each port.</p>
+
+<h2 id="manual-policy">Manual Policy</h2>
+
+<p>Connection policies can also be manually set within compositions, in the
+<code>connect_to</code> statements. A connection policy is defined by the following
+arguments:</p>
+
+<ul>
+  <li><code>type</code> the connection type, either <code>ring_buffer</code> or <code>data</code>. Defaults to
+<code>data</code> is unspecified</li>
+  <li><code>size</code> the buffer size for <code>type: 'ring_buffer'</code></li>
+</ul>
+
+<h2 id="handling-single-shot-ports">Handling Single-shot Ports</h2>
+
+<p>Rock's defaults are tuned for components that continuously generate and
+process data. Some components, for instance task or motion planning
+components, are sometimes implemented as one short. That is, the component
+will rarely generate a sample.</p>
+
+<p>Handling of this type of port is covered in <a href="composition.html#single-shot-ports">the composition
+section</a></p>
+
+<h2 id="dataflow-dynamics">Dataflow Dynamics</h2>
+
+<p>Syskit will automatically compute the buffer size required by <a href="#reliable-connection">"reliable
+connection" ports</a>. To do so, it needs to estimate
+how often samples will be produced by output ports. This is propagated</p>
+
+<h2 id="transport-details">Transport Details</h2>
+
+<h3 id="corba">CORBA</h3>
+
+<h3 id="mq">POSIX Message Queues</h3>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $('.docs-sidebar').affix({
+        offset: {
+            top: $('.docs-sidebar').offset().top
+        }
+    });
+    </script>
+
+
+        <footer class="container-fluid text-center">
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Building Robots with Rock and Syskit</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/doudou" property="cc:attributionName" rel="cc:attributionURL">Sylvain Joyeux</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Copyright Sylvain Joyeux and Contributors
+        </footer>
+    </body>
+</html>
