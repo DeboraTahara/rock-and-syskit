@@ -237,13 +237,13 @@ mandatory</strong>)</p>
 
 <div class="highlight"><pre class="highlight cpp"><code><span class="kt">bool</span> <span class="n">MyTask</span><span class="o">::</span><span class="n">configureHook</span><span class="p">()</span>
 <span class="p">{</span>
-    <span class="c1">// Here, "fd" is the file descriptor of the underlying device
-</span>    <span class="c1">// it is usually created in configureHook()
-</span>    <span class="n">RTT</span><span class="o">::</span><span class="n">extras</span><span class="o">::</span><span class="n">FileDescriptorActivity</span><span class="o">*</span> <span class="n">activity</span> <span class="o">=</span>
+    <span class="c1">// Here, "fd" is the file descriptor of the underlying device</span>
+    <span class="c1">// it is usually created in configureHook()</span>
+    <span class="n">RTT</span><span class="o">::</span><span class="n">extras</span><span class="o">::</span><span class="n">FileDescriptorActivity</span><span class="o">*</span> <span class="n">activity</span> <span class="o">=</span>
         <span class="n">getActivity</span><span class="o">&lt;</span><span class="n">RTT</span><span class="o">::</span><span class="n">extras</span><span class="o">::</span><span class="n">FileDescriptorActivity</span><span class="o">&gt;</span><span class="p">();</span>
-    <span class="c1">// This is mandatory so that the task can be deployed
-</span>    <span class="c1">// with e.g. a port-driven or periodic activity
-</span>    <span class="k">if</span> <span class="p">(</span><span class="n">activity</span><span class="p">)</span>
+    <span class="c1">// This is mandatory so that the task can be deployed</span>
+    <span class="c1">// with e.g. a port-driven or periodic activity</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">activity</span><span class="p">)</span>
         <span class="n">activity</span><span class="o">-&gt;</span><span class="n">watch</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
     <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
 <span class="p">}</span>
@@ -282,9 +282,9 @@ descriptor). These different conditions can be tested with:</p>
   <span class="p">}</span>
   <span class="k">else</span>
   <span class="p">{</span>
-    <span class="c1">// If there is more than one FD, discriminate. Otherwise,
-</span>    <span class="c1">// we don't need to use isUpdated
-</span>    <span class="k">if</span> <span class="p">(</span><span class="n">fd_activity</span><span class="o">-&gt;</span><span class="n">isUpdated</span><span class="p">(</span><span class="n">device_fd</span><span class="p">))</span>
+    <span class="c1">// If there is more than one FD, discriminate. Otherwise,</span>
+    <span class="c1">// we don't need to use isUpdated</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">fd_activity</span><span class="o">-&gt;</span><span class="n">isUpdated</span><span class="p">(</span><span class="n">device_fd</span><span class="p">))</span>
     <span class="p">{</span>
     <span class="p">}</span>
     <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">fd_activity</span><span class="o">-&gt;</span><span class="n">isUpdated</span><span class="p">(</span><span class="n">another_fd</span><span class="p">))</span>

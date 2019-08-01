@@ -153,14 +153,14 @@ do</p>
 
 <div class="highlight"><pre class="highlight cpp"><code><span class="kt">void</span> <span class="n">MotionTask</span><span class="o">::</span><span class="n">updateHook</span><span class="p">()</span>
 <span class="p">{</span>
-    <span class="c1">// code
-</span>    <span class="k">if</span> <span class="p">(</span><span class="n">blocked</span><span class="p">)</span>
+    <span class="c1">// code</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">blocked</span><span class="p">)</span>
     <span class="p">{</span>
         <span class="n">exception</span><span class="p">(</span><span class="n">BLOCKED</span><span class="p">);</span>
         <span class="k">return</span><span class="p">;</span>
     <span class="p">}</span>
-    <span class="c1">// code
-</span><span class="p">}</span>
+    <span class="c1">// code</span>
+<span class="p">}</span>
 </code></pre></div>
 <p>All these generate notifications can be reacted on at the Syskit level to change
 the system's behavior. Because each of these calls generate a notification, it is

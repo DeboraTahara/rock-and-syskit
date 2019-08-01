@@ -135,32 +135,32 @@ depends on what you actually want to do.</p>
 <ul>
   <li>
     <p>if you want to read all new samples that are on the input (since an input port
-can be connected to multiple output ports)</p>
+can be connected to multiple output ports) {: #port-read-while}</p>
 
-<div class="highlight"><pre class="highlight cpp"><code><span class="c1">// my_type is the declared type of the port
-</span><span class="n">my_type</span> <span class="n">sample</span><span class="p">;</span>
+<div class="highlight"><pre class="highlight cpp"><code><span class="c1">// my_type is the declared type of the port</span>
+<span class="n">my_type</span> <span class="n">sample</span><span class="p">;</span>
 <span class="k">while</span> <span class="p">(</span><span class="n">_in</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="nb">false</span><span class="p">)</span> <span class="o">==</span> <span class="n">RTT</span><span class="o">::</span><span class="n">NewData</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="c1">// got a new sample, do something with it
-</span>    <span class="c1">// The 'false' here is a small optimization
-</span><span class="p">}</span>
+    <span class="c1">// got a new sample, do something with it</span>
+    <span class="c1">// The 'false' here is a small optimization</span>
+<span class="p">}</span>
 </code></pre></div>  </li>
   <li>
     <p>if you are just interested by having some data</p>
 
-<div class="highlight"><pre class="highlight cpp"><code><span class="c1">// my_type is the declared type of the port
-</span><span class="n">my_type</span> <span class="n">sample</span><span class="p">;</span>
+<div class="highlight"><pre class="highlight cpp"><code><span class="c1">// my_type is the declared type of the port</span>
+<span class="n">my_type</span> <span class="n">sample</span><span class="p">;</span>
 <span class="k">if</span> <span class="p">(</span><span class="n">_in</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span> <span class="o">!=</span> <span class="n">RTT</span><span class="o">::</span><span class="n">NoData</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="c1">// got a sample, do something with it
-</span><span class="p">}</span>
+    <span class="c1">// got a sample, do something with it</span>
+<span class="p">}</span>
 </code></pre></div>  </li>
 </ul>
 
 <p>Finally, to write on an output, you use 'write':</p>
 
-<div class="highlight"><pre class="highlight cpp"><code><span class="c1">// another_type is the declared type of the port
-</span><span class="n">another_type</span> <span class="n">data</span> <span class="o">=</span> <span class="n">calculateData</span><span class="p">();</span>
+<div class="highlight"><pre class="highlight cpp"><code><span class="c1">// another_type is the declared type of the port</span>
+<span class="n">another_type</span> <span class="n">data</span> <span class="o">=</span> <span class="n">calculateData</span><span class="p">();</span>
 <span class="n">_out</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
 </code></pre></div>
 <p>Another operation of interest is the <tt>connected()</tt> predicate. It tests if
@@ -172,9 +172,9 @@ samples written on output ports.</p>
 
 <div class="highlight"><pre class="highlight cpp"><code><span class="k">if</span> <span class="p">(</span><span class="n">_out</span><span class="p">.</span><span class="n">connected</span><span class="p">())</span>
 <span class="p">{</span>
-    <span class="c1">// generate the data for _out only if somebody may be interested by it. This
-</span>    <span class="c1">// is useful if generating // the data is costly
-</span>    <span class="n">another_type</span> <span class="n">data</span> <span class="o">=</span> <span class="n">calculateData</span><span class="p">();</span>
+    <span class="c1">// generate the data for _out only if somebody may be interested by it. This</span>
+    <span class="c1">// is useful if generating // the data is costly</span>
+    <span class="n">another_type</span> <span class="n">data</span> <span class="o">=</span> <span class="n">calculateData</span><span class="p">();</span>
     <span class="n">_out</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -230,7 +230,7 @@ collisions)</p>
 </code></pre></div>
 <p>oroGen will generate a method with the signature</p>
 
-<div class="highlight"><pre class="highlight cpp"><code><span class="n">return_type</span> <span class="n">operationName</span><span class="p">(</span><span class="n">arg</span><span class="o">::</span><span class="n">type</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">arg0</span><span class="p">,</span> <span class="n">example</span><span class="o">::</span><span class="n">other_arg</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">arg1</span><span class="p">);</span>
+<div class="highlight"><pre class="highlight cpp"><code><span class="n">return_type</span> <span class="nf">operationName</span><span class="p">(</span><span class="n">arg</span><span class="o">::</span><span class="n">type</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">arg0</span><span class="p">,</span> <span class="n">example</span><span class="o">::</span><span class="n">other_arg</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">arg1</span><span class="p">);</span>
 </code></pre></div>
 <p>By default, the operations are run into the thread of the callee, i.e. the thread of
 the component on which the operation is defined. This is easier from a thread-safety

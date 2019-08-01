@@ -95,12 +95,6 @@ default[INFO]: connected
 default[INFO]: waiting for remote app to terminate
 default[INFO]: closed communication
 </code></pre></div>
-<p>Finally, in order to be compatible with the rock-specific bundle structure, one needs
-to add the <code>bundles/</code> folder to Ruby's <code>$LOAD_PATH</code>. Add the following at the
-end of <code>config/init.rb</code>:</p>
-
-<div class="highlight"><pre class="highlight plaintext"><code>$LOAD_PATH.unshift File.expand_path('../../', __dir__)
-</code></pre></div>
 <h2 id="robot-and-scene-description-using-sdf">Robot and Scene description using SDF</h2>
 
 <p>The <a href="http://sdformat.org">Scene Description Format</a> is a XML format defined by the
@@ -195,6 +189,7 @@ integration code and then load the environment. This is done by modifying the
 newly-created <code>config/robots/gazebo.rb</code> configuration file to add:</p>
 
 <div class="highlight"><pre class="highlight ruby"><code><span class="no">Robot</span><span class="p">.</span><span class="nf">init</span> <span class="k">do</span>
+    <span class="no">Roby</span><span class="p">.</span><span class="nf">app</span><span class="p">.</span><span class="nf">register_app</span> <span class="s1">'../common_models'</span>
     <span class="nb">require</span> <span class="s1">'rock_gazebo/syskit'</span>
     <span class="no">Conf</span><span class="p">.</span><span class="nf">syskit</span><span class="p">.</span><span class="nf">transformer_enabled</span> <span class="o">=</span> <span class="kp">true</span>
 <span class="k">end</span>

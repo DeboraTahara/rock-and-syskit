@@ -111,8 +111,8 @@ one needs to be able to change the value at runtime, the property must be
 declared <code>dynamic</code>:</p>
 
 <div class="highlight"><pre class="highlight ruby"><code><span class="c1"># What this property is about</span>
-<span class="n">property</span><span class="p">(</span><span class="s1">'name'</span><span class="p">,</span> <span class="s1">'configuration_type'</span><span class="p">).</span>
-  <span class="nf">dynamic</span>
+<span class="n">property</span><span class="p">(</span><span class="s1">'name'</span><span class="p">,</span> <span class="s1">'configuration_type'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">dynamic</span>
 </code></pre></div>
 <p class="important"><strong>Don't make everything dynamic</strong>. Use dynamic properties only for things that
 (1) won't cause unacceptable latency in the component's processing and
@@ -131,7 +131,7 @@ value specified directly in the orogen file:</p>
 <p>For more complex types, the initialization should be done in the task's constructors, e.g.</p>
 
 <div class="highlight"><pre class="highlight cpp"><code><span class="n">Task</span><span class="o">::</span><span class="n">Task</span><span class="p">(...)</span> <span class="p">{</span>
-  <span class="n">_initial_position</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3</span><span class="p">.</span><span class="n">Zero</span><span class="p">)</span>
+    <span class="n">_initial_position</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3</span><span class="p">.</span><span class="n">Zero</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="operations">Operations</h3>
@@ -140,21 +140,21 @@ value specified directly in the orogen file:</p>
 functionality through remote method calls. They are defined with:</p>
 
 <div class="highlight"><pre class="highlight ruby"><code><span class="c1"># Documentation of the operation</span>
-<span class="n">operation</span><span class="p">(</span><span class="s1">'commandName'</span><span class="p">).</span>
-    <span class="nf">argument</span><span class="p">(</span><span class="s1">'arg0'</span><span class="p">,</span> <span class="s1">'/arg/type'</span><span class="p">).</span>
-    <span class="nf">argument</span><span class="p">(</span><span class="s1">'arg1'</span><span class="p">,</span> <span class="s1">'/example/other_arg'</span><span class="p">)</span>
+<span class="n">operation</span><span class="p">(</span><span class="s1">'commandName'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">argument</span><span class="p">(</span><span class="s1">'arg0'</span><span class="p">,</span> <span class="s1">'/arg/type'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">argument</span><span class="p">(</span><span class="s1">'arg1'</span><span class="p">,</span> <span class="s1">'/example/other_arg'</span><span class="p">)</span>
 </code></pre></div>
 <p>Additionally, a return type can be added with</p>
 
 <div class="highlight"><pre class="highlight ruby"><code><span class="c1"># Documentation of the operation</span>
-<span class="n">operation</span><span class="p">(</span><span class="s1">'operationName'</span><span class="p">).</span>
-    <span class="nf">returns</span><span class="p">(</span><span class="s1">'int'</span><span class="p">).</span>
-    <span class="nf">argument</span><span class="p">(</span><span class="s1">'arg0'</span><span class="p">,</span> <span class="s1">'/arg/type'</span><span class="p">).</span>
-    <span class="nf">argument</span><span class="p">(</span><span class="s1">'arg1'</span><span class="p">,</span> <span class="s1">'/example/other_arg'</span><span class="p">)</span>
+<span class="n">operation</span><span class="p">(</span><span class="s1">'operationName'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">returns</span><span class="p">(</span><span class="s1">'int'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">argument</span><span class="p">(</span><span class="s1">'arg0'</span><span class="p">,</span> <span class="s1">'/arg/type'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">argument</span><span class="p">(</span><span class="s1">'arg1'</span><span class="p">,</span> <span class="s1">'/example/other_arg'</span><span class="p">)</span>
 </code></pre></div>
-<p>Note the dot at the end of all but the last line. This dot is important and, if
-omitted, will lead to syntax errors. If no return type is provided, the
-operation returns nothing.</p>
+<p>Note the dot at the beginning of all the additional operation definition
+statements. This dot is important and, if omitted, will lead to syntax
+errors. If no return type is provided, the operation returns nothing.</p>
 
 <p class="important"><strong>When to use an operation ?</strong> Well, don't. Mostly. Operations should very
 rarely be used, as they create hard synchronization between components. The one

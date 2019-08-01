@@ -215,22 +215,22 @@ callback).</p>
   <span class="n">base</span><span class="o">::</span><span class="n">samples</span><span class="o">::</span><span class="n">RigidBodyState</span> <span class="n">features2command</span><span class="p">;</span>
   <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">_features2command</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">features2command</span><span class="p">,</span> <span class="nb">true</span><span class="p">))</span>
   <span class="p">{</span>
-      <span class="c1">// no transform available yet, do nothing
-</span>      <span class="k">return</span><span class="p">;</span>
+      <span class="c1">// no transform available yet, do nothing</span>
+      <span class="k">return</span><span class="p">;</span>
   <span class="p">}</span>
 
-  <span class="c1">// Do the processing
-</span><span class="p">}</span>
+  <span class="c1">// Do the processing</span>
+<span class="p">}</span>
 </code></pre></div>
 <p>Within the C++, the transform object is available through a generated
 <code>_features2command</code> object which can be queried through its <code>.get</code> method.</p>
 
 <div class="highlight"><pre class="highlight cpp"><code><span class="n">base</span><span class="o">::</span><span class="n">samples</span><span class="o">::</span><span class="n">RigidBodyState</span> <span class="n">rbs</span><span class="p">;</span>
 <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">_features2command</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">rbs</span><span class="p">,</span> <span class="nb">true</span><span class="p">))</span>
-    <span class="c1">// transform not available
-</span><span class="k">else</span>
-    <span class="c1">// transform available
-</span></code></pre></div>
+    <span class="c1">// transform not available</span>
+<span class="k">else</span>
+    <span class="c1">// transform available</span>
+</code></pre></div>
 <p>The first argument to <code>.get</code> controls what is the expected time of the queried
 transform. It is needed only if the transformer is expected to generate an
 <em>interpolated transform</em> by setting the third argument to <code>true</code>.</p>

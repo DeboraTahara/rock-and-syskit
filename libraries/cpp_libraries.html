@@ -222,19 +222,30 @@ provides support to integrate unit testing in the development workflow.</p>
 
 <p>The default library template creates a test suite that uses boost test. There
 is also the possibility to use GTest and GMock, the Google-maintained C++
-testing libraries. To do so, modify the package's <code>manifest.xml</code> to add
-<code>&lt;test_depend "gtest" /&gt;</code>, replace <a href="#rock_testsuite"><code>rock_testsuite</code></a>
-in <code>test/CMakeLists.txt</code> by <a href="#rock_gtest"><code>rock_gtest</code></a>, and finally
-replace the content of <code>test/suite.cpp</code> with the following:</p>
+testing libraries.</p>
 
-<div class="highlight"><pre class="highlight cpp"><code><span class="c1">// Do NOT add anything to this file
-</span><span class="cp">#include &lt;gtest/gtest.h&gt;
-</span>
+<p>To use GTest,</p>
+
+<ol>
+  <li>
+    <p>modify the package's <code>manifest.xml</code> to add</p>
+
+<div class="highlight"><pre class="highlight xml"><code><span class="nt">&lt;test_depend</span> <span class="err">"google-test"</span> <span class="nt">/&gt;</span>
+</code></pre></div>  </li>
+  <li>replace <a href="#rock_testsuite"><code>rock_testsuite</code></a> in <code>test/CMakeLists.txt</code> by <a href="#rock_gtest"><code>rock_gtest</code></a>,</li>
+  <li>
+    <p>and replace the content of <code>test/suite.cpp</code> with the following:</p>
+
+<div class="highlight"><pre class="highlight cpp"><code><span class="c1">// Do NOT add anything to this file</span>
+<span class="cp">#include &lt;gtest/gtest.h&gt;
+</span>   
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
   <span class="o">::</span><span class="n">testing</span><span class="o">::</span><span class="n">InitGoogleTest</span><span class="p">(</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
   <span class="k">return</span> <span class="n">RUN_ALL_TESTS</span><span class="p">();</span>
 <span class="p">}</span>
-</code></pre></div>
+</code></pre></div>  </li>
+</ol>
+
 <p>All C++ libraries that have a <code>test/</code> folder will be assumed to have a test suite.
 However, testing is disabled by default - since building all the tests from all
 the workspace's packages would be fairly expensive. One needs to enable a package
@@ -252,7 +263,7 @@ file</a>.</p>
 <p>Once the tests are built, run them manually if you want to see their results.
 Autoproj can also run them with <code>autoproj test [package]</code>, but will redirect
 the test's output to a log file (that can be visualized later with
-<a href="../basics/day_to_day.html#alog">alog</a>.</p>
+<a href="../basics/day_to_day.html#alog">alog</a>).</p>
 
 <h2 id="debugging-in-vscode">Debugging in VSCode</h2>
 
@@ -329,8 +340,8 @@ stream-style.</p>
 <div class="highlight"><pre class="highlight cpp"><code><span class="cp">#include &lt;base-logging/Logging.hpp&gt;
 </span>
 <span class="p">...</span>
-<span class="c1">// printf-style logging
-</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">information</span><span class="p">(</span><span class="s">"test-logging happening here"</span><span class="p">);</span>
+<span class="c1">// printf-style logging</span>
+<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="nf">information</span><span class="p">(</span><span class="s">"test-logging happening here"</span><span class="p">);</span>
 <span class="n">LOG_DEBUG</span><span class="p">(</span><span class="s">"I provide you the following debug information: %s"</span><span class="p">,</span>
     <span class="n">information</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
 <span class="n">LOG_INFO</span><span class="p">(...);</span>
@@ -338,8 +349,8 @@ stream-style.</p>
 <span class="n">LOG_ERROR</span><span class="p">(..);</span>
 <span class="n">LOG_FATAL</span><span class="p">(..);</span>
 
-<span class="c1">// stream-style logging
-</span><span class="n">LOG_DEBUG_S</span> <span class="o">&lt;&lt;</span> <span class="n">information</span><span class="p">;</span>
+<span class="c1">// stream-style logging</span>
+<span class="n">LOG_DEBUG_S</span> <span class="o">&lt;&lt;</span> <span class="n">information</span><span class="p">;</span>
 <span class="n">LOG_INFO_S</span> <span class="o">&lt;&lt;</span> <span class="n">information</span><span class="p">;</span>
 <span class="p">...</span>
 <span class="n">LOG_FATAL</span> <span class="o">&lt;&lt;</span> <span class="n">information</span><span class="p">;</span>
