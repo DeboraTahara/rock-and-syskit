@@ -230,7 +230,7 @@ testing libraries.</p>
   <li>
     <p>modify the package's <code>manifest.xml</code> to add</p>
 
-<div class="highlight"><pre class="highlight xml"><code><span class="nt">&lt;test_depend</span> <span class="err">"google-test"</span> <span class="nt">/&gt;</span>
+<div class="highlight"><pre class="highlight xml"><code><span class="nt">&lt;test_depend</span> <span class="na">package=</span><span class="s">"google-test"</span> <span class="nt">/&gt;</span>
 </code></pre></div>  </li>
   <li>replace <a href="#rock_testsuite"><code>rock_testsuite</code></a> in <code>test/CMakeLists.txt</code> by <a href="#rock_gtest"><code>rock_gtest</code></a>,</li>
   <li>
