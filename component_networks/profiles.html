@@ -80,7 +80,7 @@ the following code snippet creates a profile whose full name is
 <span class="k">end</span>
 </code></pre></div>
 <p><strong>Naming Convention</strong> Profiles are by convention defined under the <code>AppName::Profiles</code>
-namespace (e.g. <code>CommonModels::Profiles</code> for the <code>common_models</code> bundle). 
+namespace (e.g. <code>CommonModels::Profiles</code> for the <code>common_models</code> bundle).
 They are saved in <code>models/profiles/</code>. The file
 names should be the snake_case version of the profile name (e.g.
 <code>models/profiles/profile_name.rb</code> for the profile defined above).</p>
@@ -96,7 +96,9 @@ conventions, can be created with</p>
 </code></pre></div>
 <h2 id="registering-networks-on-profiles">Registering Networks on Profiles</h2>
 
-<p>A component network when registered on a profile is called a <strong>definition</strong> and is created with the <code>define</code> statement. From the <a href="../basics/devices.html">basics</a>:</p>
+<p>A component network when registered on a profile is called a <strong>definition</strong>
+and is created with the <code>define</code> statement. From the
+<a href="../basics/devices.html">basics</a>:</p>
 
 <div class="highlight"><pre class="highlight ruby"><code><span class="k">module</span> <span class="nn">SyskitBasics</span>
   <span class="k">module</span> <span class="nn">Profiles</span>
@@ -124,8 +126,9 @@ object passed as argument to <code>define</code>.</p>
 
 <div class="highlight"><pre class="highlight ruby"><code><span class="n">define</span> <span class="s1">'arm_joint_position_constant_control'</span><span class="p">,</span>
   <span class="no">Compositions</span><span class="o">::</span><span class="no">JointPositionConstantControl</span>
-<span class="n">define</span> <span class="s1">'arm_safe_position'</span><span class="p">,</span> <span class="n">arm_joint_position_constant_control_def</span><span class="p">.</span>
-  <span class="nf">with_arguments</span><span class="p">(</span><span class="ss">setpoint: </span><span class="no">UR10_SAFE_POSITION</span><span class="p">)</span>
+<span class="n">define</span> <span class="s1">'arm_safe_position'</span><span class="p">,</span>
+       <span class="n">arm_joint_position_constant_control_def</span>
+       <span class="p">.</span><span class="nf">with_arguments</span><span class="p">(</span><span class="ss">setpoint: </span><span class="no">UR10_SAFE_POSITION</span><span class="p">)</span>
 </code></pre></div>
 <p class="next-page">We will also talk more about compositions in the <a href="reusable_networks.html">next
 section</a>. The rest of this section will deal with common
@@ -139,8 +142,9 @@ read, and come back to it later.</p>
 <p>To set the configuration and/or arguments of a toplevel model before defining
 it, pass the <code>with_conf</code> (resp. <code>with_arguments</code>) call to the model, as:</p>
 
-<div class="highlight"><pre class="highlight ruby"><code><span class="n">define</span> <span class="s1">'arm_safe_position'</span><span class="p">,</span> <span class="n">arm_joint_position_constant_control_def</span><span class="p">.</span>
-  <span class="nf">with_arguments</span><span class="p">(</span><span class="ss">setpoint: </span><span class="no">UR10_SAFE_POSITION</span><span class="p">)</span>
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">define</span> <span class="s1">'arm_safe_position'</span><span class="p">,</span>
+       <span class="n">arm_joint_position_constant_control_def</span>
+       <span class="p">.</span><span class="nf">with_arguments</span><span class="p">(</span><span class="ss">setpoint: </span><span class="no">UR10_SAFE_POSITION</span><span class="p">)</span>
 </code></pre></div>
 <p id="dependency_injection">In addition, it is possible to change the configuration/arguments of a child of
 a composition. This uses dependency injection mechanisms that will be detailed
@@ -163,7 +167,7 @@ better for the other cases, as it does not assume that all useful
 configurations will be known at the composition's design time.</p>
 
 <p class="note"><strong><code>use</code> vs composition argument forwarding</strong> This mechanism
-also looks very much like the argument forwarding. 
+also looks very much like the argument forwarding.
 Use argument forwarding when the argument makes sense on the composition. In
 the basics section, it <em>really makes sense</em> that a constant control composition
 has a <code>setpoint</code> argument, and that is therefore how it has been implemented.

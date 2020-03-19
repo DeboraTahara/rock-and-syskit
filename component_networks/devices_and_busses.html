@@ -49,6 +49,7 @@
       <li><a href="#device-models" id="markdown-toc-device-models">Device Models</a></li>
       <li><a href="#device-declarations" id="markdown-toc-device-declarations">Device Declarations</a></li>
       <li><a href="#device-drivers" id="markdown-toc-device-drivers">Device Drivers</a></li>
+      <li><a href="#defining-multiple-devices-of-the-same-type" id="markdown-toc-defining-multiple-devices-of-the-same-type">Defining multiple devices of the same type</a></li>
     </ul>
   </li>
   <li><a href="#communication-busses" id="markdown-toc-communication-busses">Communication Busses</a>    <ul>
@@ -181,8 +182,7 @@ associate them with a device <em>driver</em> to be able to actually <em>use</em>
 at runtime. <strong>One or more device driver must be available at the point of
 definition of the device</strong> - for instance by loading them first with <code>using_task_library</code>.</p>
 
-<p>A device driver is a component which has a <code>driver_for</code> declaration in its
-<a href="../components/runtime.html">extension file</a>. For instance, assuming a
+<p>A device driver is a component which has a <code>driver_for</code> declaration in its <a href="../components/runtime.html">extension file</a>. For instance, assuming a
 <code>gps_ublox::F9Task</code> driver, able to handle our F9 model, we would generate
 the extension file with:</p>
 
@@ -215,6 +215,48 @@ tell Syskit which component should be used. This is done with the <code>using</c
 </code></pre></div>
 <p>Note that the driver component must of course <a href="../components/runtime.html">be deployed in the app's robot
 config</a></p>
+
+<p>Before attempting to run your newly defined devices, run the profile's test file
+to check that they have been properly deployed. The test file is in <code>test/profiles</code>,
+matching the profile's name. For instance <code>models/profiles/live/base.rb</code>'s test
+file is in <code>test/profiles/live/test_base.rb</code>.</p>
+
+<h3 id="defining-multiple-devices-of-the-same-type">Defining multiple devices of the same type</h3>
+
+<p>The definition of multiple devices of the same type is directly related to
+the <a href="reusable_networks.html#deployments">deployment</a> of profile definitions. One must
+indeed</p>
+
+<ol>
+  <li>define multiple deployments with appropriate names (usually one picks the same
+name for the deployment than for the device itself)</li>
+  <li>use the <code>prefer_deployed_tasks</code> mechanism to assign a deployment to a device.</li>
+  <li>choose different configurations for the different device instances</li>
+</ol>
+
+<p>For instance:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">device</span><span class="p">(</span><span class="no">Devices</span><span class="o">::</span><span class="no">Camera</span><span class="o">::</span><span class="no">GigE</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'forward_camera'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nf">prefer_deployed_tasks</span><span class="p">(</span><span class="sr">/forward/</span><span class="p">)</span>
+  <span class="p">.</span><span class="nf">with_conf</span><span class="p">(</span><span class="s1">'default'</span><span class="p">,</span> <span class="s1">'forward'</span><span class="p">)</span>
+<span class="n">device</span><span class="p">(</span><span class="no">Devices</span><span class="o">::</span><span class="no">Camera</span><span class="o">::</span><span class="no">GigE</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'aft_camera'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nf">prefer_deployed_tasks</span><span class="p">(</span><span class="sr">/aft/</span><span class="p">)</span>
+  <span class="p">.</span><span class="nf">with_conf</span><span class="p">(</span><span class="s1">'default'</span><span class="p">,</span> <span class="s1">'aft'</span><span class="p">)</span>
+</code></pre></div>
+<p>Update the relevant device driver's <a href="../components/runtime.html#config_files">configuration
+file</a> with the separate named sections:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>--- name:default
+&lt;common parameters&gt;
+--- name:forward
+ip: 10.40.50.50
+--- name:aft 
+ip: 10.40.50.51
+</code></pre></div>
+<p>Running the profile's test file, as described just above this section, is
+even more critical in this use-case as it is easy to forget a deployment
+or fail to properly remove the ambiguities between the deployments and the
+devices.</p>
 
 <h2 id="communication-busses">Communication Busses</h2>
 

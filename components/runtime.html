@@ -46,7 +46,7 @@
 
 <ul id="markdown-toc">
   <li><a href="#component-model" id="markdown-toc-component-model">Component Model</a></li>
-  <li><a href="#configuration-files" id="markdown-toc-configuration-files">Configuration Files</a></li>
+  <li><a href="#config_files" id="markdown-toc-config_files">Configuration Files</a></li>
   <li><a href="#quickly-running-new-components" id="markdown-toc-quickly-running-new-components">Quickly Running New Components</a></li>
   <li><a href="#extension_file" id="markdown-toc-extension_file">Component Extension File</a></li>
   <li><a href="#runtime-environment" id="markdown-toc-runtime-environment">Runtime Environment</a></li>
@@ -100,7 +100,7 @@ Networks</a> section of the
 </code></pre></div>
 <p>The components are then available using the <code>OroGen.</code> syntax, e.g. <code>OroGen.imu_advanced_navigation_anpp.Task</code>.</p>
 
-<h2 id="configuration-files">Configuration Files</h2>
+<h2 id="config_files">Configuration Files</h2>
 
 <p>Configuration files are YAML files that contain values for a component's
 properties. A component's available configurations is to be saved in
@@ -160,8 +160,8 @@ the future.</p>
 profile</a>, a non-default configuration can be selected
 with the <code>with_conf</code> call, e.g.</p>
 
-<div class="highlight"><pre class="highlight ruby"><code><span class="no">OroGen</span><span class="p">.</span><span class="nf">imu_advanced_navigation_anpp</span><span class="o">.</span><span class="no">Task</span><span class="p">.</span>
-  <span class="nf">with_conf</span><span class="p">(</span><span class="s1">'default'</span><span class="p">,</span> <span class="s1">'high_dynamics'</span><span class="p">)</span>
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">OroGen</span><span class="p">.</span><span class="nf">imu_advanced_navigation_anpp</span><span class="o">.</span><span class="no">Task</span>
+      <span class="p">.</span><span class="nf">with_conf</span><span class="p">(</span><span class="s1">'default'</span><span class="p">,</span> <span class="s1">'high_dynamics'</span><span class="p">)</span>
 </code></pre></div>
 <p>The configurations are overlaid one on top of each other, from left to right.
 In the example above, the values in the <code>high_dynamics</code> section will override
