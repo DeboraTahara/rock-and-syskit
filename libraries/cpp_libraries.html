@@ -50,6 +50,7 @@
   <li><a href="#cxx_standard" id="markdown-toc-cxx_standard">Picking the C++ Standard</a></li>
   <li><a href="#package-dependencies" id="markdown-toc-package-dependencies">Package Dependencies</a></li>
   <li><a href="#conventions-for-library-design" id="markdown-toc-conventions-for-library-design">Conventions for library design</a></li>
+  <li><a href="#optional-features" id="markdown-toc-optional-features">Optional Features</a></li>
   <li><a href="#tests" id="markdown-toc-tests">Tests</a></li>
   <li><a href="#debugging-in-vscode" id="markdown-toc-debugging-in-vscode">Debugging in VSCode</a></li>
   <li><a href="#rock-cmake-macros" id="markdown-toc-rock-cmake-macros">The Rock CMake macros</a></li>
@@ -215,6 +216,22 @@ test the <code>Spline</code> class implemented in <code>src/Spline.(hpp|cpp)</co
 <p>If the ultimate goal of a data type is to be used as an interface type on a
 Rock component, you must take this into account when designing the type.
 Read first <a href="../components/defining_types.html">the documentation on type definitions for components</a>.</p>
+
+<h2 id="optional-features">Optional Features</h2>
+
+<p>First rule of optional features is to keep optional features to a minimum.
+Unless you are creating something of the size of OpenCV, they are not worth the
+complexity.</p>
+
+<p>The second rule of optional features is to avoid enabling or disabling them
+based on auto-detection mechanism. These mechanisms are fragile, and will end up
+being disabled for unknown reasons on a machine where they were expected to be
+enabled, and vice-versa. Simply control their availability through a <a href="https://cmake.org/cmake/help/v3.0/command/option.html">CMake
+option</a> and fail if the
+feature is enabled but its dependencies are not present.</p>
+
+<p>See also <a href="../workspace/managing.html#optional_features">this page</a> for a more
+general discusssion on the subject.</p>
 
 <h2 id="tests">Tests</h2>
 

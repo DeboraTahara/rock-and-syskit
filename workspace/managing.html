@@ -51,6 +51,7 @@
   <li><a href="#choosing-what-to-build-where" id="markdown-toc-choosing-what-to-build-where">Choosing what to build where</a></li>
   <li><a href="#optional-dependencies" id="markdown-toc-optional-dependencies">Optional Dependencies</a></li>
   <li><a href="#configuration_options" id="markdown-toc-configuration_options">Configuration Options</a></li>
+  <li><a href="#optional_features" id="markdown-toc-optional_features">Optional Features</a></li>
 </ul>
 
 <p>This page will deal with the overall design patterns that involve a build
@@ -212,6 +213,31 @@ ask again until the user runs <code>autoproj reconfigure</code>.</p>
 </code></pre></div>
 <p>Within the version control information, it is expanded using the
 <code>$CONFIGURATION_OPTION_NAME</code> syntax.</p>
+
+<h2 id="optional_features">Optional Features</h2>
+
+<p>Packages sometimes have optional features. Some of them are dependent on
+dependencies being available (think: parts of opencv being built only if library
+X, Y and Z are present), some of them are dependent on a runtime being present
+(e.g. language bindings).</p>
+
+<p>In most cases (ideally, in <strong>all</strong> cases), the packages should have ways to
+control whether these features should be enabled or disabled. They often
+fallback on auto-detection if the flags aren't set, but they have ways to bypass
+the autodetection. Autodetection can often also be overriden by passing the
+appropriate information. For instance, <a href="../libraries/cpp_libraries.html">CMake C++
+packages</a> are controlled through the setting of
+<a href="add_packages.html#cmake">CMake variables</a>.</p>
+
+<p><strong>Do not rely on these autodetection mechanism</strong>. They are fragile, and only
+make sure that different developers end up with different results, based on
+whether the dependencies/libraries/environment variables are set differently by
+pure chance.</p>
+
+<p>Instead, figure out what <strong>your build</strong> wants and make sure the package settings
+are updated accordingly. See for instance (../libraries/cpp_libraries.html#optional_features).
+The source of the information you pass to the package may be a configuration
+option or the information from another package built by Autoproj.</p>
 
 <p class="next-page">That's all for the Workspace documentation. Go back to the <a href="../#how_to_read">documentation main
 index</a> for more topics.</p>

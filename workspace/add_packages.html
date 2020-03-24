@@ -223,6 +223,39 @@ them are declared and the principal build configuration options.</p>
 </code></pre></div>
 <p>The above snippet being equivalent to calling <code>cmake -DVAR=VALUE</code></p>
 
+<p>Generally speaking, when integrating a CMake package, set as many of the
+optional feature knobs <strong>explicitly</strong>. See <a href="managing.html#optional_features">this
+page</a> for a more in-depth discussion.</p>
+
+<p>For instance, if you want some Python bindings to be built, resolve the Python
+interpreter once and for all for your whole workspace and pass the path to the
+interpreter explicitely. The <code>rock.core</code> package has <a href="https://github.com/rock-core/package_set/blob/master/rock/python.rb">explicit support for this
+mechanism for Python</a>.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">cmake_package</span> <span class="s1">'some/package'</span> <span class="k">do</span> <span class="o">|</span><span class="n">pkg</span><span class="o">|</span>
+    <span class="c1"># Helper from rock.core that resolves the Python binary that should be</span>
+    <span class="c1"># used by packages, Returns nil if the build has python support disabled</span>
+    <span class="c1"># (through a configuration options)</span>
+    <span class="n">bin</span><span class="p">,</span> <span class="o">=</span> <span class="no">Rock</span><span class="p">.</span><span class="nf">activate_python_path</span><span class="p">(</span><span class="n">pkg</span><span class="p">)</span>
+    <span class="n">pkg</span><span class="p">.</span><span class="nf">define</span> <span class="s1">'BINDINGS_PYTHON'</span><span class="p">,</span> <span class="n">bin</span>
+    <span class="n">pkg</span><span class="p">.</span><span class="nf">define</span> <span class="s1">'PYTHON_EXECUTABLE'</span><span class="p">,</span> <span class="n">bin</span> <span class="k">if</span> <span class="n">bin</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>Autoproj being Ruby-based, the Ruby interpreter you should be using is available
+within the Autoproj configuration. Rock's CMake macros control the build of Ruby
+bindings (present in <code>bindings/ruby</code> within the package) with the
+<code>BINDINGS_RUBY</code> variable. However, due to the heavily ruby-based nature of the
+toolchain, Rock currently does not have an overarching configuration flag to
+globally disable all Ruby bindings, so you would need to create one for your
+specific needs.</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">cmake_package</span> <span class="s1">'some/package'</span> <span class="k">do</span> <span class="o">|</span><span class="n">pkg</span><span class="o">|</span>
+    <span class="c1"># Assuming that you use the `mypackage_ruby_bindings' flag to</span>
+    <span class="c1"># control the bindings, control them with (enabled by default)</span>
+    <span class="c1"># pkg.define 'BINDINGS_RUBY', Autoproj.config.get('mypackage_ruby_bindings', true)</span>
+    <span class="n">pkg</span><span class="p">.</span><span class="nf">define</span> <span class="s1">'RUBY_EXECUTABLE'</span><span class="p">,</span> <span class="no">Autoproj</span><span class="p">.</span><span class="nf">config</span><span class="p">.</span><span class="nf">ruby_executable</span>
+<span class="k">end</span>
+</code></pre></div>
 <h3 id="autotools">Autotools packages</h3>
 
 <div class="highlight"><pre class="highlight ruby"><code><span class="n">autotools_package</span> <span class="s2">"package_name"</span>
