@@ -55,6 +55,7 @@
   </li>
   <li><a href="#using-test-components" id="markdown-toc-using-test-components">Using test components</a></li>
   <li><a href="#running-the-tests" id="markdown-toc-running-the-tests">Running the tests</a></li>
+  <li><a href="#using-a-debugger-or-valgrind" id="markdown-toc-using-a-debugger-or-valgrind">Using a Debugger or Valgrind</a></li>
 </ul>
 
 <p>Syskit has built-in support to allow creating unit test suites for Rock
@@ -303,6 +304,8 @@ syskit orogen-test test/task_test.rb --workdir bundle -- "-n=/FILTER/"
 <p>where FILTER is a regular expression that should match the name of the test(s)
 you want to run.</p>
 
+<h2 id="using-a-debugger-or-valgrind">Using a Debugger or Valgrind</h2>
+
 <p>If you need to run the task under valgrind, pass the corresponding option to the
 <code>deployed_as</code> statement:</p>
 
@@ -312,9 +315,19 @@ you want to run.</p>
 of choice (e.g. using <a href="https://marketplace.visualstudio.com/items?itemName=rock-robotics.rock">rock.vscode's oroGen
 launcher</a>
 and tell the test to attach to it by replacing <code>deployed_as</code> with
-<code>deployed_as_unmanaged</code>:</p>
+<code>deployed_as_unmanaged</code>.</p>
+
+<p>Start the component first before you run the test, or the tests might time out
+while waiting for the component to be started. This works best with the
+<code>-n=/FILTER/</code> option described above.</p>
 
 <div class="highlight"><pre class="highlight ruby"><code><span class="n">syskit_deploy</span><span class="p">(</span><span class="no">OroGen</span><span class="p">.</span><span class="nf">project_name</span><span class="o">.</span><span class="no">Task</span><span class="p">.</span><span class="nf">deployed_as_unmanaged</span><span class="p">(</span><span class="s1">'test'</span><span class="p">))</span>
+</code></pre></div>
+<p>In both cases, the standard default timeout used by the <code>expect_execution</code>
+statements will probably not be enough. Change it globally to something like one
+minute in the topmost <code>before</code> block with</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="nb">self</span><span class="p">.</span><span class="nf">expect_execution_default_timeout</span> <span class="o">=</span> <span class="mi">60</span>
 </code></pre></div>
 
             </div>
