@@ -51,6 +51,9 @@
   <li><a href="#testing-the-component-behavior" id="markdown-toc-testing-the-component-behavior">Testing the component behavior</a>    <ul>
       <li><a href="#actions" id="markdown-toc-actions">Actions</a></li>
       <li><a href="#expectations" id="markdown-toc-expectations">Expectations</a></li>
+      <li><a href="#testing-failures-while-the-component-is-running" id="markdown-toc-testing-failures-while-the-component-is-running">Testing failures while the component is running</a></li>
+      <li><a href="#testing-configuration-or-start-failures" id="markdown-toc-testing-configuration-or-start-failures">Testing configuration or start failures</a></li>
+      <li><a href="#testing-component-input-and-output-during-start-and-stop-transitions" id="markdown-toc-testing-component-input-and-output-during-start-and-stop-transitions">Testing component input and output during start and stop transitions</a></li>
     </ul>
   </li>
   <li><a href="#using-test-components" id="markdown-toc-using-test-components">Using test components</a></li>
@@ -265,6 +268,50 @@ block to make sure <code>have_one_new_sample</code> is last:</p>
          <span class="n">have_one_new_sample</span><span class="p">(</span><span class="n">task</span><span class="p">.</span><span class="nf">out2_port</span><span class="p">)]</span>
     <span class="k">end</span>
 </code></pre></div>
+<h3 id="testing-failures-while-the-component-is-running">Testing failures while the component is running</h3>
+
+<p>At runtime, that is <strong>after</strong> the component started until <strong>after</strong> it
+stopped, failures (exceptions) map to Syskit events. Assert that the expected
+event is emitted:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">expect_execution</span> <span class="p">{</span> <span class="no">ACTION</span> <span class="p">}</span>
+    <span class="p">.</span><span class="nf">to</span> <span class="p">{</span> <span class="n">emit</span> <span class="n">task</span><span class="p">.</span><span class="nf">some_exception_event</span> <span class="p">}</span>
+</code></pre></div>
+<h3 id="testing-configuration-or-start-failures">Testing configuration or start failures</h3>
+
+<p>While the component is not running, failure handling does not use the task's
+events (events cannot be emitted while the task is not running). You have
+to instead use the exception handling mechanisms. In both cases, the predicate
+to look for is <code>fail_to_start</code>. However, the way to "trigger" the configuration
+or start differ (there is currently no way to direct the test harness to configure
+a component)</p>
+
+<p>For configuration:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">expect_execution</span><span class="p">.</span><span class="nf">scheduler</span><span class="p">(</span><span class="kp">true</span><span class="p">).</span><span class="nf">to</span> <span class="p">{</span> <span class="n">fail_to_start</span> <span class="n">task</span> <span class="p">}</span>
+</code></pre></div>
+<p>and for start:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">expect_execution</span> <span class="p">{</span> <span class="n">task</span><span class="p">.</span><span class="nf">start!</span> <span class="p">}.</span><span class="nf">to</span> <span class="p">{</span> <span class="n">fail_to_start</span> <span class="n">task</span> <span class="p">}</span>
+</code></pre></div>
+<h3 id="testing-component-input-and-output-during-start-and-stop-transitions">Testing component input and output during start and stop transitions</h3>
+
+<p>If you want to test what happens <em>during</em> a configuration, start or stop
+transition, you need to call <code>join_all_waiting_for(false)</code> on the value
+returned by <code>expect_execution</code>. This is needed only for expectations during
+which the task will not "have finished" to configure, start (or stop), e.g.:</p>
+
+<p>For example:</p>
+
+<div class="highlight"><pre class="highlight ruby"><code><span class="n">sample</span> <span class="o">=</span> <span class="n">expect_execution</span> <span class="p">{</span> <span class="n">task</span><span class="p">.</span><span class="nf">start!</span> <span class="p">}</span>
+    <span class="p">.</span><span class="nf">join_all_waiting_work</span><span class="p">(</span><span class="kp">false</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">to</span> <span class="p">{</span> <span class="n">have_one_new_sample</span> <span class="n">task</span><span class="p">.</span><span class="nf">out_port</span> <span class="p">}</span>
+<span class="n">expect_execution</span> <span class="p">{</span> <span class="n">syskit_write</span> <span class="n">task</span><span class="p">.</span><span class="nf">in_port</span><span class="p">,</span> <span class="n">data</span> <span class="p">}</span>
+    <span class="p">.</span><span class="nf">join_all_waiting_work</span><span class="p">(</span><span class="kp">false</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">to</span> <span class="p">{</span> <span class="n">have_one_new_sample</span> <span class="n">task</span><span class="p">.</span><span class="nf">out_port</span> <span class="p">}</span>
+<span class="n">expect_execution</span> <span class="p">{</span> <span class="n">syskit_write</span> <span class="n">task</span><span class="p">.</span><span class="nf">in_port</span><span class="p">,</span> <span class="n">data</span> <span class="p">}</span>
+    <span class="p">.</span><span class="nf">to</span> <span class="p">{</span> <span class="n">emit</span> <span class="n">task</span><span class="p">.</span><span class="nf">start_event</span> <span class="p">}</span>
+</code></pre></div>
 <h2 id="using-test-components">Using test components</h2>
 
 <p>For some generic base component implementations, it can be beneficial to create
@@ -299,7 +346,7 @@ ctest -V
 with</p>
 
 <div class="highlight"><pre class="highlight plaintext"><code>acd -b .
-syskit orogen-test test/task_test.rb --workdir bundle -- "-n=/FILTER/"
+syskit orogen-test `alocate .`/test/task_test.rb --workdir bundle -- "-n=/FILTER/"
 </code></pre></div>
 <p>where FILTER is a regular expression that should match the name of the test(s)
 you want to run.</p>
@@ -329,7 +376,6 @@ minute in the topmost <code>before</code> block with</p>
 
 <div class="highlight"><pre class="highlight ruby"><code><span class="nb">self</span><span class="p">.</span><span class="nf">expect_execution_default_timeout</span> <span class="o">=</span> <span class="mi">60</span>
 </code></pre></div>
-
             </div>
         </div>
     </div>
