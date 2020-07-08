@@ -4024,33 +4024,33 @@ tbody.collapse.in {
     z-index: 2;
     margin-left: -1px; }
 
-.nav, #markdown-toc > li > ul, #markdown-toc, ul.nav li ul, #markdown-toc > li > ul li ul, ul#markdown-toc li ul {
+.nav, #markdown-toc, ul.nav > li > ul, ul#markdown-toc > li > ul {
   padding-left: 0;
   margin-bottom: 0;
   list-style: none; }
-  .nav:before, #markdown-toc > li > ul:before, #markdown-toc:before, ul.nav li ul:before, #markdown-toc > li > ul li ul:before, ul#markdown-toc li ul:before, .nav:after, #markdown-toc > li > ul:after, #markdown-toc:after, ul.nav li ul:after, #markdown-toc > li > ul li ul:after, ul#markdown-toc li ul:after {
+  .nav:before, #markdown-toc:before, ul.nav > li > ul:before, ul#markdown-toc > li > ul:before, .nav:after, #markdown-toc:after, ul.nav > li > ul:after, ul#markdown-toc > li > ul:after {
     display: table;
     content: " "; }
-  .nav:after, #markdown-toc > li > ul:after, #markdown-toc:after, ul.nav li ul:after, #markdown-toc > li > ul li ul:after, ul#markdown-toc li ul:after {
+  .nav:after, #markdown-toc:after, ul.nav > li > ul:after, ul#markdown-toc > li > ul:after {
     clear: both; }
-  .nav > li, #markdown-toc > li > ul > li, #markdown-toc > li, ul.nav li ul > li, #markdown-toc > li > ul li ul > li, ul#markdown-toc li ul > li {
+  .nav > li, #markdown-toc > li, ul.nav > li > ul > li, ul#markdown-toc > li > ul > li {
     position: relative;
     display: block; }
-    .nav > li > a, #markdown-toc > li > ul > li > a, #markdown-toc > li > a, ul.nav li ul > li > a, #markdown-toc > li > ul li ul > li > a, ul#markdown-toc li ul > li > a {
+    .nav > li > a, #markdown-toc > li > a, ul.nav > li > ul > li > a, ul#markdown-toc > li > ul > li > a {
       position: relative;
       display: block;
       padding: 10px 15px; }
-      .nav > li > a:hover, #markdown-toc > li > ul > li > a:hover, #markdown-toc > li > a:hover, ul.nav li ul > li > a:hover, #markdown-toc > li > ul li ul > li > a:hover, ul#markdown-toc li ul > li > a:hover, .nav > li > a:focus, #markdown-toc > li > ul > li > a:focus, #markdown-toc > li > a:focus, ul.nav li ul > li > a:focus, #markdown-toc > li > ul li ul > li > a:focus, ul#markdown-toc li ul > li > a:focus {
+      .nav > li > a:hover, #markdown-toc > li > a:hover, ul.nav > li > ul > li > a:hover, ul#markdown-toc > li > ul > li > a:hover, .nav > li > a:focus, #markdown-toc > li > a:focus, ul.nav > li > ul > li > a:focus, ul#markdown-toc > li > ul > li > a:focus {
         text-decoration: none;
         background-color: #eeeeee; }
-    .nav > li.disabled > a, #markdown-toc > li > ul > li.disabled > a, #markdown-toc > li.disabled > a, ul.nav li ul > li.disabled > a, #markdown-toc > li > ul li ul > li.disabled > a, ul#markdown-toc li ul > li.disabled > a {
+    .nav > li.disabled > a, #markdown-toc > li.disabled > a, ul.nav > li > ul > li.disabled > a, ul#markdown-toc > li > ul > li.disabled > a {
       color: #777777; }
-      .nav > li.disabled > a:hover, #markdown-toc > li > ul > li.disabled > a:hover, #markdown-toc > li.disabled > a:hover, ul.nav li ul > li.disabled > a:hover, #markdown-toc > li > ul li ul > li.disabled > a:hover, ul#markdown-toc li ul > li.disabled > a:hover, .nav > li.disabled > a:focus, #markdown-toc > li > ul > li.disabled > a:focus, #markdown-toc > li.disabled > a:focus, ul.nav li ul > li.disabled > a:focus, #markdown-toc > li > ul li ul > li.disabled > a:focus, ul#markdown-toc li ul > li.disabled > a:focus {
+      .nav > li.disabled > a:hover, #markdown-toc > li.disabled > a:hover, ul.nav > li > ul > li.disabled > a:hover, ul#markdown-toc > li > ul > li.disabled > a:hover, .nav > li.disabled > a:focus, #markdown-toc > li.disabled > a:focus, ul.nav > li > ul > li.disabled > a:focus, ul#markdown-toc > li > ul > li.disabled > a:focus {
         color: #777777;
         text-decoration: none;
         cursor: not-allowed;
         background-color: transparent; }
-  .nav .open > a, #markdown-toc > li > ul .open > a, #markdown-toc .open > a, ul.nav li ul .open > a, #markdown-toc > li > ul li ul .open > a, ul#markdown-toc li ul .open > a, .nav .open > a:hover, .nav .open > a:focus {
+  .nav .open > a, #markdown-toc .open > a, ul.nav > li > ul .open > a, ul#markdown-toc > li > ul .open > a, .nav .open > a:hover, .nav .open > a:focus {
     background-color: #eeeeee;
     border-color: #337ab7; }
   .nav .nav-divider, #markdown-toc .nav-divider {
@@ -4058,7 +4058,7 @@ tbody.collapse.in {
     margin: 9px 0;
     overflow: hidden;
     background-color: #e5e5e5; }
-  .nav > li > a > img, #markdown-toc > li > ul > li > a > img, #markdown-toc > li > a > img, ul.nav li ul > li > a > img, #markdown-toc > li > ul li ul > li > a > img, ul#markdown-toc li ul > li > a > img {
+  .nav > li > a > img, #markdown-toc > li > a > img, ul.nav > li > ul > li > a > img, ul#markdown-toc > li > ul > li > a > img {
     max-width: none; }
 
 .nav-tabs {
@@ -6372,78 +6372,49 @@ div.highlight {
 /**
  * Shared classes
  */
-.toc-link, #markdown-toc > li > a, .docs-sidebar .nav > li > a, ul.nav li .docs-sidebar ul > li > a, #markdown-toc > li > ul li .docs-sidebar ul > li > a, ul#markdown-toc li .docs-sidebar ul > li > a,
+.toc-link, ul#markdown-toc > li > a, .docs-sidebar .nav > li > a, .docs-sidebar #markdown-toc > li > a,
 .docs-sidebar .nav > li > span > a,
-.docs-sidebar #markdown-toc > li > ul > li > span > a,
-.docs-sidebar #markdown-toc > li > span > a,
-ul.nav li .docs-sidebar ul > li > span > a,
-#markdown-toc > li > ul li .docs-sidebar ul > li > span > a,
-ul#markdown-toc li .docs-sidebar ul > li > span > a, .toc-level2-link, #markdown-toc > li > ul > li > a, .docs-sidebar .nav .nav > li > a, .docs-sidebar #markdown-toc .nav > li > a, .docs-sidebar #markdown-toc #markdown-toc > li > a, ul.nav li .docs-sidebar ul .nav > li > a, #markdown-toc > li > ul li .docs-sidebar ul .nav > li > a, ul#markdown-toc li .docs-sidebar ul .nav > li > a, .docs-sidebar ul.nav li ul > li > a, .docs-sidebar #markdown-toc > li > ul li ul > li > a, .docs-sidebar ul#markdown-toc li ul > li > a, .docs-sidebar ul.nav li ul ul > li > a, .docs-sidebar #markdown-toc > li > ul li ul ul > li > a, .docs-sidebar ul#markdown-toc li ul ul > li > a, ul.nav li .docs-sidebar ul ul > li > a, #markdown-toc > li > ul li .docs-sidebar ul ul > li > a, ul#markdown-toc li .docs-sidebar ul ul > li > a,
+.docs-sidebar #markdown-toc > li > span > a, .toc-level2-link, ul#markdown-toc > li > ul > li > a, .docs-sidebar .nav .nav > li > a, .docs-sidebar #markdown-toc .nav > li > a, .docs-sidebar #markdown-toc #markdown-toc > li > a, .docs-sidebar ul.nav > li > ul > li > a, .docs-sidebar ul.nav > li > ul.nav > li > ul > li > a, .docs-sidebar ul#markdown-toc > li > ul.nav > li > ul > li > a, .docs-sidebar ul#markdown-toc > li > ul#markdown-toc > li > ul > li > a,
 .docs-sidebar .nav .nav > li > span > a,
 .docs-sidebar #markdown-toc .nav > li > span > a,
 .docs-sidebar #markdown-toc #markdown-toc > li > span > a,
-ul.nav li .docs-sidebar ul .nav > li > span > a,
-#markdown-toc > li > ul li .docs-sidebar ul .nav > li > span > a,
-ul#markdown-toc li .docs-sidebar ul .nav > li > span > a,
-.docs-sidebar ul.nav li ul > li > span > a,
-.docs-sidebar #markdown-toc > li > ul li ul > li > span > a,
-.docs-sidebar ul#markdown-toc li ul > li > span > a,
-.docs-sidebar ul.nav li ul ul > li > span > a,
-.docs-sidebar #markdown-toc > li > ul li ul ul > li > span > a,
-.docs-sidebar ul#markdown-toc li ul ul > li > span > a,
-ul.nav li .docs-sidebar ul ul > li > span > a,
-#markdown-toc > li > ul li .docs-sidebar ul ul > li > span > a,
-ul#markdown-toc li .docs-sidebar ul ul > li > span > a {
+.docs-sidebar ul.nav > li > ul > li > span > a,
+.docs-sidebar ul#markdown-toc > li > ul > li > span > a,
+.docs-sidebar ul.nav > li > ul.nav > li > ul > li > span > a,
+.docs-sidebar ul#markdown-toc > li > ul.nav > li > ul > li > span > a,
+.docs-sidebar ul#markdown-toc > li > ul#markdown-toc > li > ul > li > span > a {
   display: block;
-  padding: 4px 20px;
-  font-size: 13px;
+  margin-left: 1em;
+  padding: 0.1em 15px;
+  font-size: 120%;
   font-weight: 500;
   color: #767676; }
 
-.toc-link-hover, #markdown-toc > li > a:hover,
-#markdown-toc > li > a:focus, .docs-sidebar .nav > li > a:hover, .docs-sidebar #markdown-toc > li > ul > li > a:hover, .docs-sidebar ul.nav li ul > li > a:hover, .docs-sidebar #markdown-toc > li > ul li ul > li > a:hover, .docs-sidebar ul#markdown-toc li ul > li > a:hover, ul.nav li .docs-sidebar ul > li > a:hover, #markdown-toc > li > ul li .docs-sidebar ul > li > a:hover, ul#markdown-toc li .docs-sidebar ul > li > a:hover,
+.toc-link-hover, ul#markdown-toc > li > a:hover,
+ul#markdown-toc > li > a:focus, .docs-sidebar .nav > li > a:hover, .docs-sidebar #markdown-toc > li > a:hover, .docs-sidebar ul.nav > li > ul > li > a:hover, .docs-sidebar ul#markdown-toc > li > ul > li > a:hover,
 .docs-sidebar .nav > li > a:focus,
-.docs-sidebar #markdown-toc > li > ul > li > a:focus,
-.docs-sidebar ul.nav li ul > li > a:focus,
-.docs-sidebar #markdown-toc > li > ul li ul > li > a:focus,
-.docs-sidebar ul#markdown-toc li ul > li > a:focus,
-ul.nav li .docs-sidebar ul > li > a:focus,
-#markdown-toc > li > ul li .docs-sidebar ul > li > a:focus,
-ul#markdown-toc li .docs-sidebar ul > li > a:focus,
+.docs-sidebar #markdown-toc > li > a:focus,
+.docs-sidebar ul.nav > li > ul > li > a:focus,
+.docs-sidebar ul#markdown-toc > li > ul > li > a:focus,
 .docs-sidebar .nav > li > span > a:hover,
-.docs-sidebar #markdown-toc > li > ul > li > span > a:hover,
 .docs-sidebar #markdown-toc > li > span > a:hover,
-.docs-sidebar ul.nav li ul > li > span > a:hover,
-.docs-sidebar #markdown-toc > li > ul li ul > li > span > a:hover,
-.docs-sidebar ul#markdown-toc li ul > li > span > a:hover,
-ul.nav li .docs-sidebar ul > li > span > a:hover,
-#markdown-toc > li > ul li .docs-sidebar ul > li > span > a:hover,
-ul#markdown-toc li .docs-sidebar ul > li > span > a:hover,
+.docs-sidebar ul.nav > li > ul > li > span > a:hover,
+.docs-sidebar ul#markdown-toc > li > ul > li > span > a:hover,
 .docs-sidebar .nav > li > span > a:focus,
-.docs-sidebar #markdown-toc > li > ul > li > span > a:focus,
 .docs-sidebar #markdown-toc > li > span > a:focus,
-.docs-sidebar ul.nav li ul > li > span > a:focus,
-.docs-sidebar #markdown-toc > li > ul li ul > li > span > a:focus,
-.docs-sidebar ul#markdown-toc li ul > li > span > a:focus,
-ul.nav li .docs-sidebar ul > li > span > a:focus,
-#markdown-toc > li > ul li .docs-sidebar ul > li > span > a:focus,
-ul#markdown-toc li .docs-sidebar ul > li > span > a:focus {
-  padding-left: 19px;
+.docs-sidebar ul.nav > li > ul > li > span > a:focus,
+.docs-sidebar ul#markdown-toc > li > ul > li > span > a:focus {
+  padding-left: 14px;
   color: #563d7c;
   text-decoration: none;
   background-color: transparent;
   border-left: 1px solid #563d7c; }
 
-.toc-link-active, .docs-sidebar .nav > .active > a, .docs-sidebar #markdown-toc > li > ul > .active > a, .docs-sidebar #markdown-toc > .active > a, .docs-sidebar ul.nav li ul > .active > a, .docs-sidebar #markdown-toc > li > ul li ul > .active > a, .docs-sidebar ul#markdown-toc li ul > .active > a, ul.nav li .docs-sidebar ul > .active > a, #markdown-toc > li > ul li .docs-sidebar ul > .active > a, ul#markdown-toc li .docs-sidebar ul > .active > a,
+.toc-link-active, .docs-sidebar .nav > .active > a, .docs-sidebar #markdown-toc > .active > a, .docs-sidebar ul.nav > li > ul > .active > a, .docs-sidebar ul#markdown-toc > li > ul > .active > a,
 .docs-sidebar .nav > .active:hover > a,
 .docs-sidebar .nav > .active:focus > a,
 .docs-sidebar .nav > .active > span > a,
 .docs-sidebar #markdown-toc > .active > span > a,
-.docs-sidebar ul.nav li ul > .active > span > a,
-.docs-sidebar ul#markdown-toc li ul > .active > span > a,
-ul.nav li .docs-sidebar ul > .active > span > a,
-#markdown-toc > li > ul li .docs-sidebar ul > .active > span > a,
-ul#markdown-toc li .docs-sidebar ul > .active > span > a,
 .docs-sidebar .nav > .active:hover > span > a,
 .docs-sidebar .nav > .active:focus > span > a {
   padding-left: 18px;
@@ -6452,117 +6423,56 @@ ul#markdown-toc li .docs-sidebar ul > .active > span > a,
   background-color: transparent;
   border-left: 2px solid #563d7c; }
 
-.toc-level2-link, #markdown-toc > li > ul > li > a, .docs-sidebar .nav .nav > li > a, .docs-sidebar #markdown-toc .nav > li > a, .docs-sidebar .nav #markdown-toc > li > a, .docs-sidebar #markdown-toc #markdown-toc > li > a, ul.nav li .docs-sidebar ul .nav > li > a, #markdown-toc > li > ul li .docs-sidebar ul .nav > li > a, ul#markdown-toc li .docs-sidebar ul .nav > li > a, ul.nav li .docs-sidebar ul #markdown-toc > li > a, #markdown-toc > li > ul li .docs-sidebar ul #markdown-toc > li > a, ul#markdown-toc li .docs-sidebar ul #markdown-toc > li > a, .docs-sidebar ul.nav li ul > li > a, .docs-sidebar #markdown-toc > li > ul li ul > li > a, .docs-sidebar ul#markdown-toc li ul > li > a, .docs-sidebar ul.nav li ul ul > li > a, .docs-sidebar #markdown-toc > li > ul li ul ul > li > a, .docs-sidebar ul#markdown-toc li ul ul > li > a, ul.nav li .docs-sidebar ul ul > li > a, #markdown-toc > li > ul li .docs-sidebar ul ul > li > a, ul#markdown-toc li .docs-sidebar ul ul > li > a,
+.toc-level2-link, ul#markdown-toc > li > ul > li > a, .docs-sidebar .nav .nav > li > a, .docs-sidebar #markdown-toc .nav > li > a, .docs-sidebar .nav #markdown-toc > li > a, .docs-sidebar #markdown-toc #markdown-toc > li > a, .docs-sidebar ul.nav > li > ul > li > a, .docs-sidebar ul.nav > li > ul.nav > li > ul > li > a, .docs-sidebar ul#markdown-toc > li > ul.nav > li > ul > li > a, .docs-sidebar ul#markdown-toc > li > ul#markdown-toc > li > ul > li > a,
 .docs-sidebar .nav .nav > li > span > a,
 .docs-sidebar #markdown-toc .nav > li > span > a,
-.docs-sidebar #markdown-toc > li > ul > li > span > a,
 .docs-sidebar .nav #markdown-toc > li > span > a,
 .docs-sidebar #markdown-toc #markdown-toc > li > span > a,
-ul.nav li .docs-sidebar ul .nav > li > span > a,
-#markdown-toc > li > ul li .docs-sidebar ul .nav > li > span > a,
-ul#markdown-toc li .docs-sidebar ul .nav > li > span > a,
-ul.nav li .docs-sidebar ul #markdown-toc > li > span > a,
-#markdown-toc > li > ul li .docs-sidebar ul #markdown-toc > li > span > a,
-ul#markdown-toc li .docs-sidebar ul #markdown-toc > li > span > a,
-.docs-sidebar ul.nav li ul > li > span > a,
-.docs-sidebar #markdown-toc > li > ul li ul > li > span > a,
-.docs-sidebar ul#markdown-toc li ul > li > span > a,
-.docs-sidebar ul.nav li ul ul > li > span > a,
-.docs-sidebar #markdown-toc > li > ul li ul ul > li > span > a,
-.docs-sidebar ul#markdown-toc li ul ul > li > span > a,
-ul.nav li .docs-sidebar ul ul > li > span > a,
-#markdown-toc > li > ul li .docs-sidebar ul ul > li > span > a,
-ul#markdown-toc li .docs-sidebar ul ul > li > span > a {
+.docs-sidebar ul.nav > li > ul > li > span > a,
+.docs-sidebar ul#markdown-toc > li > ul > li > span > a,
+.docs-sidebar ul.nav > li > ul.nav > li > ul > li > span > a,
+.docs-sidebar ul#markdown-toc > li > ul.nav > li > ul > li > span > a,
+.docs-sidebar ul#markdown-toc > li > ul#markdown-toc > li > ul > li > span > a {
+  margin-left: 1em;
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 30px;
-  font-size: 12px;
+  font-size: 105%;
   font-weight: normal; }
 
-.toc-level2-link-hover, #markdown-toc > li > ul > li > a:hover,
-#markdown-toc > li > ul > li > a:focus, .docs-sidebar .nav .nav > li > a:hover, .docs-sidebar #markdown-toc > li > ul .nav > li > a:hover, .docs-sidebar .nav #markdown-toc > li > ul > li > a:hover, .docs-sidebar #markdown-toc > li > ul #markdown-toc > li > ul > li > a:hover, .docs-sidebar #markdown-toc .nav > li > a:hover, .docs-sidebar #markdown-toc > li > ul > li > a:hover, .docs-sidebar .nav #markdown-toc > li > a:hover, .docs-sidebar #markdown-toc > li > ul #markdown-toc > li > a:hover, .docs-sidebar #markdown-toc #markdown-toc > li > a:hover, ul.nav li .docs-sidebar ul .nav > li > a:hover, #markdown-toc > li > ul li .docs-sidebar ul .nav > li > a:hover, ul.nav li .docs-sidebar ul #markdown-toc > li > ul > li > a:hover, #markdown-toc > li > ul li .docs-sidebar ul #markdown-toc > li > ul > li > a:hover, ul#markdown-toc li .docs-sidebar ul .nav > li > a:hover, ul#markdown-toc li .docs-sidebar ul #markdown-toc > li > ul > li > a:hover, ul.nav li .docs-sidebar ul #markdown-toc > li > a:hover, #markdown-toc > li > ul li .docs-sidebar ul #markdown-toc > li > a:hover, ul#markdown-toc li .docs-sidebar ul #markdown-toc > li > a:hover, .docs-sidebar ul.nav li ul > li > a:hover, .docs-sidebar #markdown-toc > li > ul li ul > li > a:hover, .docs-sidebar ul#markdown-toc li ul > li > a:hover, .docs-sidebar ul.nav li ul ul > li > a:hover, .docs-sidebar #markdown-toc > li > ul li ul ul > li > a:hover, .docs-sidebar ul#markdown-toc li ul ul > li > a:hover, ul.nav li .docs-sidebar ul ul > li > a:hover, #markdown-toc > li > ul li .docs-sidebar ul ul > li > a:hover, ul#markdown-toc li .docs-sidebar ul ul > li > a:hover,
+.toc-level2-link-hover, ul#markdown-toc > li > ul > li > a:hover,
+ul#markdown-toc > li > ul > li > a:focus, .docs-sidebar .nav .nav > li > a:hover, .docs-sidebar #markdown-toc .nav > li > a:hover, .docs-sidebar .nav #markdown-toc > li > a:hover, .docs-sidebar #markdown-toc #markdown-toc > li > a:hover, .docs-sidebar ul.nav > li > ul > li > a:hover, .docs-sidebar ul.nav > li > ul.nav > li > ul > li > a:hover, .docs-sidebar ul#markdown-toc > li > ul.nav > li > ul > li > a:hover, .docs-sidebar ul#markdown-toc > li > ul#markdown-toc > li > ul > li > a:hover,
 .docs-sidebar .nav .nav > li > a:focus,
-.docs-sidebar #markdown-toc > li > ul .nav > li > a:focus,
-.docs-sidebar .nav #markdown-toc > li > ul > li > a:focus,
-.docs-sidebar #markdown-toc > li > ul #markdown-toc > li > ul > li > a:focus,
 .docs-sidebar #markdown-toc .nav > li > a:focus,
-.docs-sidebar #markdown-toc > li > ul > li > a:focus,
 .docs-sidebar .nav #markdown-toc > li > a:focus,
-.docs-sidebar #markdown-toc > li > ul #markdown-toc > li > a:focus,
 .docs-sidebar #markdown-toc #markdown-toc > li > a:focus,
-ul.nav li .docs-sidebar ul .nav > li > a:focus,
-#markdown-toc > li > ul li .docs-sidebar ul .nav > li > a:focus,
-ul.nav li .docs-sidebar ul #markdown-toc > li > ul > li > a:focus,
-#markdown-toc > li > ul li .docs-sidebar ul #markdown-toc > li > ul > li > a:focus,
-ul#markdown-toc li .docs-sidebar ul .nav > li > a:focus,
-ul#markdown-toc li .docs-sidebar ul #markdown-toc > li > ul > li > a:focus,
-ul.nav li .docs-sidebar ul #markdown-toc > li > a:focus,
-#markdown-toc > li > ul li .docs-sidebar ul #markdown-toc > li > a:focus,
-ul#markdown-toc li .docs-sidebar ul #markdown-toc > li > a:focus,
-.docs-sidebar ul.nav li ul > li > a:focus,
-.docs-sidebar #markdown-toc > li > ul li ul > li > a:focus,
-.docs-sidebar ul#markdown-toc li ul > li > a:focus,
-.docs-sidebar ul.nav li ul ul > li > a:focus,
-.docs-sidebar #markdown-toc > li > ul li ul ul > li > a:focus,
-.docs-sidebar ul#markdown-toc li ul ul > li > a:focus,
-ul.nav li .docs-sidebar ul ul > li > a:focus,
-#markdown-toc > li > ul li .docs-sidebar ul ul > li > a:focus,
-ul#markdown-toc li .docs-sidebar ul ul > li > a:focus,
+.docs-sidebar ul.nav > li > ul > li > a:focus,
+.docs-sidebar ul.nav > li > ul.nav > li > ul > li > a:focus,
+.docs-sidebar ul#markdown-toc > li > ul.nav > li > ul > li > a:focus,
+.docs-sidebar ul#markdown-toc > li > ul#markdown-toc > li > ul > li > a:focus,
 .docs-sidebar .nav .nav > li > span > a:hover,
-.docs-sidebar #markdown-toc > li > ul .nav > li > span > a:hover,
-.docs-sidebar .nav #markdown-toc > li > ul > li > span > a:hover,
-.docs-sidebar #markdown-toc > li > ul #markdown-toc > li > ul > li > span > a:hover,
 .docs-sidebar #markdown-toc .nav > li > span > a:hover,
-.docs-sidebar #markdown-toc > li > ul > li > span > a:hover,
 .docs-sidebar .nav #markdown-toc > li > span > a:hover,
-.docs-sidebar #markdown-toc > li > ul #markdown-toc > li > span > a:hover,
 .docs-sidebar #markdown-toc #markdown-toc > li > span > a:hover,
-ul.nav li .docs-sidebar ul .nav > li > span > a:hover,
-#markdown-toc > li > ul li .docs-sidebar ul .nav > li > span > a:hover,
-ul.nav li .docs-sidebar ul #markdown-toc > li > ul > li > span > a:hover,
-#markdown-toc > li > ul li .docs-sidebar ul #markdown-toc > li > ul > li > span > a:hover,
-ul#markdown-toc li .docs-sidebar ul .nav > li > span > a:hover,
-ul#markdown-toc li .docs-sidebar ul #markdown-toc > li > ul > li > span > a:hover,
-ul.nav li .docs-sidebar ul #markdown-toc > li > span > a:hover,
-#markdown-toc > li > ul li .docs-sidebar ul #markdown-toc > li > span > a:hover,
-ul#markdown-toc li .docs-sidebar ul #markdown-toc > li > span > a:hover,
-.docs-sidebar ul.nav li ul > li > span > a:hover,
-.docs-sidebar #markdown-toc > li > ul li ul > li > span > a:hover,
-.docs-sidebar ul#markdown-toc li ul > li > span > a:hover,
-.docs-sidebar ul.nav li ul ul > li > span > a:hover,
-.docs-sidebar #markdown-toc > li > ul li ul ul > li > span > a:hover,
-.docs-sidebar ul#markdown-toc li ul ul > li > span > a:hover,
-ul.nav li .docs-sidebar ul ul > li > span > a:hover,
-#markdown-toc > li > ul li .docs-sidebar ul ul > li > span > a:hover,
-ul#markdown-toc li .docs-sidebar ul ul > li > span > a:hover,
+.docs-sidebar ul.nav > li > ul > li > span > a:hover,
+.docs-sidebar ul#markdown-toc > li > ul > li > span > a:hover,
+.docs-sidebar ul.nav > li > ul.nav > li > ul > li > span > a:hover,
+.docs-sidebar ul#markdown-toc > li > ul.nav > li > ul > li > span > a:hover,
+.docs-sidebar ul#markdown-toc > li > ul#markdown-toc > li > ul > li > span > a:hover,
 .docs-sidebar .nav .nav > li > span > a:focus,
-.docs-sidebar #markdown-toc > li > ul .nav > li > span > a:focus,
-.docs-sidebar .nav #markdown-toc > li > ul > li > span > a:focus,
-.docs-sidebar #markdown-toc > li > ul #markdown-toc > li > ul > li > span > a:focus,
 .docs-sidebar #markdown-toc .nav > li > span > a:focus,
-.docs-sidebar #markdown-toc > li > ul > li > span > a:focus,
 .docs-sidebar .nav #markdown-toc > li > span > a:focus,
-.docs-sidebar #markdown-toc > li > ul #markdown-toc > li > span > a:focus,
 .docs-sidebar #markdown-toc #markdown-toc > li > span > a:focus,
-ul.nav li .docs-sidebar ul .nav > li > span > a:focus,
-#markdown-toc > li > ul li .docs-sidebar ul .nav > li > span > a:focus,
-ul.nav li .docs-sidebar ul #markdown-toc > li > ul > li > span > a:focus,
-#markdown-toc > li > ul li .docs-sidebar ul #markdown-toc > li > ul > li > span > a:focus,
-ul#markdown-toc li .docs-sidebar ul .nav > li > span > a:focus,
-ul#markdown-toc li .docs-sidebar ul #markdown-toc > li > ul > li > span > a:focus,
-ul.nav li .docs-sidebar ul #markdown-toc > li > span > a:focus,
-#markdown-toc > li > ul li .docs-sidebar ul #markdown-toc > li > span > a:focus,
-ul#markdown-toc li .docs-sidebar ul #markdown-toc > li > span > a:focus,
-.docs-sidebar ul.nav li ul > li > span > a:focus,
-.docs-sidebar #markdown-toc > li > ul li ul > li > span > a:focus,
-.docs-sidebar ul#markdown-toc li ul > li > span > a:focus,
-.docs-sidebar ul.nav li ul ul > li > span > a:focus,
-.docs-sidebar #markdown-toc > li > ul li ul ul > li > span > a:focus,
-.docs-sidebar ul#markdown-toc li ul ul > li > span > a:focus,
-ul.nav li .docs-sidebar ul ul > li > span > a:focus,
-#markdown-toc > li > ul li .docs-sidebar ul ul > li > span > a:focus,
-ul#markdown-toc li .docs-sidebar ul ul > li > span > a:focus {
-  padding-left: 29px; }
+.docs-sidebar ul.nav > li > ul > li > span > a:focus,
+.docs-sidebar ul#markdown-toc > li > ul > li > span > a:focus,
+.docs-sidebar ul.nav > li > ul.nav > li > ul > li > span > a:focus,
+.docs-sidebar ul#markdown-toc > li > ul.nav > li > ul > li > span > a:focus,
+.docs-sidebar ul#markdown-toc > li > ul#markdown-toc > li > ul > li > span > a:focus {
+  padding-left: 29px;
+  color: #563d7c;
+  text-decoration: none;
+  background-color: transparent;
+  border-left: 1px solid #563d7c; }
 
 /**
  * Sidebar navigation
@@ -6574,40 +6484,26 @@ ul#markdown-toc li .docs-sidebar ul ul > li > span > a:focus {
 
 /* All levels of nav */
 /* Nav: second level (shown on .active) */
-.docs-sidebar .nav .nav, .docs-sidebar #markdown-toc .nav, .docs-sidebar #markdown-toc > li > ul, .docs-sidebar .nav #markdown-toc, .docs-sidebar #markdown-toc #markdown-toc, ul.nav li .docs-sidebar ul .nav, #markdown-toc > li > ul li .docs-sidebar ul .nav, ul#markdown-toc li .docs-sidebar ul .nav, ul.nav li .docs-sidebar ul #markdown-toc, #markdown-toc > li > ul li .docs-sidebar ul #markdown-toc, ul#markdown-toc li .docs-sidebar ul #markdown-toc, .docs-sidebar ul.nav li ul, .docs-sidebar #markdown-toc > li > ul li ul, .docs-sidebar ul#markdown-toc li ul, ul.nav li .docs-sidebar ul ul, #markdown-toc > li > ul li .docs-sidebar ul ul, ul#markdown-toc li .docs-sidebar ul ul {
+.docs-sidebar .nav .nav, .docs-sidebar #markdown-toc .nav, .docs-sidebar .nav #markdown-toc, .docs-sidebar #markdown-toc #markdown-toc, .docs-sidebar ul.nav > li > ul, .docs-sidebar ul#markdown-toc > li > ul, .docs-sidebar ul.nav > li > ul.nav > li > ul, .docs-sidebar ul#markdown-toc > li > ul.nav > li > ul, .docs-sidebar ul#markdown-toc > li > ul#markdown-toc > li > ul {
   display: none;
   /* Hide by default, but at >768px, show it */
   padding-bottom: 10px; }
 
-.docs-sidebar .nav .nav > .active > a, .docs-sidebar #markdown-toc .nav > .active > a, .docs-sidebar #markdown-toc > li > ul > .active > a, .docs-sidebar .nav #markdown-toc > .active > a, .docs-sidebar #markdown-toc #markdown-toc > .active > a, ul.nav li .docs-sidebar ul .nav > .active > a, #markdown-toc > li > ul li .docs-sidebar ul .nav > .active > a, ul#markdown-toc li .docs-sidebar ul .nav > .active > a, ul.nav li .docs-sidebar ul #markdown-toc > .active > a, #markdown-toc > li > ul li .docs-sidebar ul #markdown-toc > .active > a, ul#markdown-toc li .docs-sidebar ul #markdown-toc > .active > a, .docs-sidebar ul.nav li ul > .active > a, .docs-sidebar #markdown-toc > li > ul li ul > .active > a, .docs-sidebar ul#markdown-toc li ul > .active > a, .docs-sidebar ul.nav li ul ul > .active > a, .docs-sidebar #markdown-toc > li > ul li ul ul > .active > a, .docs-sidebar ul#markdown-toc li ul ul > .active > a, ul.nav li .docs-sidebar ul ul > .active > a, #markdown-toc > li > ul li .docs-sidebar ul ul > .active > a, ul#markdown-toc li .docs-sidebar ul ul > .active > a,
+.docs-sidebar .nav .nav > .active > a, .docs-sidebar #markdown-toc .nav > .active > a, .docs-sidebar .nav #markdown-toc > .active > a, .docs-sidebar #markdown-toc #markdown-toc > .active > a, .docs-sidebar ul.nav > li > ul > .active > a, .docs-sidebar ul#markdown-toc > li > ul > .active > a, .docs-sidebar ul.nav > li > ul.nav > li > ul > .active > a, .docs-sidebar ul#markdown-toc > li > ul.nav > li > ul > .active > a, .docs-sidebar ul#markdown-toc > li > ul#markdown-toc > li > ul > .active > a,
 .docs-sidebar .nav .nav > .active:hover > a,
 .docs-sidebar .nav .nav > .active:focus > a,
 .docs-sidebar .nav .nav > .active > span > a,
 .docs-sidebar #markdown-toc .nav > .active > span > a,
-.docs-sidebar #markdown-toc > li > ul > .active > span > a,
 .docs-sidebar .nav #markdown-toc > .active > span > a,
 .docs-sidebar #markdown-toc #markdown-toc > .active > span > a,
-ul.nav li .docs-sidebar ul .nav > .active > span > a,
-#markdown-toc > li > ul li .docs-sidebar ul .nav > .active > span > a,
-ul#markdown-toc li .docs-sidebar ul .nav > .active > span > a,
-ul.nav li .docs-sidebar ul #markdown-toc > .active > span > a,
-#markdown-toc > li > ul li .docs-sidebar ul #markdown-toc > .active > span > a,
-ul#markdown-toc li .docs-sidebar ul #markdown-toc > .active > span > a,
-.docs-sidebar ul.nav li ul > .active > span > a,
-.docs-sidebar #markdown-toc > li > ul li ul > .active > span > a,
-.docs-sidebar ul#markdown-toc li ul > .active > span > a,
-.docs-sidebar ul.nav li ul ul > .active > span > a,
-.docs-sidebar #markdown-toc > li > ul li ul ul > .active > span > a,
-.docs-sidebar ul#markdown-toc li ul ul > .active > span > a,
-ul.nav li .docs-sidebar ul ul > .active > span > a,
-#markdown-toc > li > ul li .docs-sidebar ul ul > .active > span > a,
-ul#markdown-toc li .docs-sidebar ul ul > .active > span > a,
+.docs-sidebar ul.nav > li > ul > .active > span > a,
+.docs-sidebar ul#markdown-toc > li > ul > .active > span > a,
 .docs-sidebar .nav .nav > .active:hover > span > a,
 .docs-sidebar .nav .nav > .active:focus > span > a {
   padding-left: 28px;
   font-weight: 500; }
 
-.docs-sidebar .nav li.active ul, .docs-sidebar #markdown-toc li.active ul, ul.nav li .docs-sidebar ul li.active ul, #markdown-toc > li > ul li .docs-sidebar ul li.active ul, ul#markdown-toc li .docs-sidebar ul li.active ul {
+.docs-sidebar .nav li.active ul, .docs-sidebar #markdown-toc li.active ul {
   display: block; }
 
 nav.docs-sidebar.affix {
@@ -6617,9 +6513,6 @@ nav.docs-sidebar.affix {
 /**
  * Page TOC
  */
-#markdown-toc > li > a {
-  margin-left: 19px; }
-
 #markdown-toc {
   margin-left: 19px;
   margin-right: 5px;
@@ -6628,9 +6521,6 @@ nav.docs-sidebar.affix {
   padding-bottom: 1.5em;
   width: 40%;
   background: #f5f5f5; }
-
-#markdown-toc > li > ul {
-  padding-left: 19px; }
 
 /**
  * Use the :target pseudo-element to apply
