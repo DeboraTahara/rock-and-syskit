@@ -187,7 +187,9 @@ that listen to certain conditions to emit its events.</p>
 <p>Calling <code>poll</code> with a block, within a task's class definition, defines a
 block that will be executed at each execution cycle (usually 100ms). The
 block is evaluated in the context of the task instance (i.e. <code>self</code> is the
-task instance)</p>
+task instance). There can be only one poll block at each level of the class
+hierarchy, and you must call <code>super()</code> to call the implementation from the
+superclass.</p>
 
 <p>For instance, a task that would emit stop after a configurable amount of time
 could be written:</p>
@@ -205,6 +207,8 @@ could be written:</p>
   <span class="k">end</span>
 
   <span class="n">poll</span> <span class="k">do</span>
+    <span class="k">super</span><span class="p">()</span>
+
     <span class="n">stop_event</span><span class="p">.</span><span class="nf">emit</span> <span class="k">if</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span> <span class="o">&gt;</span> <span class="vi">@deadline</span>
   <span class="k">end</span>
 <span class="k">end</span>
@@ -244,6 +248,8 @@ using the <code>data_writer</code> declaration:</p>
 <div class="highlight"><pre class="highlight ruby"><code><span class="n">data_writer</span> <span class="n">controller_child</span><span class="p">.</span><span class="nf">cmd_port</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'command'</span>
 
 <span class="n">poll</span> <span class="k">do</span>
+  <span class="k">super</span><span class="p">()</span>
+
   <span class="n">cmd</span> <span class="o">=</span> <span class="n">generate_command</span>
   <span class="n">command_writer</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
 <span class="k">end</span>
@@ -265,6 +271,8 @@ ready before you write.</p>
 <span class="n">data_reader</span> <span class="n">planning_child</span><span class="p">.</span><span class="nf">plan_port</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'plan'</span>
 
 <span class="n">poll</span> <span class="k">do</span>
+  <span class="k">super</span><span class="p">()</span>
+
   <span class="k">if</span> <span class="n">problem_writer</span><span class="p">.</span><span class="nf">ready?</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="vi">@problem_written</span>
     <span class="n">problem_writer</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="n">problem</span><span class="p">)</span>
     <span class="vi">@problem_written</span> <span class="o">=</span> <span class="kp">true</span>
@@ -330,6 +338,8 @@ For instance:</p>
   <span class="n">output_port</span> <span class="s2">"out"</span><span class="p">,</span> <span class="s2">"/base/Time"</span>
 
   <span class="n">poll</span> <span class="k">do</span>
+    <span class="k">super</span><span class="p">()</span>
+
     <span class="k">while</span> <span class="p">(</span><span class="n">in_time</span> <span class="o">=</span> <span class="n">orocos_task</span><span class="p">.</span><span class="nf">in</span><span class="p">.</span><span class="nf">read_new</span><span class="p">)</span>
       <span class="n">orocos_task</span><span class="p">.</span><span class="nf">out</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="n">in_time</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
     <span class="k">end</span>
