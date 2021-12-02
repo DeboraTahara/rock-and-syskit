@@ -220,9 +220,9 @@ this property should be enough to have a functional component.</p>
 <p>Syskit will automatically pick a configuration with the device's name if one
 is available, e.g. with a configuration file containing two sections</p>
 
-<div class="highlight"><pre class="highlight diff"><code><span class="gd">--- name:default
+<div class="highlight"><pre class="highlight plaintext"><code>--- name:default
 --- name:gps
-</span></code></pre></div>
+</code></pre></div>
 <p>Syskit will use the <code>['default', 'gps']</code> configuration by default (since the
 device declared in the <code>robot</code> block is called <code>gps</code>) for the driver. If the
 <code>gps</code> configuration does not exist, it will simply use <code>default</code>.</p>

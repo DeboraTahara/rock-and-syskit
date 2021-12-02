@@ -417,18 +417,18 @@ and finishing with <code>autoproj/overrides.d</code>.</p>
 <p>For instance, the following two entries:</p>
 
 <div class="highlight"><pre class="highlight yaml"><code><span class="na">version_control</span><span class="pi">:</span>
-<span class="pi">-</span> <span class="s">tools/syskit</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">tools/syskit</span><span class="pi">:</span>
   <span class="na">github</span><span class="pi">:</span> <span class="s">rock-core/tools-syskit</span>
   <span class="na">branch</span><span class="pi">:</span> <span class="s">master</span>
 </code></pre></div>
 <p>and (in <code>autoproj/overrides.d/50-syskit.yml</code>)</p>
 
-<div class="highlight"><pre class="highlight yaml"><code><span class="pi">-</span> <span class="s">tools/syskit</span><span class="pi">:</span>
+<div class="highlight"><pre class="highlight yaml"><code><span class="pi">-</span> <span class="na">tools/syskit</span><span class="pi">:</span>
   <span class="na">branch</span><span class="pi">:</span> <span class="s">some_other_branch</span>
 </code></pre></div>
 <p>Will be equivalent to</p>
 
-<div class="highlight"><pre class="highlight yaml"><code><span class="pi">-</span> <span class="s">tools/syskit</span><span class="pi">:</span>
+<div class="highlight"><pre class="highlight yaml"><code><span class="pi">-</span> <span class="na">tools/syskit</span><span class="pi">:</span>
   <span class="na">github</span><span class="pi">:</span> <span class="s">rock-core/tools-syskit</span>
   <span class="na">branch</span><span class="pi">:</span> <span class="s">some_other_branch</span>
 </code></pre></div>

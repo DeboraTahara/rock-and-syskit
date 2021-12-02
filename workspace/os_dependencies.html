@@ -397,7 +397,7 @@ source package instead of an osdep package. The best place to do so is by
 adding an <code>overrides.osdeps</code> file in your main build configuration and add an
 entry for the package:</p>
 
-<div class="highlight"><pre class="highlight yaml"><code><span class="s">simulation/gazebo</span><span class="pi">:</span> <span class="s">nonexistent</span>
+<div class="highlight"><pre class="highlight yaml"><code><span class="na">simulation/gazebo</span><span class="pi">:</span> <span class="s">nonexistent</span>
 </code></pre></div>
 <p class="important">It is important to note at this point that all the package installation is
 delegated to the underlying package system. When forcing usage of a source
@@ -424,7 +424,7 @@ should update the osdep entry to match:</p>
 
 <div class="highlight"><pre class="highlight yaml"><code><span class="na">gdal</span><span class="pi">:</span>
   <span class="na">ubuntu</span><span class="pi">:</span>
-    <span class="s1">'</span><span class="s">14.04,14.10,15.04,15.10'</span><span class="pi">:</span>
+    <span class="s1">'</span><span class="s">14.04,14.10,15.04,15.10'</span><span class="err">:</span>
     <span class="pi">-</span> <span class="s">libgdal1-dev</span>
     <span class="na">default</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="s">libgdal-dev</span>
@@ -436,10 +436,10 @@ package name changes again.</p>
 <p>Combined with the <code>nonexistent</code> keyword, this also allows to fall back to the source
 package for older OS versions:</p>
 
-<div class="highlight"><pre class="highlight yaml"><code><span class="s">control/visp</span><span class="pi">:</span>
+<div class="highlight"><pre class="highlight yaml"><code><span class="na">control/visp</span><span class="pi">:</span>
   <span class="na">ubuntu</span><span class="pi">:</span>
-    <span class="s1">'</span><span class="s">14.04,14.10,15.04,15.10'</span><span class="pi">:</span> <span class="s">nonexistent</span>
-    <span class="na">default</span><span class="pi">:</span>
+    <span class="s1">'</span><span class="s">14.04,14.10,15.04,15.10'</span><span class="err">:</span> <span class="s">nonexistent</span>
+    <span class="s">default</span><span class="err">:</span>
     <span class="pi">-</span> <span class="s">libvisp-core3.0-dev</span>
 </code></pre></div>
 <h2 id="osrepos-files">osrepos files</h2>
@@ -478,7 +478,7 @@ itself and the required keys. If you want to use the same entry for different OS
 may use the <code>default</code> keyword or a comma-separated list of release names/versions:</p>
 
 <div class="highlight"><pre class="highlight yaml"><code><span class="pi">-</span> <span class="na">ubuntu</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="s">xenial,'14.04',saucy</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">xenial,'14.04',saucy</span><span class="err">:</span>
     <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">repo</span>
       <span class="na">repo</span><span class="pi">:</span> <span class="s1">'</span><span class="s">deb</span><span class="nv"> </span><span class="s">http://packages.microsoft.com/repos/vscode</span><span class="nv"> </span><span class="s">stable</span><span class="nv"> </span><span class="s">main'</span>
   <span class="pi">-</span> <span class="na">default</span><span class="pi">:</span>

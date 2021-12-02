@@ -65,13 +65,13 @@ block of your app's configuration.</p>
 deployment</a>. <a href="deployment.html#explicit-deployments">Explicit
 deployments</a> can be used as-is</p>
 
-<div class="highlight"><pre class="highlight ruby"><code><span class="no">Syskit</span><span class="p">.</span><span class="nf">conf</span><span class="p">.</span><span class="nf">use_deployment</span> <span class="s1">'test'</span>
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">Syskit</span><span class="p">.</span><span class="nf">conf</span><span class="p">.</span><span class="nf">use_deployment</span> <span class="no">OroGen</span><span class="o">::</span><span class="no">Deployments</span><span class="p">.</span><span class="nf">test</span>
 </code></pre></div>
 <p>However, this way, only one of the <code>test</code> deployment can be started at a given
 time. To start multiple ones, one must prefix the task's names:</p>
 
-<div class="highlight"><pre class="highlight ruby"><code><span class="no">Syskit</span><span class="p">.</span><span class="nf">conf</span><span class="p">.</span><span class="nf">use_deployment</span> <span class="s1">'test'</span> <span class="o">=&gt;</span> <span class="s1">'left:'</span>
-<span class="no">Syskit</span><span class="p">.</span><span class="nf">conf</span><span class="p">.</span><span class="nf">use_deployment</span> <span class="s1">'test'</span> <span class="o">=&gt;</span> <span class="s1">'right:'</span>
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">Syskit</span><span class="p">.</span><span class="nf">conf</span><span class="p">.</span><span class="nf">use_deployment</span> <span class="no">OroGen</span><span class="o">::</span><span class="no">Deployments</span><span class="p">.</span><span class="nf">test</span> <span class="o">=&gt;</span> <span class="s2">"left:"</span>
+<span class="no">Syskit</span><span class="p">.</span><span class="nf">conf</span><span class="p">.</span><span class="nf">use_deployment</span> <span class="no">OroGen</span><span class="o">::</span><span class="no">Deployments</span><span class="p">.</span><span class="nf">test</span> <span class="o">=&gt;</span> <span class="s2">"right:"</span>
 </code></pre></div>
 <p>This prefixes the task names with resp. <code>left:</code> and <code>right:</code>. For instance, if
 <code>test</code> had a task called <code>task</code>, the deployed tasks would be called <code>left:task</code>
